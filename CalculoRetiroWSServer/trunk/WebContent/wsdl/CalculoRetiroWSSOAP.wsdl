@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://calculo.webServices.calculoRetiroWS.ssffaa.cl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CalculoRetiroWS" targetNamespace="http://calculo.webServices.calculoRetiroWS.ssffaa.cl">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://calculo.webServices.calculoRetiroWS.ssffaa.cl">
+      <xsd:element name="calcular">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="run" type="xsd:string"/>
+          	<xsd:element name="institucion" type="xsd:string"/>
+          	<xsd:element name="subInstitucion" type="xsd:string"/>
+          	<xsd:element name="categoria" type="xsd:string"/>
+          	<xsd:element name="escalafonCivil" type="xsd:string"/>
+          	<xsd:element name="grado" type="xsd:string"/>
+          	<xsd:element name="gradoJerarquico" type="xsd:int"/>
+          	<xsd:element name="gradoEconomico" type="xsd:int"/>
+          	<xsd:element name="esDeLinea" type="xsd:string"/>
+            <xsd:element name="fechaDeBaja" type="xsd:date"/>
+          	<xsd:element name="cantidadDeAcciones" type="xsd:int"/>
+            <xsd:element name="tipoDeAcciones" type="xsd:string"/>
+            <xsd:element name="porcentajeDeSobresueldo" type="xsd:string"/>
+            <xsd:element name="porcentajeDeSegundoSobresueldo" type="xsd:string"/>
+            <xsd:element name="porcentajeDeAsignacionSOFSOM" type="xsd:string"/>
+            <xsd:element name="poseeAsigMinistroDeCorte" type="xsd:string"/>
+            <xsd:element name="sueldoIntegroMinistroDeCorte" type="xsd:int"/>
+            <xsd:element name="planillaSuplementariaLey19699" type="xsd:string"/>
+            <xsd:element name="planillaSuplementariaDFL1_68" type="xsd:string"/>
+            <xsd:element name="aniosCPDNyConsc" type="xsd:int"/>
+            <xsd:element name="mesesCPDNyConsc" type="xsd:int"/>
+            <xsd:element name="diasCPDNyConsc" type="xsd:int"/>
+            <xsd:element name="aniosDesahucio" type="xsd:int"/>
+            <xsd:element name="mesesDesahucio" type="xsd:int"/>
+            <xsd:element name="diasDesahucio" type="xsd:int"/>
+            <xsd:element name="otrasInstituciones" type="xsd:string"/>
+            <xsd:element name="abonos" type="xsd:string"/>
+            <xsd:element name="concurrencias" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="calcularResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <!--             16 -->
+            <xsd:element name="grados" type="xsd:string"/>
+            <xsd:element name="sueldoEnActividad" type="xsd:int"/>
+            <xsd:element name="sueldo1981" type="xsd:int"/>
+            <xsd:element name="cantidadTrienios" type="xsd:int"/>
+            <xsd:element name="porcentajeTrienios" type="xsd:string"/>
+            <xsd:element name="asignacionTrieniosLey18263" type="xsd:int"/>
+            <xsd:element name="asignacionTrieniosLey18694" type="xsd:int"/>
+            <xsd:element name="porcentajeSobresueldo" type="xsd:string"/>
+            <xsd:element name="sobresueldoLey18263" type="xsd:int"/>
+            <xsd:element name="sobresueldoLey18694" type="xsd:int"/>
+            <xsd:element name="porcentajeBonifMandoAdministracion" type="xsd:string"/>
+            <xsd:element name="bonifMandoAdministracionLey18263" type="xsd:int"/>
+            <xsd:element name="bonifMandoAdministracionLey18694" type="xsd:int"/>
+            <xsd:element name="porcentajeBonifAltoMando" type="xsd:string"/>
+            <xsd:element name="bonifAltoMandoLey18263" type="xsd:int"/>
+            <xsd:element name="bonifAltoMandoLey18694" type="xsd:int"/>
+			<!--             14 -->
+            <xsd:element name="aplicaPlanillaSuplementaria" type="xsd:string"/>
+            <xsd:element name="planillaSuplementariaLey19699Actual" type="xsd:int"/>
+            <xsd:element name="planillaSuplementariaLey19699anio1981" type="xsd:int"/>
+            <xsd:element name="porcentajeAsignacionSOM" type="xsd:string"/>
+            <xsd:element name="asignacionSOMLey18263" type="xsd:int"/>
+            <xsd:element name="asignacionSOMLey18694" type="xsd:int"/>
+            <xsd:element name="porcentajeAsigMinistroDeCorte" type="xsd:string"/>
+            <xsd:element name="asigMinistroDeCorteLey18263" type="xsd:int"/>
+            <xsd:element name="asigMinistroDeCorteLey18694" type="xsd:int"/>
+            <xsd:element name="poseeTituloProf" type="xsd:string"/>
+     		<xsd:element name="aegeLey18263" type="xsd:int"/>
+            <xsd:element name="aegeLey18694" type="xsd:int"/>     
+            <xsd:element name="totalLey18263" type="xsd:int"/>
+            <xsd:element name="totalParaDesahucio" type="xsd:int"/>
+			<!--             33 -->
+			<xsd:element name="cantidadAVOS" type="xsd:string"/>
+			<xsd:element name="montoAVOS" type="xsd:int"/>
+			<xsd:element name="porcentajeAVOS" type="xsd:string"/>
+            <xsd:element name="reajusteHasta8_8" type="xsd:int"/>
+            <xsd:element name="porcentajeReajusteDS376_1987" type="xsd:string"/>
+            <xsd:element name="montoReajusteDS376_1987" type="xsd:int"/>
+            <xsd:element name="porcentajeReajusteDS321_1988" type="xsd:string"/>
+            <xsd:element name="montoReajusteDS321_1988" type="xsd:int"/>
+            <xsd:element name="tipoDocUltimoReajuste" type="xsd:string"/>
+            <xsd:element name="numeroDocUltimoReajuste" type="xsd:string"/>
+            <xsd:element name="porcentajeUltimoReajuste" type="xsd:string"/>
+            <xsd:element name="montoUltimoReajuste" type="xsd:int"/>
+            <xsd:element name="totalImponibleParcial" type="xsd:int"/>
+            <xsd:element name="totalDesahucioSegunAvos" type="xsd:int"/>
+            <xsd:element name="totalImponible" type="xsd:int"/>
+            <xsd:element name="aegeNoImponible" type="xsd:int"/>
+            <xsd:element name="recibePlanillaSuplementariaDfl_1_68" type="xsd:string"/>
+            <xsd:element name="planillaSuplementariaDfl_1_68" type="xsd:int"/>
+            <xsd:element name="bonificacionCompensatoria" type="xsd:int"/>
+            <xsd:element name="tipoDeBonifRiesgoEspecial" type="xsd:string"/>
+            <xsd:element name="porcentajeBonifRiesgoEspecial" type="xsd:string"/>
+            <xsd:element name="bonifRiesgoEspecial" type="xsd:int"/>
+            <xsd:element name="porcentajeAsigMinDeCorteNoImp" type="xsd:string"/>
+            <xsd:element name="asigMinistroDeCorteNoImp" type="xsd:int"/>
+            <xsd:element name="porcentajeAsigSOMnoImp" type="xsd:string"/>
+            <xsd:element name="asignacionSOMnoImp" type="xsd:int"/>
+            <xsd:element name="porcentajeSegundoSobresueldo" type="xsd:string"/>
+            <xsd:element name="segundoSobresueldo" type="xsd:int"/>
+            <xsd:element name="totalRemuneracion" type="xsd:int"/>
+            <xsd:element name="totalRemuneracionSegunAVOS" type="xsd:int"/>
+            <xsd:element name="porcentajeAVOS2" type="xsd:string"/>
+            <xsd:element name="pensionAotorgar" type="xsd:int"/>
+            <xsd:element name="conTopeSinTope" type="xsd:string"/>
+			<!--             13 -->
+            <xsd:element name="distribucionCapredena" type="xsd:int"/>
+            <xsd:element name="distribucionFisco" type="xsd:int"/>
+            <xsd:element name="distribucionTotal" type="xsd:int"/>
+            <xsd:element name="mensualidadesDesahucio" type="xsd:int"/>
+            <xsd:element name="montoMensualidadDesahucio" type="xsd:int"/>
+            <xsd:element name="subtotalDesahucio" type="xsd:int"/>
+            <xsd:element name="cantidadAcciones" type="xsd:int"/>
+            <xsd:element name="montoUnitarioAcciones" type="xsd:int"/>
+            <xsd:element name="subtotalAcciones" type="xsd:int"/>
+            <xsd:element name="desahucioApagar" type="xsd:int"/>
+            <xsd:element name="mesesSgteTrienio" type="xsd:int"/>
+            <xsd:element name="diasSgteTrienio" type="xsd:int"/>
+            <xsd:element name="siguienteTrienio" type="xsd:int"/>
+			<!--             8 -->
+			<!--<xsd:element maxOccurs="unbounded" minOccurs="0" name="detalleDeServicios" type="tns1:ItemGrillaWSTO"/>-->
+			<xsd:element name="aniosServiciosTotales" type="xsd:int"/>
+            <xsd:element name="mesesServiciosTotales" type="xsd:int"/>
+            <xsd:element name="diasServiciosTotales" type="xsd:int"/>
+            <xsd:element name="enDiasServiciosTotales" type="xsd:int"/>
+            <xsd:element name="proporcionServiciosTotales" type="xsd:double"/>
+            <!--<xsd:element maxOccurs="unbounded" minOccurs="0" name="detalleConcurrencias" type="tns1:ItemGrillaWSTO"/>-->
+            <xsd:element name="totalConcurrencias" type="xsd:int"/>
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="calcularRequest">
+    <wsdl:part element="tns:calcular" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="calcularResponse">
+    <wsdl:part element="tns:calcularResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="CalculoRetiroWS">
+    <wsdl:operation name="calcular">
+      <wsdl:input message="tns:calcularRequest"/>
+      <wsdl:output message="tns:calcularResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculoRetiroWSSOAP" type="tns:CalculoRetiroWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="calcular">
+      <soap:operation soapAction="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcular"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculoRetiroWS">
+    <wsdl:port binding="tns:CalculoRetiroWSSOAP" name="CalculoRetiroWSSOAP">
+      <soap:address location="http://localhost:8080/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
