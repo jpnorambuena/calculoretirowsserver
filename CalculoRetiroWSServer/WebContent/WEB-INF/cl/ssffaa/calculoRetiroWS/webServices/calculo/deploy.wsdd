@@ -1,0 +1,26 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from CalculoRetiroWS WSDL service -->
+
+  <service name="CalculoRetiroWSSOAP" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
+      <parameter name="wsdlServiceElement" value="CalculoRetiroWS"/>
+      <parameter name="schemaUnqualified" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
+      <parameter name="wsdlServicePort" value="CalculoRetiroWSSOAP"/>
+      <parameter name="className" value="cl.ssffaa.calculoRetiroWS.webServices.calculo.CalculoRetiroWSSOAPSkeleton"/>
+      <parameter name="wsdlPortType" value="CalculoRetiroWS"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+  </service>
+</deployment>
