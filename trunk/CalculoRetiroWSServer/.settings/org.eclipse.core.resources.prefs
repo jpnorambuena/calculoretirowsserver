@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/cl/ssffaa/calculoRetiroWS/dao/to/ItemColumnaWSTO.java=UTF-8
+encoding//src/cl/ssffaa/calculoRetiroWS/dao/to/ItemGrillaWSTO.java=UTF-8
+encoding//src/cl/ssffaa/calculoRetiroWS/dao/to/holders/ItemGrillaWSTOArrayHolder.java=UTF-8
+encoding//src/cl/ssffaa/calculoRetiroWS/dao/to/holders/ItemGrillaWSTOHolder.java=UTF-8
 encoding//src/cl/ssffaa/calculoRetiroWS/webServices/calculo/CalculoRetiroWSSOAPImpl.java=UTF-8
 encoding//src/cl/ssffaa/calculoRetiroWS/webServices/calculo/CalculoRetiroWSSOAPSkeleton.java=UTF-8
 encoding//src/cl/ssffaa/calculoRetiroWS/webServices/calculo/CalculoRetiroWSSOAPStub.java=UTF-8

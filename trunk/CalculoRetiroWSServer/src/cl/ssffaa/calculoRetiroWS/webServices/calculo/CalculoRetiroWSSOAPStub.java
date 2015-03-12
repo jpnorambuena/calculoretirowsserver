@@ -233,6 +233,9 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "siguienteTrienio"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "detalleDeServicios"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "ItemGrillaWSTO"), cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[].class, false, false);
+        param.setOmittable(true);
+        oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "aniosServiciosTotales"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "mesesServiciosTotales"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
@@ -242,6 +245,9 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "enDiasServiciosTotales"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "proporcionServiciosTotales"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "double"), double.class, false, false);
+        oper.addParameter(param);
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "detalleConcurrencias"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "ItemGrillaWSTO"), cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[].class, false, false);
+        param.setOmittable(true);
         oper.addParameter(param);
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("", "totalConcurrencias"), org.apache.axis.description.ParameterDesc.OUT, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "int"), int.class, false, false);
         oper.addParameter(param);
@@ -268,6 +274,33 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
             super.service = service;
         }
         ((org.apache.axis.client.Service)super.service).setTypeMappingVersion("1.2");
+            java.lang.Class cls;
+            javax.xml.namespace.QName qName;
+            javax.xml.namespace.QName qName2;
+            java.lang.Class beansf = org.apache.axis.encoding.ser.BeanSerializerFactory.class;
+            java.lang.Class beandf = org.apache.axis.encoding.ser.BeanDeserializerFactory.class;
+            java.lang.Class enumsf = org.apache.axis.encoding.ser.EnumSerializerFactory.class;
+            java.lang.Class enumdf = org.apache.axis.encoding.ser.EnumDeserializerFactory.class;
+            java.lang.Class arraysf = org.apache.axis.encoding.ser.ArraySerializerFactory.class;
+            java.lang.Class arraydf = org.apache.axis.encoding.ser.ArrayDeserializerFactory.class;
+            java.lang.Class simplesf = org.apache.axis.encoding.ser.SimpleSerializerFactory.class;
+            java.lang.Class simpledf = org.apache.axis.encoding.ser.SimpleDeserializerFactory.class;
+            java.lang.Class simplelistsf = org.apache.axis.encoding.ser.SimpleListSerializerFactory.class;
+            java.lang.Class simplelistdf = org.apache.axis.encoding.ser.SimpleListDeserializerFactory.class;
+            qName = new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "ItemColumnaWSTO");
+            cachedSerQNames.add(qName);
+            cls = cl.ssffaa.calculoRetiroWS.dao.to.ItemColumnaWSTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
+            qName = new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "ItemGrillaWSTO");
+            cachedSerQNames.add(qName);
+            cls = cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO.class;
+            cachedSerClasses.add(cls);
+            cachedSerFactories.add(beansf);
+            cachedDeserFactories.add(beandf);
+
     }
 
     protected org.apache.axis.client.Call createCall() throws java.rmi.RemoteException {
@@ -296,6 +329,37 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
                 java.lang.String key = (java.lang.String) keys.nextElement();
                 _call.setProperty(key, super.cachedProperties.get(key));
             }
+            // All the type mapping information is registered
+            // when the first call is made.
+            // The type mapping information is actually registered in
+            // the TypeMappingRegistry of the service, which
+            // is the reason why registration is only needed for the first call.
+            synchronized (this) {
+                if (firstCall()) {
+                    // must set encoding style before registering serializers
+                    _call.setEncodingStyle(null);
+                    for (int i = 0; i < cachedSerFactories.size(); ++i) {
+                        java.lang.Class cls = (java.lang.Class) cachedSerClasses.get(i);
+                        javax.xml.namespace.QName qName =
+                                (javax.xml.namespace.QName) cachedSerQNames.get(i);
+                        java.lang.Object x = cachedSerFactories.get(i);
+                        if (x instanceof Class) {
+                            java.lang.Class sf = (java.lang.Class)
+                                 cachedSerFactories.get(i);
+                            java.lang.Class df = (java.lang.Class)
+                                 cachedDeserFactories.get(i);
+                            _call.registerTypeMapping(cls, qName, sf, df, false);
+                        }
+                        else if (x instanceof javax.xml.rpc.encoding.SerializerFactory) {
+                            org.apache.axis.encoding.SerializerFactory sf = (org.apache.axis.encoding.SerializerFactory)
+                                 cachedSerFactories.get(i);
+                            org.apache.axis.encoding.DeserializerFactory df = (org.apache.axis.encoding.DeserializerFactory)
+                                 cachedDeserFactories.get(i);
+                            _call.registerTypeMapping(cls, qName, sf, df, false);
+                        }
+                    }
+                }
+            }
             return _call;
         }
         catch (java.lang.Throwable _t) {
@@ -303,7 +367,7 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
         }
     }
 
-    public void calcular(java.lang.String run, java.lang.String institucion, java.lang.String subInstitucion, java.lang.String categoria, java.lang.String escalafonCivil, java.lang.String grado, int gradoJerarquico, int gradoEconomico, java.lang.String esDeLinea, java.util.Date fechaDeBaja, int cantidadDeAcciones, java.lang.String tipoDeAcciones, java.lang.String porcentajeDeSobresueldo, java.lang.String porcentajeDeSegundoSobresueldo, java.lang.String porcentajeDeAsignacionSOFSOM, java.lang.String poseeAsigMinistroDeCorte, int sueldoIntegroMinistroDeCorte, java.lang.String planillaSuplementariaLey19699, java.lang.String planillaSuplementariaDFL1_68, int aniosCPDNyConsc, int mesesCPDNyConsc, int diasCPDNyConsc, int aniosDesahucio, int mesesDesahucio, int diasDesahucio, java.lang.String otrasInstituciones, java.lang.String abonos, java.lang.String concurrencias, javax.xml.rpc.holders.StringHolder grados, javax.xml.rpc.holders.IntHolder sueldoEnActividad, javax.xml.rpc.holders.IntHolder sueldo1981, javax.xml.rpc.holders.IntHolder cantidadTrienios, javax.xml.rpc.holders.StringHolder porcentajeTrienios, javax.xml.rpc.holders.IntHolder asignacionTrieniosLey18263, javax.xml.rpc.holders.IntHolder asignacionTrieniosLey18694, javax.xml.rpc.holders.StringHolder porcentajeSobresueldo, javax.xml.rpc.holders.IntHolder sobresueldoLey18263, javax.xml.rpc.holders.IntHolder sobresueldoLey18694, javax.xml.rpc.holders.StringHolder porcentajeBonifMandoAdministracion, javax.xml.rpc.holders.IntHolder bonifMandoAdministracionLey18263, javax.xml.rpc.holders.IntHolder bonifMandoAdministracionLey18694, javax.xml.rpc.holders.StringHolder porcentajeBonifAltoMando, javax.xml.rpc.holders.IntHolder bonifAltoMandoLey18263, javax.xml.rpc.holders.IntHolder bonifAltoMandoLey18694, javax.xml.rpc.holders.StringHolder aplicaPlanillaSuplementaria, javax.xml.rpc.holders.IntHolder planillaSuplementariaLey19699Actual, javax.xml.rpc.holders.IntHolder planillaSuplementariaLey19699Anio1981, javax.xml.rpc.holders.StringHolder porcentajeAsignacionSOM, javax.xml.rpc.holders.IntHolder asignacionSOMLey18263, javax.xml.rpc.holders.IntHolder asignacionSOMLey18694, javax.xml.rpc.holders.StringHolder porcentajeAsigMinistroDeCorte, javax.xml.rpc.holders.IntHolder asigMinistroDeCorteLey18263, javax.xml.rpc.holders.IntHolder asigMinistroDeCorteLey18694, javax.xml.rpc.holders.StringHolder poseeTituloProf, javax.xml.rpc.holders.IntHolder aegeLey18263, javax.xml.rpc.holders.IntHolder aegeLey18694, javax.xml.rpc.holders.IntHolder totalLey18263, javax.xml.rpc.holders.IntHolder totalParaDesahucio, javax.xml.rpc.holders.StringHolder cantidadAVOS, javax.xml.rpc.holders.IntHolder montoAVOS, javax.xml.rpc.holders.StringHolder porcentajeAVOS, javax.xml.rpc.holders.IntHolder reajusteHasta8_8, javax.xml.rpc.holders.StringHolder porcentajeReajusteDS376_1987, javax.xml.rpc.holders.IntHolder montoReajusteDS376_1987, javax.xml.rpc.holders.StringHolder porcentajeReajusteDS321_1988, javax.xml.rpc.holders.IntHolder montoReajusteDS321_1988, javax.xml.rpc.holders.StringHolder tipoDocUltimoReajuste, javax.xml.rpc.holders.StringHolder numeroDocUltimoReajuste, javax.xml.rpc.holders.StringHolder porcentajeUltimoReajuste, javax.xml.rpc.holders.IntHolder montoUltimoReajuste, javax.xml.rpc.holders.IntHolder totalImponibleParcial, javax.xml.rpc.holders.IntHolder totalDesahucioSegunAvos, javax.xml.rpc.holders.IntHolder totalImponible, javax.xml.rpc.holders.IntHolder aegeNoImponible, javax.xml.rpc.holders.StringHolder recibePlanillaSuplementariaDfl_1_68, javax.xml.rpc.holders.IntHolder planillaSuplementariaDfl_1_68, javax.xml.rpc.holders.IntHolder bonificacionCompensatoria, javax.xml.rpc.holders.StringHolder tipoDeBonifRiesgoEspecial, javax.xml.rpc.holders.StringHolder porcentajeBonifRiesgoEspecial, javax.xml.rpc.holders.IntHolder bonifRiesgoEspecial, javax.xml.rpc.holders.StringHolder porcentajeAsigMinDeCorteNoImp, javax.xml.rpc.holders.IntHolder asigMinistroDeCorteNoImp, javax.xml.rpc.holders.StringHolder porcentajeAsigSOMnoImp, javax.xml.rpc.holders.IntHolder asignacionSOMnoImp, javax.xml.rpc.holders.StringHolder porcentajeSegundoSobresueldo, javax.xml.rpc.holders.IntHolder segundoSobresueldo, javax.xml.rpc.holders.IntHolder totalRemuneracion, javax.xml.rpc.holders.IntHolder totalRemuneracionSegunAVOS, javax.xml.rpc.holders.StringHolder porcentajeAVOS2, javax.xml.rpc.holders.IntHolder pensionAotorgar, javax.xml.rpc.holders.StringHolder conTopeSinTope, javax.xml.rpc.holders.IntHolder distribucionCapredena, javax.xml.rpc.holders.IntHolder distribucionFisco, javax.xml.rpc.holders.IntHolder distribucionTotal, javax.xml.rpc.holders.IntHolder mensualidadesDesahucio, javax.xml.rpc.holders.IntHolder montoMensualidadDesahucio, javax.xml.rpc.holders.IntHolder subtotalDesahucio, javax.xml.rpc.holders.IntHolder cantidadAcciones, javax.xml.rpc.holders.IntHolder montoUnitarioAcciones, javax.xml.rpc.holders.IntHolder subtotalAcciones, javax.xml.rpc.holders.IntHolder desahucioApagar, javax.xml.rpc.holders.IntHolder mesesSgteTrienio, javax.xml.rpc.holders.IntHolder diasSgteTrienio, javax.xml.rpc.holders.IntHolder siguienteTrienio, javax.xml.rpc.holders.IntHolder aniosServiciosTotales, javax.xml.rpc.holders.IntHolder mesesServiciosTotales, javax.xml.rpc.holders.IntHolder diasServiciosTotales, javax.xml.rpc.holders.IntHolder enDiasServiciosTotales, javax.xml.rpc.holders.DoubleHolder proporcionServiciosTotales, javax.xml.rpc.holders.IntHolder totalConcurrencias) throws java.rmi.RemoteException {
+    public void calcular(java.lang.String run, java.lang.String institucion, java.lang.String subInstitucion, java.lang.String categoria, java.lang.String escalafonCivil, java.lang.String grado, int gradoJerarquico, int gradoEconomico, java.lang.String esDeLinea, java.util.Date fechaDeBaja, int cantidadDeAcciones, java.lang.String tipoDeAcciones, java.lang.String porcentajeDeSobresueldo, java.lang.String porcentajeDeSegundoSobresueldo, java.lang.String porcentajeDeAsignacionSOFSOM, java.lang.String poseeAsigMinistroDeCorte, int sueldoIntegroMinistroDeCorte, java.lang.String planillaSuplementariaLey19699, java.lang.String planillaSuplementariaDFL1_68, int aniosCPDNyConsc, int mesesCPDNyConsc, int diasCPDNyConsc, int aniosDesahucio, int mesesDesahucio, int diasDesahucio, java.lang.String otrasInstituciones, java.lang.String abonos, java.lang.String concurrencias, javax.xml.rpc.holders.StringHolder grados, javax.xml.rpc.holders.IntHolder sueldoEnActividad, javax.xml.rpc.holders.IntHolder sueldo1981, javax.xml.rpc.holders.IntHolder cantidadTrienios, javax.xml.rpc.holders.StringHolder porcentajeTrienios, javax.xml.rpc.holders.IntHolder asignacionTrieniosLey18263, javax.xml.rpc.holders.IntHolder asignacionTrieniosLey18694, javax.xml.rpc.holders.StringHolder porcentajeSobresueldo, javax.xml.rpc.holders.IntHolder sobresueldoLey18263, javax.xml.rpc.holders.IntHolder sobresueldoLey18694, javax.xml.rpc.holders.StringHolder porcentajeBonifMandoAdministracion, javax.xml.rpc.holders.IntHolder bonifMandoAdministracionLey18263, javax.xml.rpc.holders.IntHolder bonifMandoAdministracionLey18694, javax.xml.rpc.holders.StringHolder porcentajeBonifAltoMando, javax.xml.rpc.holders.IntHolder bonifAltoMandoLey18263, javax.xml.rpc.holders.IntHolder bonifAltoMandoLey18694, javax.xml.rpc.holders.StringHolder aplicaPlanillaSuplementaria, javax.xml.rpc.holders.IntHolder planillaSuplementariaLey19699Actual, javax.xml.rpc.holders.IntHolder planillaSuplementariaLey19699Anio1981, javax.xml.rpc.holders.StringHolder porcentajeAsignacionSOM, javax.xml.rpc.holders.IntHolder asignacionSOMLey18263, javax.xml.rpc.holders.IntHolder asignacionSOMLey18694, javax.xml.rpc.holders.StringHolder porcentajeAsigMinistroDeCorte, javax.xml.rpc.holders.IntHolder asigMinistroDeCorteLey18263, javax.xml.rpc.holders.IntHolder asigMinistroDeCorteLey18694, javax.xml.rpc.holders.StringHolder poseeTituloProf, javax.xml.rpc.holders.IntHolder aegeLey18263, javax.xml.rpc.holders.IntHolder aegeLey18694, javax.xml.rpc.holders.IntHolder totalLey18263, javax.xml.rpc.holders.IntHolder totalParaDesahucio, javax.xml.rpc.holders.StringHolder cantidadAVOS, javax.xml.rpc.holders.IntHolder montoAVOS, javax.xml.rpc.holders.StringHolder porcentajeAVOS, javax.xml.rpc.holders.IntHolder reajusteHasta8_8, javax.xml.rpc.holders.StringHolder porcentajeReajusteDS376_1987, javax.xml.rpc.holders.IntHolder montoReajusteDS376_1987, javax.xml.rpc.holders.StringHolder porcentajeReajusteDS321_1988, javax.xml.rpc.holders.IntHolder montoReajusteDS321_1988, javax.xml.rpc.holders.StringHolder tipoDocUltimoReajuste, javax.xml.rpc.holders.StringHolder numeroDocUltimoReajuste, javax.xml.rpc.holders.StringHolder porcentajeUltimoReajuste, javax.xml.rpc.holders.IntHolder montoUltimoReajuste, javax.xml.rpc.holders.IntHolder totalImponibleParcial, javax.xml.rpc.holders.IntHolder totalDesahucioSegunAvos, javax.xml.rpc.holders.IntHolder totalImponible, javax.xml.rpc.holders.IntHolder aegeNoImponible, javax.xml.rpc.holders.StringHolder recibePlanillaSuplementariaDfl_1_68, javax.xml.rpc.holders.IntHolder planillaSuplementariaDfl_1_68, javax.xml.rpc.holders.IntHolder bonificacionCompensatoria, javax.xml.rpc.holders.StringHolder tipoDeBonifRiesgoEspecial, javax.xml.rpc.holders.StringHolder porcentajeBonifRiesgoEspecial, javax.xml.rpc.holders.IntHolder bonifRiesgoEspecial, javax.xml.rpc.holders.StringHolder porcentajeAsigMinDeCorteNoImp, javax.xml.rpc.holders.IntHolder asigMinistroDeCorteNoImp, javax.xml.rpc.holders.StringHolder porcentajeAsigSOMnoImp, javax.xml.rpc.holders.IntHolder asignacionSOMnoImp, javax.xml.rpc.holders.StringHolder porcentajeSegundoSobresueldo, javax.xml.rpc.holders.IntHolder segundoSobresueldo, javax.xml.rpc.holders.IntHolder totalRemuneracion, javax.xml.rpc.holders.IntHolder totalRemuneracionSegunAVOS, javax.xml.rpc.holders.StringHolder porcentajeAVOS2, javax.xml.rpc.holders.IntHolder pensionAotorgar, javax.xml.rpc.holders.StringHolder conTopeSinTope, javax.xml.rpc.holders.IntHolder distribucionCapredena, javax.xml.rpc.holders.IntHolder distribucionFisco, javax.xml.rpc.holders.IntHolder distribucionTotal, javax.xml.rpc.holders.IntHolder mensualidadesDesahucio, javax.xml.rpc.holders.IntHolder montoMensualidadDesahucio, javax.xml.rpc.holders.IntHolder subtotalDesahucio, javax.xml.rpc.holders.IntHolder cantidadAcciones, javax.xml.rpc.holders.IntHolder montoUnitarioAcciones, javax.xml.rpc.holders.IntHolder subtotalAcciones, javax.xml.rpc.holders.IntHolder desahucioApagar, javax.xml.rpc.holders.IntHolder mesesSgteTrienio, javax.xml.rpc.holders.IntHolder diasSgteTrienio, javax.xml.rpc.holders.IntHolder siguienteTrienio, cl.ssffaa.calculoRetiroWS.dao.to.holders.ItemGrillaWSTOArrayHolder detalleDeServicios, javax.xml.rpc.holders.IntHolder aniosServiciosTotales, javax.xml.rpc.holders.IntHolder mesesServiciosTotales, javax.xml.rpc.holders.IntHolder diasServiciosTotales, javax.xml.rpc.holders.IntHolder enDiasServiciosTotales, javax.xml.rpc.holders.DoubleHolder proporcionServiciosTotales, cl.ssffaa.calculoRetiroWS.dao.to.holders.ItemGrillaWSTOArrayHolder detalleConcurrencias, javax.xml.rpc.holders.IntHolder totalConcurrencias) throws java.rmi.RemoteException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
@@ -709,6 +773,11 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
                 siguienteTrienio.value = ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "siguienteTrienio")), int.class)).intValue();
             }
             try {
+                detalleDeServicios.value = (cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[]) _output.get(new javax.xml.namespace.QName("", "detalleDeServicios"));
+            } catch (java.lang.Exception _exception) {
+                detalleDeServicios.value = (cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[]) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "detalleDeServicios")), cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[].class);
+            }
+            try {
                 aniosServiciosTotales.value = ((java.lang.Integer) _output.get(new javax.xml.namespace.QName("", "aniosServiciosTotales"))).intValue();
             } catch (java.lang.Exception _exception) {
                 aniosServiciosTotales.value = ((java.lang.Integer) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "aniosServiciosTotales")), int.class)).intValue();
@@ -732,6 +801,11 @@ public class CalculoRetiroWSSOAPStub extends org.apache.axis.client.Stub impleme
                 proporcionServiciosTotales.value = ((java.lang.Double) _output.get(new javax.xml.namespace.QName("", "proporcionServiciosTotales"))).doubleValue();
             } catch (java.lang.Exception _exception) {
                 proporcionServiciosTotales.value = ((java.lang.Double) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "proporcionServiciosTotales")), double.class)).doubleValue();
+            }
+            try {
+                detalleConcurrencias.value = (cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[]) _output.get(new javax.xml.namespace.QName("", "detalleConcurrencias"));
+            } catch (java.lang.Exception _exception) {
+                detalleConcurrencias.value = (cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[]) org.apache.axis.utils.JavaUtils.convert(_output.get(new javax.xml.namespace.QName("", "detalleConcurrencias")), cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO[].class);
             }
             try {
                 totalConcurrencias.value = ((java.lang.Integer) _output.get(new javax.xml.namespace.QName("", "totalConcurrencias"))).intValue();

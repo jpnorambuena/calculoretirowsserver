@@ -122,17 +122,17 @@ public class ItemGrillaWSTO  implements java.io.Serializable {
         new org.apache.axis.description.TypeDesc(ItemGrillaWSTO.class, true);
 
     static {
-        typeDesc.setXmlType(new javax.xml.namespace.QName("http://transferObject.dao.ssffaa.cl", "ItemGrillaWSTO"));
+        typeDesc.setXmlType(new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "ItemGrillaWSTO"));
         org.apache.axis.description.ElementDesc elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("id");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://transferObject.dao.ssffaa.cl", "id"));
+        elemField.setXmlName(new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "id"));
         elemField.setXmlType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"));
         elemField.setNillable(true);
         typeDesc.addFieldDesc(elemField);
         elemField = new org.apache.axis.description.ElementDesc();
         elemField.setFieldName("listaColumnas");
-        elemField.setXmlName(new javax.xml.namespace.QName("http://transferObject.dao.ssffaa.cl", "listaColumnas"));
-        elemField.setXmlType(new javax.xml.namespace.QName("http://transferObject.dao.ssffaa.cl", "ItemColumnaWSTO"));
+        elemField.setXmlName(new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "listaColumnas"));
+        elemField.setXmlType(new javax.xml.namespace.QName("http://to.dao.calculoRetiroWS.ssffaa.cl", "ItemColumnaWSTO"));
         elemField.setMinOccurs(0);
         elemField.setNillable(true);
         elemField.setMaxOccursUnbounded(true);
