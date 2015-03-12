@@ -22,7 +22,7 @@ public class CalculoRetiroWS_ServiceLocator extends org.apache.axis.client.Servi
     }
 
     // Use to get a proxy class for CalculoRetiroWSSOAP
-    private java.lang.String CalculoRetiroWSSOAP_address = "http://www.example.org/";
+    private java.lang.String CalculoRetiroWSSOAP_address = "http://localhost:8080/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP";
 
     public java.lang.String getCalculoRetiroWSSOAPAddress() {
         return CalculoRetiroWSSOAP_address;

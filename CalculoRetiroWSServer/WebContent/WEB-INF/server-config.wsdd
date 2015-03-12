@@ -32,6 +32,9 @@
   <ns1:parameter name="wsdlTargetNamespace" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
   <ns1:parameter name="wsdlPortType" value="CalculoRetiroWS"/>
   <ns1:parameter name="schemaUnqualified" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns2:ItemGrillaWSTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO" xmlns:ns2="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns2:ItemColumnaWSTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemColumnaWSTO" xmlns:ns2="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
+ 
  </ns1:service>
  <ns1:service name="AdminService" provider="java:MSG">
   <ns1:parameter name="allowedMethods" value="AdminService"/>
