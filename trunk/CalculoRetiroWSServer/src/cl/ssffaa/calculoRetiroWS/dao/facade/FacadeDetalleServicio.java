@@ -184,7 +184,7 @@ public class FacadeDetalleServicio {
 	    servicio.setServicio("Total efectivos, abonos y concurrencias");
 		servicio.setAnios(totalAniosNormalizado);
 		servicio.setMeses(totalMesesNormalizado);
-		servicio.setDias(totalAniosNormalizado);
+		servicio.setDias(totalDiasNormalizado);
 		servicio.setEnDias(totalEnDias);
 		servicio.setPorcentaje(sumaPorcentaje);
 		servicio.setTipoDeServicio(EnumTipoDeServicio.TOTAL_SERVICIOS);

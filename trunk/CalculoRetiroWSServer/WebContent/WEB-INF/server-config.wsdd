@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -38,8 +38,8 @@
   <ns1:parameter name="wsdlTargetNamespace" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
   <ns1:parameter name="wsdlPortType" value="CalculoRetiroWS"/>
   <ns1:parameter name="schemaUnqualified" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
-  <ns2:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns1:ItemGrillaWSTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO" xmlns:ns1="http://to.dao.calculoRetiroWS.ssffaa.cl" xmlns:ns2="http://xml.apache.org/axis/wsdd/"/>
-  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns2:ItemColumnaWSTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemColumnaWSTO" xmlns:ns2="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns2:ItemGrillaWSTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO" xmlns:ns2="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns3:ItemColumnaWSTO" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemColumnaWSTO" xmlns:ns3="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
  </ns1:service>
  <ns1:service name="Version" provider="java:RPC">
   <ns1:parameter name="allowedMethods" value="getVersion"/>
