@@ -17,7 +17,7 @@ import cl.ssffaa.calculoRetiroWS.util.UtilNode;
 public class FacadeAbono {
 
 
-	public DetalleAbonoTO obtenerDetalleDeAbonos(String abonos){
+public DetalleAbonoTO obtenerDetalleDeAbonos(String abonos){
 		
 		DetalleAbonoTO detalleAbono = new DetalleAbonoTO();
 		List<AbonoTO> listaAbonos = new ArrayList<AbonoTO>();

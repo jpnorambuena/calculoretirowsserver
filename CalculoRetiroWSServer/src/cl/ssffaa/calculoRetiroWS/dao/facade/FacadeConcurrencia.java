@@ -22,7 +22,7 @@ import cl.ssffaa.calculoRetiroWS.util.enums.EnumTipoDeServicio;
 public class FacadeConcurrencia {
 
 
-	public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias){
+public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias){
 		
 		DetalleConcurrenciaTO detalleConcurrencia = new DetalleConcurrenciaTO();
 		List<ConcurrenciaTO> listaConcurrencias = new ArrayList<ConcurrenciaTO>();
