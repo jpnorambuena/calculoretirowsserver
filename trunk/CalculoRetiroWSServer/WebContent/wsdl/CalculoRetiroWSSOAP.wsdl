@@ -134,6 +134,7 @@
       </xsd:element>
     </xsd:schema>
     <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://to.dao.calculoRetiroWS.ssffaa.cl">
+		
 		<complexType name="ItemGrillaWSTO">
 			<sequence>
 				<element name="id" nillable="true" type="xsd:string"/>
