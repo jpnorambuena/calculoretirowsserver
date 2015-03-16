@@ -3,6 +3,13 @@ package cl.ssffaa.calculoRetiroWS.dao.facade;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import cl.ssffaa.calculoRetiroWS.dao.to.AbonoTO;
 import cl.ssffaa.calculoRetiroWS.dao.to.ConcurrenciaTO;
 import cl.ssffaa.calculoRetiroWS.dao.to.DetalleAbonoTO;
@@ -11,7 +18,9 @@ import cl.ssffaa.calculoRetiroWS.dao.to.DetalleDeServiciosTO;
 import cl.ssffaa.calculoRetiroWS.dao.to.ItemColumnaWSTO;
 import cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO;
 import cl.ssffaa.calculoRetiroWS.dao.to.ServicioTO;
+import cl.ssffaa.calculoRetiroWS.util.Archivo;
 import cl.ssffaa.calculoRetiroWS.util.Util;
+import cl.ssffaa.calculoRetiroWS.util.UtilLog;
 import cl.ssffaa.calculoRetiroWS.util.enums.EnumTipoDeServicio;
 
 public class FacadeDetalleServicio {
@@ -277,5 +286,89 @@ public class FacadeDetalleServicio {
 		return detalleDeServicios;
 	}
 	
+	public String obtenerXmlDetalleDeServicios(String instituciones, DetalleAbonoTO detalleAbonos, 
+			DetalleConcurrenciaTO detalleConcurrencia, int aniosCPDNyConsc, int mesesCPDNyConsc, int diasCPDNyConsc){
 	
+		String xml = "";
+		
+		try {
+			Document doc = (((DocumentBuilderFactory.newInstance()).newDocumentBuilder()).getDOMImplementation()).createDocument(null,  "detalleDeServicios", null);
+			//Element detalleDeServicios = doc.createElement("detalleDeServicios");
+			//doc.getDocumentElement().appendChild(detalleDeServicios);
+					
+			List<ServicioTO> listaDeServicios = this.obtenerListaDeServicios(instituciones, detalleAbonos, detalleConcurrencia, aniosCPDNyConsc, mesesCPDNyConsc, diasCPDNyConsc);
+							    	
+			int cantidadColumnas = 6;
+			
+			if(listaDeServicios != null){
+				
+				for(int i=0; i<listaDeServicios.size(); i++){
+			    	
+		    		ServicioTO servicioTO = listaDeServicios.get(i);
+		    				    		
+		    		Element servicio = doc.createElement("servicio");
+		    			    		
+		    		if(servicio != null){
+		    		
+		    			for(int k = 0; k < cantidadColumnas; k++)
+		            	{	
+		    				ItemColumnaWSTO itemColumna = new ItemColumnaWSTO();
+		    				itemColumna.setOrden(k+1);
+		    				itemColumna.setTipo("ALF");
+		    				switch (k) {
+								case 0:
+									Element detalle = doc.createElement("detalle");
+									detalle.setTextContent(servicioTO.getServicio());
+									servicio.appendChild(detalle);
+									break;
+								case 1:
+									Element anios = doc.createElement("anios");
+									anios.setTextContent(servicioTO.getAnios()+"");
+									servicio.appendChild(anios);
+									break;
+								case 2:
+									Element meses = doc.createElement("meses");
+									meses.setTextContent(servicioTO.getMeses()+"");
+									servicio.appendChild(meses);
+									break;
+								case 3:
+									Element dias = doc.createElement("dias");
+									dias.setTextContent(servicioTO.getDias()+"");
+									servicio.appendChild(dias);
+									break;
+								case 4:
+									Element enDias = doc.createElement("enDias");
+									if(servicioTO.getEnDias() >= 0)
+										enDias.setTextContent(servicioTO.getEnDias()+"");
+									else
+										enDias.setTextContent("");
+									servicio.appendChild(enDias);
+									break;
+								case 5:
+									Element proporcion = doc.createElement("proporcion");
+									if(servicioTO.getPorcentaje() >= 0)
+										proporcion.setTextContent(servicioTO.getPorcentaje()+"");
+									else
+										proporcion.setTextContent("");
+									servicio.appendChild(proporcion);
+									break;
+								default:
+									break;
+							}
+		            	}
+		    			doc.getDocumentElement().appendChild(servicio);
+		    		}
+		    	}
+				xml = Archivo.convertirDocumentToString(doc);
+			}
+			
+		} catch (DOMException e) {
+			UtilLog.registrar(e);
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			UtilLog.registrar(e);
+			e.printStackTrace();
+		}
+		return xml;
+	}
 }

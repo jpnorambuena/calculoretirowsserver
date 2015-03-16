@@ -121,36 +121,18 @@
             <xsd:element name="diasSgteTrienio" type="xsd:int"/>
             <xsd:element name="siguienteTrienio" type="xsd:int"/>
 			<!--             8 -->
-			<xsd:element maxOccurs="unbounded" minOccurs="0" name="detalleDeServicios" type="tns1:ItemGrillaWSTO"/>
+			<xsd:element name="detalleDeServicios" type="xsd:string"/>
 			<xsd:element name="aniosServiciosTotales" type="xsd:int"/>
             <xsd:element name="mesesServiciosTotales" type="xsd:int"/>
             <xsd:element name="diasServiciosTotales" type="xsd:int"/>
             <xsd:element name="enDiasServiciosTotales" type="xsd:int"/>
             <xsd:element name="proporcionServiciosTotales" type="xsd:double"/>
-            <xsd:element maxOccurs="unbounded" minOccurs="0" name="detalleConcurrencias" type="tns1:ItemGrillaWSTO"/>
+            <xsd:element name="detalleConcurrencias" type="xsd:string"/>
             <xsd:element name="totalConcurrencias" type="xsd:int"/>
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
     </xsd:schema>
-    <schema xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://to.dao.calculoRetiroWS.ssffaa.cl">
-		<complexType name="ItemColumnaWSTO">
-		    <sequence>
-		    	<element name="id" nillable="true" type="xsd:string"/>
-		     	<element name="tipo" nillable="true" type="xsd:string"/>
-	     	 	<element name="orden" nillable="true" type="xsd:int"/>
-	     	 	<element name="valor" nillable="true" type="xsd:string"/>
-	     	 	<element maxOccurs="unbounded" minOccurs="0" name="listaValores" nillable="true" type="xsd:string"/>
-		    </sequence>
-	   	</complexType>
-		<complexType name="ItemGrillaWSTO">
-			<sequence>
-				<element name="id" nillable="true" type="xsd:string"/>
-	     	 	<element maxOccurs="unbounded" minOccurs="0" name="listaColumnas" nillable="true" type="tns1:ItemColumnaWSTO"/>
-		    </sequence>
-	   	</complexType>
-  	</schema>
-	  	
   </wsdl:types>
   <wsdl:message name="calcularRequest">
     <wsdl:part element="tns:calcular" name="parameters"/>
