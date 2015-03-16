@@ -15,7 +15,6 @@
   <service name="CalculoRetiroWSSOAP" provider="java:RPC" style="wrapped" use="literal">
       <parameter name="wsdlTargetNamespace" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
       <parameter name="wsdlServiceElement" value="CalculoRetiroWS"/>
-      <parameter name="schemaQualified" value="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
       <parameter name="schemaUnqualified" value="http://calculo.webServices.calculoRetiroWS.ssffaa.cl"/>
       <parameter name="wsdlServicePort" value="CalculoRetiroWSSOAP"/>
       <parameter name="className" value="cl.ssffaa.calculoRetiroWS.webServices.calculo.CalculoRetiroWSSOAPSkeleton"/>
@@ -23,21 +22,5 @@
       <parameter name="typeMappingVersion" value="1.2"/>
       <parameter name="allowedMethods" value="*"/>
 
-      <typeMapping
-        xmlns:ns="http://to.dao.calculoRetiroWS.ssffaa.cl"
-        qname="ns:ItemGrillaWSTO"
-        type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO"
-        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
-        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
-        encodingStyle=""
-      />
-      <typeMapping
-        xmlns:ns="http://to.dao.calculoRetiroWS.ssffaa.cl"
-        qname="ns:ItemColumnaWSTO"
-        type="java:cl.ssffaa.calculoRetiroWS.dao.to.ItemColumnaWSTO"
-        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
-        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
-        encodingStyle=""
-      />
   </service>
 </deployment>

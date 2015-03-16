@@ -3,6 +3,10 @@ package cl.ssffaa.calculoRetiroWS.dao.facade;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,6 +20,7 @@ import cl.ssffaa.calculoRetiroWS.dao.to.ItemGrillaWSTO;
 import cl.ssffaa.calculoRetiroWS.dao.to.ServicioTO;
 import cl.ssffaa.calculoRetiroWS.util.Archivo;
 import cl.ssffaa.calculoRetiroWS.util.Util;
+import cl.ssffaa.calculoRetiroWS.util.UtilLog;
 import cl.ssffaa.calculoRetiroWS.util.UtilNode;
 import cl.ssffaa.calculoRetiroWS.util.enums.EnumTipoDeServicio;
 
@@ -193,5 +198,72 @@ public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias)
 	    	
 	    	
 		return distribucionConcurrencia;
+	}
+	
+	
+	public String obtenerXmlDistribucionConcurrencia(List<ServicioTO> listaDeServicios, int distribucionCapredena, 
+			int cantidadConcurrencias){
+			    	
+		int cantidadColumnas = 2;
+		int total = 0;
+		String xml = "";
+		
+		try {
+			Document doc = (((DocumentBuilderFactory.newInstance()).newDocumentBuilder()).getDOMImplementation()).createDocument(null,  "detalleConcurrencias", null);
+			//Element detalleConcurrencias = doc.createElement("detalleConcurrencias");
+			//doc.getDocumentElement().appendChild(detalleConcurrencias);
+			
+			if(listaDeServicios != null){
+				for(int i=0; i<listaDeServicios.size(); i++){
+			    	
+		    		ServicioTO servicio = listaDeServicios.get(i);
+		    				    		
+		    		Element concurrencia = doc.createElement("concurrencia");
+		    			    		
+		    		if(servicio != null){
+		    		
+		    			if(servicio.getTipoDeServicio() == EnumTipoDeServicio.TOTAL_CON_ABONOS || 
+		    					servicio.getTipoDeServicio() == EnumTipoDeServicio.CONCURRENCIA){
+			    				
+			    			for(int k = 0; k < cantidadColumnas; k++)
+			            	{	
+			    				int montoConcurrencia = (int) Math.round((distribucionCapredena * servicio.getPorcentaje())/100.0);
+	    						
+			    				switch (k) {
+									case 0:
+										Element institucion = doc.createElement("institucion");
+										if(servicio.getTipoDeServicio() == EnumTipoDeServicio.TOTAL_CON_ABONOS)
+											institucion.setTextContent(EnumTipoDeServicio.CAPREDENA);
+										else
+											institucion.setTextContent(servicio.getServicio());
+										concurrencia.appendChild(institucion);
+										break;
+									case 1:
+										Element monto = doc.createElement("monto");
+										monto.setTextContent(montoConcurrencia+"");
+										concurrencia.appendChild(monto);
+										total += montoConcurrencia;
+										break;
+									
+									default:
+										break;
+								}
+			            	}
+			    			doc.getDocumentElement().appendChild(concurrencia);
+			    		}
+			    	}
+					xml = Archivo.convertirDocumentToString(doc);
+				}
+			}
+			
+		} catch (DOMException e) {
+			UtilLog.registrar(e);
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			UtilLog.registrar(e);
+			e.printStackTrace();
+		}
+			    	
+		return xml;
 	}
 }
