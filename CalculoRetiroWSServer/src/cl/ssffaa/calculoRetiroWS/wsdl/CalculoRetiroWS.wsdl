@@ -2,7 +2,6 @@
 <wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://calculo.webServices.calculoRetiroWS.ssffaa.cl" xmlns:tns1="http://to.dao.calculoRetiroWS.ssffaa.cl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CalculoRetiroWS" targetNamespace="http://calculo.webServices.calculoRetiroWS.ssffaa.cl">
   <wsdl:types>
     <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://calculo.webServices.calculoRetiroWS.ssffaa.cl">
-      <import namespace="http://to.dao.calculoRetiroWS.ssffaa.cl"/>
       <xsd:element name="calcular">
         <xsd:complexType>
           <xsd:sequence>
