@@ -210,8 +210,6 @@ public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias)
 		
 		try {
 			Document doc = (((DocumentBuilderFactory.newInstance()).newDocumentBuilder()).getDOMImplementation()).createDocument(null,  "detalleConcurrencias", null);
-			//Element detalleConcurrencias = doc.createElement("detalleConcurrencias");
-			//doc.getDocumentElement().appendChild(detalleConcurrencias);
 			
 			if(listaDeServicios != null){
 				for(int i=0; i<listaDeServicios.size(); i++){

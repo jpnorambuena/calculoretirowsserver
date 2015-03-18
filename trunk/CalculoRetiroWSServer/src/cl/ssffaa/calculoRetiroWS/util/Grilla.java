@@ -42,7 +42,6 @@ public class Grilla {
 		    	            	}
 	    		        		
 	    		        		valoresConcatenados = valoresConcatenados + valor.getTextContent(); 
-	    		        		System.out.println("valoresConcatenados: " + valoresConcatenados);
 		    	            }
 	    	            }
 	    	        }
