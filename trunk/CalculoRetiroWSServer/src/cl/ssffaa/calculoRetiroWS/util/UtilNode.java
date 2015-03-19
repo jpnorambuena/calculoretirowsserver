@@ -1,5 +1,6 @@
 package cl.ssffaa.calculoRetiroWS.util;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -66,42 +67,50 @@ public class UtilNode {
     	return valor;
 	}
 	
-	public static String obtenerSubXml(Document document, String nombreNodo, int indiceNodo){
+	public static String obtenerSubXml(Document document, String nombreNodo){
+		
+		
 		String subXml = "";
 		
 		try {
-			Document nuevoDocument = (((DocumentBuilderFactory.newInstance()).newDocumentBuilder()).getDOMImplementation()).createDocument(null, nombreNodo, null);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder db = dbf.newDocumentBuilder();
+			Document nuevoDocument = db.newDocument();
+						
 			if(document != null){
+				Element raiz = nuevoDocument.createElement(nombreNodo);
 				NodeList listaNodos = document.getElementsByTagName(nombreNodo);
-		    	if(listaNodos != null && listaNodos.getLength() > 0){   		
-		    		Node nodo = listaNodos.item(indiceNodo);
-		    		if(nodo.getNodeType() == Node.ELEMENT_NODE){
-			        	Element elemento = (Element) nodo;
-			        	if(elemento != null){
-			        		NodeList nodosHijos = elemento.getChildNodes();
-				    		
-				    		if(nodosHijos != null){
-				    			for(int i=0; i<nodosHijos.getLength(); i++){
-				    				Node nodoHijo = nodosHijos.item(i);
-				    				if(nodoHijo.getNodeType() == Node.ELEMENT_NODE){
-				    		        	Element elementoHijo = (Element) nodoHijo;
-				    		        	if(elementoHijo != null){
-				    		        		System.out.println("elemento: "+ elementoHijo.getTagName() + " VALOR: " + elementoHijo.getTextContent());
-				    		        		nuevoDocument.adoptNode(elementoHijo);
-				    		        	}
-				    				}
-				    			}
-				    		}
-			        	}
-			        	
-					}		    		
+		    	if(listaNodos != null){
+		    		for(int i=0; i<listaNodos.getLength(); i++){
+			    		Node nodo = listaNodos.item(i);
+			    		if(nodo.getNodeType() == Node.ELEMENT_NODE){
+				        	Element elemento = (Element) nodo;
+				        	if(elemento != null){
+				        		NodeList nodosHijos = elemento.getChildNodes();
+					    		if(nodosHijos != null){
+					    			for(int j=0; j<nodosHijos.getLength(); j++){
+					    				Node nodoHijo = nodosHijos.item(j);
+					    				if(nodoHijo != null && nodoHijo.getNodeType() == Node.ELEMENT_NODE){
+					    		        	Element elementoHijo = (Element) nodoHijo;
+					    		        	if(elementoHijo != null){
+					    		        		Element nuevoElemento = (Element) nuevoDocument.importNode(elementoHijo, true);
+					    		        		raiz.appendChild(nuevoElemento);
+					    		        	}
+					    				}
+					    			}
+					    		}
+				        	}
+				        	
+						}	
+		    		}
 		    	}
-		    	
+		    	nuevoDocument.appendChild(raiz);
 		    	subXml = Archivo.convertirDocumentToString(nuevoDocument);
 			}
 		} catch (DOMException e) {
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return subXml;

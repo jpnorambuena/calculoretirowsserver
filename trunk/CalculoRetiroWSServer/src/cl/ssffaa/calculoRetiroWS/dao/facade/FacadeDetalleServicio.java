@@ -3,6 +3,7 @@ package cl.ssffaa.calculoRetiroWS.dao.facade;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -292,14 +293,15 @@ public class FacadeDetalleServicio {
 		String xml = "";
 		
 		try {
-			Document doc = (((DocumentBuilderFactory.newInstance()).newDocumentBuilder()).getDOMImplementation()).createDocument(null,  "detalleDeServicios", null);
-			//Element detalleDeServicios = doc.createElement("detalleDeServicios");
-			//doc.getDocumentElement().appendChild(detalleDeServicios);
-					
-			List<ServicioTO> listaDeServicios = this.obtenerListaDeServicios(instituciones, detalleAbonos, detalleConcurrencia, aniosCPDNyConsc, mesesCPDNyConsc, diasCPDNyConsc);
-							    	
-			int cantidadColumnas = 6;
 			
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.newDocument();
+
+			Element detalleDeServicios = doc.createElement("detalleDeServicios");
+								
+			List<ServicioTO> listaDeServicios = this.obtenerListaDeServicios(instituciones, detalleAbonos, detalleConcurrencia, aniosCPDNyConsc, mesesCPDNyConsc, diasCPDNyConsc);
+						
 			if(listaDeServicios != null){
 				
 				for(int i=0; i<listaDeServicios.size(); i++){
@@ -310,55 +312,41 @@ public class FacadeDetalleServicio {
 		    			    		
 		    		if(servicio != null){
 		    		
-		    			for(int k = 0; k < cantidadColumnas; k++)
-		            	{	
-		    				ItemColumnaWSTO itemColumna = new ItemColumnaWSTO();
-		    				itemColumna.setOrden(k+1);
-		    				itemColumna.setTipo("ALF");
-		    				switch (k) {
-								case 0:
-									Element detalle = doc.createElement("detalle");
-									detalle.setTextContent(servicioTO.getServicio());
-									servicio.appendChild(detalle);
-									break;
-								case 1:
-									Element anios = doc.createElement("anios");
-									anios.setTextContent(servicioTO.getAnios()+"");
-									servicio.appendChild(anios);
-									break;
-								case 2:
-									Element meses = doc.createElement("meses");
-									meses.setTextContent(servicioTO.getMeses()+"");
-									servicio.appendChild(meses);
-									break;
-								case 3:
-									Element dias = doc.createElement("dias");
-									dias.setTextContent(servicioTO.getDias()+"");
-									servicio.appendChild(dias);
-									break;
-								case 4:
-									Element enDias = doc.createElement("enDias");
-									if(servicioTO.getEnDias() >= 0)
-										enDias.setTextContent(servicioTO.getEnDias()+"");
-									else
-										enDias.setTextContent("");
-									servicio.appendChild(enDias);
-									break;
-								case 5:
-									Element proporcion = doc.createElement("proporcion");
-									if(servicioTO.getPorcentaje() >= 0)
-										proporcion.setTextContent(servicioTO.getPorcentaje()+"");
-									else
-										proporcion.setTextContent("");
-									servicio.appendChild(proporcion);
-									break;
-								default:
-									break;
-							}
-		            	}
-		    			doc.getDocumentElement().appendChild(servicio);
+		    			
+						Element detalle = doc.createElement("detalle");
+						detalle.setTextContent(servicioTO.getServicio());
+						servicio.appendChild(detalle);
+						
+						Element anios = doc.createElement("anios");
+						anios.setTextContent(servicioTO.getAnios()+"");
+						servicio.appendChild(anios);
+						
+						Element meses = doc.createElement("meses");
+						meses.setTextContent(servicioTO.getMeses()+"");
+						servicio.appendChild(meses);
+			
+						Element dias = doc.createElement("dias");
+						dias.setTextContent(servicioTO.getDias()+"");
+						servicio.appendChild(dias);
+			
+						Element enDias = doc.createElement("enDias");
+						if(servicioTO.getEnDias() >= 0)
+							enDias.setTextContent(servicioTO.getEnDias()+"");
+						else
+							enDias.setTextContent("");
+						servicio.appendChild(enDias);
+						
+						Element proporcion = doc.createElement("proporcion");
+						if(servicioTO.getPorcentaje() >= 0)
+							proporcion.setTextContent(servicioTO.getPorcentaje()+"");
+						else
+							proporcion.setTextContent("");
+						servicio.appendChild(proporcion);
+						
+		    			detalleDeServicios.appendChild(servicio);
 		    		}
 		    	}
+				doc.appendChild(detalleDeServicios);
 				xml = Archivo.convertirDocumentToString(doc);
 			}
 			
