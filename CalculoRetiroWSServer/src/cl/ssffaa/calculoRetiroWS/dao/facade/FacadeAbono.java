@@ -22,6 +22,86 @@ public DetalleAbonoTO obtenerDetalleDeAbonos(String abonos){
 		DetalleAbonoTO detalleAbono = new DetalleAbonoTO();
 		List<AbonoTO> listaAbonos = new ArrayList<AbonoTO>();
 		
+		int valorAnios = 0;
+		int valorMeses = 0;
+		int valorDias = 0;
+		
+		int totalAnios = 0;
+		int totalMeses = 0;
+		int totalDias = 0;
+		
+		Document abonosXml = Archivo.convertirStringToDocument(abonos);
+		if(abonosXml != null){
+			Element raizAbonos = abonosXml.getDocumentElement();
+			
+			NodeList nlAbonos = raizAbonos.getChildNodes();
+			AbonoTO abonoTO = null;
+			
+			if(nlAbonos != null){
+	    		for(int i=0; i<nlAbonos.getLength(); i++){
+		    		Node nAbono = nlAbonos.item(i);
+		    		if(nAbono.getNodeType() == Node.ELEMENT_NODE){
+			        	Element eAbono = (Element) nAbono;
+			        	abonoTO = new AbonoTO();
+			        	if(eAbono != null){
+			        		Element eTipo = (Element) eAbono.getElementsByTagName("tipo").item(0);
+			        		if (eTipo != null)
+			        			abonoTO.setTipo(eTipo.getTextContent());
+			        		else
+			        			abonoTO.setTipo("");
+			        		
+			        		Element eAnios = (Element) eAbono.getElementsByTagName("anios").item(0);
+			        		if (eAnios != null)
+			        			valorAnios = Integer.parseInt(eAnios.getTextContent());
+			        		else
+			        			valorAnios = 0;;
+			        		
+			        		Element eMeses = (Element) eAbono.getElementsByTagName("meses").item(0);
+			        		if (eMeses != null)
+			        			valorMeses = Integer.parseInt(eMeses.getTextContent());
+			        		else
+			        			valorMeses = 0;
+			        		
+			        		Element eDias = (Element) eAbono.getElementsByTagName("dias").item(0);
+			        		if (eDias != null)
+			        			valorDias = Integer.parseInt(eDias.getTextContent());
+			        		else
+			        			valorDias = 0;
+			        		
+			        		
+			        		abonoTO.setAnios(valorAnios);
+			        		abonoTO.setMeses(valorMeses);
+			        		abonoTO.setDias(valorDias);
+			        		
+			        		listaAbonos.add(abonoTO);
+				    		
+				    		totalAnios += valorAnios;
+					    	totalMeses += valorMeses;
+					    	totalDias += valorDias;
+			        	}
+					}	
+	    		}
+		    	detalleAbono.setAbonos(listaAbonos);
+		    	detalleAbono.setTotalAnios(Util.obtenerAniosNormalizados(totalDias, totalMeses, totalAnios));
+		    	detalleAbono.setTotalMeses(Util.obtenerMesesNormalizados(totalDias, totalMeses));
+		    	detalleAbono.setTotalDias(Util.obtenerDiasNormalizados(totalDias));
+		    }
+		}
+		else{
+			detalleAbono.setAbonos(listaAbonos);
+			detalleAbono.setTotalAnios(0);
+	    	detalleAbono.setTotalMeses(0);
+	    	detalleAbono.setTotalDias(0);
+		}
+		return detalleAbono;
+	}
+	
+
+	public DetalleAbonoTO obtenerDetalleDeAbonosAntiguo(String abonos){
+		
+		DetalleAbonoTO detalleAbono = new DetalleAbonoTO();
+		List<AbonoTO> listaAbonos = new ArrayList<AbonoTO>();
+		
 		Document abonosXml = Archivo.convertirStringToDocument(abonos);
 		if(abonosXml != null){
 			Element raizAbonos = abonosXml.getDocumentElement();
@@ -122,5 +202,6 @@ public DetalleAbonoTO obtenerDetalleDeAbonos(String abonos){
 		}
 		return detalleAbono;
 	}
-	
+
 }
+

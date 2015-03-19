@@ -3,6 +3,7 @@ package cl.ssffaa.calculoRetiroWS.dao.facade;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -28,6 +29,86 @@ public class FacadeConcurrencia {
 
 
 public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias){
+		
+		DetalleConcurrenciaTO detalleConcurrencia = new DetalleConcurrenciaTO();
+		List<ConcurrenciaTO> listaConcurrencias = new ArrayList<ConcurrenciaTO>();
+		
+		int valorAnios = 0;
+		int valorMeses = 0;
+		int valorDias = 0;
+		
+		int totalAnios = 0;
+		int totalMeses = 0;
+		int totalDias = 0;
+		
+		Document concurrenciasXml = Archivo.convertirStringToDocument(concurrencias);
+		if(concurrenciasXml != null){
+			Element raizConcurrencias = concurrenciasXml.getDocumentElement();
+			
+			NodeList nlConcurrencias = raizConcurrencias.getChildNodes();
+			ConcurrenciaTO concurrenciaTO = null;
+			
+			if(nlConcurrencias != null){
+	    		for(int i=0; i<nlConcurrencias.getLength(); i++){
+		    		Node nConcurrencia = nlConcurrencias.item(i);
+		    		if(nConcurrencia.getNodeType() == Node.ELEMENT_NODE){
+			        	Element eConcurrencia = (Element) nConcurrencia;
+			        	concurrenciaTO = new ConcurrenciaTO();
+			        	if(eConcurrencia != null){
+			        		Element eTipo = (Element) eConcurrencia.getElementsByTagName("tipo").item(0);
+			        		if (eTipo != null)
+			        			concurrenciaTO.setTipo(eTipo.getTextContent());
+			        		else
+			        			concurrenciaTO.setTipo("");
+			        		
+			        		Element eAnios = (Element) eConcurrencia.getElementsByTagName("anios").item(0);
+			        		if (eAnios != null)
+			        			valorAnios = Integer.parseInt(eAnios.getTextContent());
+			        		else
+			        			valorAnios = 0;;
+			        		
+			        		Element eMeses = (Element) eConcurrencia.getElementsByTagName("meses").item(0);
+			        		if (eMeses != null)
+			        			valorMeses = Integer.parseInt(eMeses.getTextContent());
+			        		else
+			        			valorMeses = 0;
+			        		
+			        		Element eDias = (Element) eConcurrencia.getElementsByTagName("dias").item(0);
+			        		if (eDias != null)
+			        			valorDias = Integer.parseInt(eDias.getTextContent());
+			        		else
+			        			valorDias = 0;
+			        		
+			        		
+			        		concurrenciaTO.setAnios(valorAnios);
+			        		concurrenciaTO.setMeses(valorMeses);
+			        		concurrenciaTO.setDias(valorDias);
+			        		
+			        		listaConcurrencias.add(concurrenciaTO);
+				    		
+				    		totalAnios += valorAnios;
+					    	totalMeses += valorMeses;
+					    	totalDias += valorDias;
+			        	}
+					}	
+	    		}
+		    	detalleConcurrencia.setConcurrencias(listaConcurrencias);
+		    	detalleConcurrencia.setTotalAnios(Util.obtenerAniosNormalizados(totalDias, totalMeses, totalAnios));
+		    	detalleConcurrencia.setTotalMeses(Util.obtenerMesesNormalizados(totalDias, totalMeses));
+		    	detalleConcurrencia.setTotalDias(Util.obtenerDiasNormalizados(totalDias));
+		    }
+		}
+		else{
+			detalleConcurrencia.setConcurrencias(listaConcurrencias);
+			detalleConcurrencia.setTotalAnios(0);
+	    	detalleConcurrencia.setTotalMeses(0);
+	    	detalleConcurrencia.setTotalDias(0);
+		}
+		
+		return detalleConcurrencia;
+	}
+
+	public DetalleConcurrenciaTO obtenerDetalleDeConcurrenciasAntiguo(String concurrencias){
 		
 		DetalleConcurrenciaTO detalleConcurrencia = new DetalleConcurrenciaTO();
 		List<ConcurrenciaTO> listaConcurrencias = new ArrayList<ConcurrenciaTO>();
@@ -203,13 +284,17 @@ public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias)
 	
 	public String obtenerXmlDistribucionConcurrencia(List<ServicioTO> listaDeServicios, int distribucionCapredena, 
 			int cantidadConcurrencias){
-			    	
-		int cantidadColumnas = 2;
-		int total = 0;
+		
 		String xml = "";
 		
 		try {
-			Document doc = (((DocumentBuilderFactory.newInstance()).newDocumentBuilder()).getDOMImplementation()).createDocument(null,  "detalleConcurrencias", null);
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	        DocumentBuilder db = dbf.newDocumentBuilder();
+			Document doc = db.newDocument();
+
+			Element detalleConcurrencias = doc.createElement("detalleConcurrencias");
+			
+			int total = 0;
 			
 			if(listaDeServicios != null){
 				for(int i=0; i<listaDeServicios.size(); i++){
@@ -223,35 +308,31 @@ public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias)
 		    			if(servicio.getTipoDeServicio() == EnumTipoDeServicio.TOTAL_CON_ABONOS || 
 		    					servicio.getTipoDeServicio() == EnumTipoDeServicio.CONCURRENCIA){
 			    				
-			    			for(int k = 0; k < cantidadColumnas; k++)
-			            	{	
-			    				int montoConcurrencia = (int) Math.round((distribucionCapredena * servicio.getPorcentaje())/100.0);
-	    						
-			    				switch (k) {
-									case 0:
-										Element institucion = doc.createElement("institucion");
-										if(servicio.getTipoDeServicio() == EnumTipoDeServicio.TOTAL_CON_ABONOS)
-											institucion.setTextContent(EnumTipoDeServicio.CAPREDENA);
-										else
-											institucion.setTextContent(servicio.getServicio());
-										concurrencia.appendChild(institucion);
-										break;
-									case 1:
-										Element monto = doc.createElement("monto");
-										monto.setTextContent(montoConcurrencia+"");
-										concurrencia.appendChild(monto);
-										total += montoConcurrencia;
-										break;
-									
-									default:
-										break;
-								}
-			            	}
-			    			doc.getDocumentElement().appendChild(concurrencia);
+			    			
+		    				int montoConcurrencia = (int) Math.round((distribucionCapredena * servicio.getPorcentaje())/100.0);
+    		
+							Element institucion = doc.createElement("institucion");
+							if(servicio.getTipoDeServicio() == EnumTipoDeServicio.TOTAL_CON_ABONOS)
+								institucion.setTextContent(EnumTipoDeServicio.CAPREDENA);
+							else
+								institucion.setTextContent(servicio.getServicio());
+							
+							
+							Element monto = doc.createElement("monto");
+							monto.setTextContent(montoConcurrencia+"");
+							
+							
+							concurrencia.appendChild(institucion);
+							concurrencia.appendChild(monto);
+							
+							total += montoConcurrencia;
+								
+			    			detalleConcurrencias.appendChild(concurrencia);
 			    		}
 			    	}
-					xml = Archivo.convertirDocumentToString(doc);
 				}
+				doc.appendChild(detalleConcurrencias);
+				xml = Archivo.convertirDocumentToString(doc);
 			}
 			
 		} catch (DOMException e) {

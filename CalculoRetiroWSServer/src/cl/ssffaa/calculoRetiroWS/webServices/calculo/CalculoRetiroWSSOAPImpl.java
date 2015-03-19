@@ -13,9 +13,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import cl.ssffaa.calculoRetiroWS.dao.facade.FacadeAbono;
 import cl.ssffaa.calculoRetiroWS.dao.facade.FacadeAsignacion;
@@ -154,7 +151,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
 	String _detalleDeConcurrencias = "";
 	
 	
-	DetalleDeServiciosTO _detallesDeServicio = new DetalleDeServiciosTO();
+	DetalleDeServiciosTO _detalleDeServiciosTO = new DetalleDeServiciosTO();
 	ItemGrillaWSTO[] _itemGrillaDetallesDeServicio = null;
 	
 	
@@ -819,20 +816,20 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         this._instituciones = this._instituciones + institucion; 
                 
         
-        this._detallesDeServicio = facadeDetalleServicio.obtenerDetalleDeServicios(this._instituciones, this._detalleAbono, this._detalleConcurrencia, this._aniosCPDNyConsc, this._mesesCPDNyConsc, this._diasCPDNyConsc);
+        this._detalleDeServiciosTO = facadeDetalleServicio.obtenerDetalleDeServicios(this._instituciones, this._detalleAbono, this._detalleConcurrencia, this._aniosCPDNyConsc, this._mesesCPDNyConsc, this._diasCPDNyConsc);
         
-        this._itemGrillaDetallesDeServicio = this._detallesDeServicio.getItemGrillaDetalleDeServicios();
+        this._itemGrillaDetallesDeServicio = this._detalleDeServiciosTO.getItemGrillaDetalleDeServicios();
         
         //detalleDeServicios.value = this._itemGrillaDetallesDeServicio;
         
         this._detalleDeServicios = facadeDetalleServicio.obtenerXmlDetalleDeServicios(this._instituciones, this._detalleAbono, this._detalleConcurrencia, this._aniosCPDNyConsc, this._mesesCPDNyConsc, this._diasCPDNyConsc);
 	    detalleDeServicios.value = this._detalleDeServicios;
         
-        aniosServiciosTotales.value = this._detallesDeServicio.getTotalAnios();
-        mesesServiciosTotales.value = this._detallesDeServicio.getTotalMeses();
-        diasServiciosTotales.value = this._detallesDeServicio.getTotalDias();
-        enDiasServiciosTotales.value = this._detallesDeServicio.getTotalEnDias();
-        proporcionServiciosTotales.value = this._detallesDeServicio.getTotalPorcentaje();
+        aniosServiciosTotales.value = this._detalleDeServiciosTO.getTotalAnios();
+        mesesServiciosTotales.value = this._detalleDeServiciosTO.getTotalMeses();
+        diasServiciosTotales.value = this._detalleDeServiciosTO.getTotalDias();
+        enDiasServiciosTotales.value = this._detalleDeServiciosTO.getTotalEnDias();
+        proporcionServiciosTotales.value = this._detalleDeServiciosTO.getTotalPorcentaje();
        
         
         for(int i = 0; i < this._itemGrillaDetallesDeServicio.length; i++)
@@ -862,7 +859,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         System.out.println("PROPORCION SERVICIOS TOTALES: "+ proporcionServiciosTotales.value);
         
         
-        this._distribucionConcurrencia = facadeConcurrencia.obtenerDistribucionConcurrencia(this._detallesDeServicio.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
+        this._distribucionConcurrencia = facadeConcurrencia.obtenerDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
         
         this._itemGrillaDistribucionConcurrencia = this._distribucionConcurrencia.getItemGrillaDistribucionConcurrencia();
         
@@ -888,7 +885,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         
         //detalleConcurrencias.value = this._itemGrillaDistribucionConcurrencia;
         
-        this._detalleDeConcurrencias = facadeConcurrencia.obtenerXmlDistribucionConcurrencia(this._detallesDeServicio.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
+        this._detalleDeConcurrencias = facadeConcurrencia.obtenerXmlDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
         
         detalleConcurrencias.value = this._detalleDeConcurrencias;
         
@@ -899,7 +896,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         
     }
 
-    public java.lang.String calcularPorXml(java.lang.String xmlInput) throws java.rmi.RemoteException {
+    public java.lang.String calcularPorXml(java.lang.String xmlInput) {
         
     	
     	
@@ -984,9 +981,9 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
 			e.printStackTrace();
 		}
     	    	
-    	String otrasInstituciones = UtilNode.obtenerSubXml(documentInput, "otrasInstituciones", 0);
-    	String abonos = UtilNode.obtenerSubXml(documentInput, "abonos", 0);
-    	String concurrencias = UtilNode.obtenerSubXml(documentInput, "concurrencias", 0);
+    	String otrasInstituciones = UtilNode.obtenerSubXml(documentInput, "otrasInstituciones");
+    	String abonos = UtilNode.obtenerSubXml(documentInput, "abonos");
+    	String concurrencias = UtilNode.obtenerSubXml(documentInput, "concurrencias");
 
     	
     	
@@ -1541,26 +1538,29 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         this._instituciones = this._instituciones + institucion; 
                 
        
-        this._detallesDeServicio = facadeDetalleServicio.obtenerDetalleDeServicios(this._instituciones, this._detalleAbono, this._detalleConcurrencia, this._aniosCPDNyConsc, this._mesesCPDNyConsc, this._diasCPDNyConsc);
+        this._detalleDeServiciosTO = facadeDetalleServicio.obtenerDetalleDeServicios(this._instituciones, this._detalleAbono, this._detalleConcurrencia, this._aniosCPDNyConsc, this._mesesCPDNyConsc, this._diasCPDNyConsc);
         
 
         this._detalleDeServicios = facadeDetalleServicio.obtenerXmlDetalleDeServicios(this._instituciones, this._detalleAbono, this._detalleConcurrencia, this._aniosCPDNyConsc, this._mesesCPDNyConsc, this._diasCPDNyConsc);
-        
-        this._xmlOutput += "<detalleDeServicios>" + this._detalleDeServicios + "</detalleDeServicios>\n";
-        
-        
-        this._xmlOutput += "<aniosServiciosTotales>" + this._detallesDeServicio.getTotalAnios() + "</aniosServiciosTotales>\n";
-        this._xmlOutput += "<mesesServiciosTotales>" + this._detallesDeServicio.getTotalMeses() + "</mesesServiciosTotales>\n";
-        this._xmlOutput += "<diasServiciosTotales>" + this._detallesDeServicio.getTotalDias() + "</diasServiciosTotales>\n";
-        this._xmlOutput += "<enDiasServiciosTotales>" + this._detallesDeServicio.getTotalEnDias() + "</enDiasServiciosTotales>\n";
-        this._xmlOutput += "<proporcionServiciosTotales>" + this._detallesDeServicio.getTotalPorcentaje() + "</proporcionServiciosTotales>\n";
+        this._detalleDeServicios = this._detalleDeServicios.replaceAll("\\<\\?xml(.+?)\\?\\>", "").trim();
         
         
+        this._xmlOutput += this._detalleDeServicios + "\n";
         
-        this._distribucionConcurrencia = facadeConcurrencia.obtenerDistribucionConcurrencia(this._detallesDeServicio.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
+        
+        this._xmlOutput += "<aniosServiciosTotales>" + this._detalleDeServiciosTO.getTotalAnios() + "</aniosServiciosTotales>\n";
+        this._xmlOutput += "<mesesServiciosTotales>" + this._detalleDeServiciosTO.getTotalMeses() + "</mesesServiciosTotales>\n";
+        this._xmlOutput += "<diasServiciosTotales>" + this._detalleDeServiciosTO.getTotalDias() + "</diasServiciosTotales>\n";
+        this._xmlOutput += "<enDiasServiciosTotales>" + this._detalleDeServiciosTO.getTotalEnDias() + "</enDiasServiciosTotales>\n";
+        this._xmlOutput += "<proporcionServiciosTotales>" + this._detalleDeServiciosTO.getTotalPorcentaje() + "</proporcionServiciosTotales>\n";
+        
+        
+        
+        this._distribucionConcurrencia = facadeConcurrencia.obtenerDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
                
-        this._detalleDeConcurrencias = facadeConcurrencia.obtenerXmlDistribucionConcurrencia(this._detallesDeServicio.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
-
+        this._detalleDeConcurrencias = facadeConcurrencia.obtenerXmlDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
+        this._detalleDeConcurrencias = this._detalleDeConcurrencias.replaceAll("\\<\\?xml(.+?)\\?\\>", "").trim();
+        
         this._xmlOutput += "<concurrencias>\n";
         this._xmlOutput += this._detalleDeConcurrencias + "\n";
         this._xmlOutput += "<totalConcurrencias>" + this._distribucionConcurrencia.getTotal() + "</totalConcurrencias>\n";
@@ -1570,8 +1570,10 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         
         this._xmlOutput += "</resultados>";
         DBMannager.close(c, true);  
-     
-        return _xmlOutput;
+        
+        this._xmlOutput = Archivo.formatearXml(this._xmlOutput);
+        
+        return this._xmlOutput;
     }
 
 
