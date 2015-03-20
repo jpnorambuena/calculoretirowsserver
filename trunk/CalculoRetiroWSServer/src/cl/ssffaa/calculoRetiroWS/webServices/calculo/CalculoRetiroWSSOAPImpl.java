@@ -833,24 +833,24 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
        
         
         for(int i = 0; i < this._itemGrillaDetallesDeServicio.length; i++)
+        {
+                ItemGrillaWSTO itemGrilla = new ItemGrillaWSTO();
+                ItemColumnaWSTO listaItemColumna[] = new ItemColumnaWSTO[6];
+                
+                itemGrilla = this._itemGrillaDetallesDeServicio[i];
+                listaItemColumna = itemGrilla.getListaColumnas();
+                
+                String linea = "| \t";
+                
+                for(int j = 0; j < listaItemColumna.length; j++)
                 {
-                        ItemGrillaWSTO itemGrilla = new ItemGrillaWSTO();
-                        ItemColumnaWSTO listaItemColumna[] = new ItemColumnaWSTO[6];
-                        
-                        itemGrilla = this._itemGrillaDetallesDeServicio[i];
-                        listaItemColumna = itemGrilla.getListaColumnas();
-                        
-                        String linea = "| \t";
-                        
-                        for(int j = 0; j < listaItemColumna.length; j++)
-                        {
-                                ItemColumnaWSTO itemColumna = new ItemColumnaWSTO();
-                                itemColumna = listaItemColumna[j];
-                                linea = linea + itemColumna.getValor();
-                                linea = linea + "\t |";
-                        }
-                        System.out.println(linea);
-                }       
+                        ItemColumnaWSTO itemColumna = new ItemColumnaWSTO();
+                        itemColumna = listaItemColumna[j];
+                        linea = linea + itemColumna.getValor();
+                        linea = linea + "\t |";
+                }
+                System.out.println(linea);
+        }       
         
         System.out.println("AÑOS SERVICIOS TOTALES: "+ aniosServiciosTotales.value);
         System.out.println("MESES SERVICIOS TOTALES: "+ mesesServiciosTotales.value);
@@ -891,15 +891,14 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         
         
         totalConcurrencias.value = this._distribucionConcurrencia.getTotal();
+        System.out.println("TOTAL CONCURRENCIAS: "+ totalConcurrencias.value);
         
         DBMannager.close(c, true);   
         
     }
 
     public java.lang.String calcularPorXml(java.lang.String xmlInput) {
-        
-    	
-    	
+            	
     	Document documentInput = Archivo.convertirStringToDocument(xmlInput);
     	
     	if(documentInput == null)
@@ -984,8 +983,6 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
     	String otrasInstituciones = UtilNode.obtenerSubXml(documentInput, "otrasInstituciones");
     	String abonos = UtilNode.obtenerSubXml(documentInput, "abonos");
     	String concurrencias = UtilNode.obtenerSubXml(documentInput, "concurrencias");
-
-    	
     	
     	Connection c = DBMannager.getConnection();
 
@@ -1008,10 +1005,8 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         this._idTipoDePersonal = facadeTipoDePersonal.obtenerIdTipoDePersonal(categoria, grado, escalafonCivil);
         this._tipoDePersonal = facadeTipoDePersonal.obtenerTipoDePersonal(categoria, grado, escalafonCivil);
         
-        
         System.out.println("RUN PENSIONADO : "+ run);
         
-        //this._gradoJerarquico = grado;
         this._gradoJerarquico = facadeGradoJerarquico.obtenerIdGradoJerarquico(this._idTipoDePersonal, subInstitucion, categoria, grado, escalafonCivil);
         if(this._gradoJerarquico < 0)
                 this._gradoJerarquico = gradoJerarquico;
@@ -1283,7 +1278,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         this._porcentajeReajusteDS376_1987 = facadeReajuste.obtenerPorcentajeReajusteDS376_1987(this._reajusteHasta8_8, 20);
         
         //S053
-        this._xmlOutput += "<porcentajeReajusteDS376_1987>" + this._porcentajeReajusteDS376_1987 + "<%/porcentajeReajusteDS376_1987>\n";
+        this._xmlOutput += "<porcentajeReajusteDS376_1987>" + this._porcentajeReajusteDS376_1987 + "%</porcentajeReajusteDS376_1987>\n";
         
         this._montoReajusteDS376_1987 = facadeReajuste.obtenerMontoReajusteDS376_1987(this._reajusteHasta8_8, this._porcentajeReajusteDS376_1987);
         
@@ -1369,7 +1364,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         }
                 
         //S077
-        this._xmlOutput += "<porcentajeAsigMinDeCorteNoImp>" + this._porcentajeMinistroDeCorteNoImp + "<%/porcentajeAsigMinDeCorteNoImp>\n";
+        this._xmlOutput += "<porcentajeAsigMinDeCorteNoImp>" + this._porcentajeMinistroDeCorteNoImp + "%</porcentajeAsigMinDeCorteNoImp>\n";
         
         this._asigMinistroDeCorteNoImp = facadeAsignacion.obtenerAsignacionMinistroDeCorteNoImponible(this._sueldoMinistroDeCorte);
         
@@ -1424,7 +1419,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         
         //S059
         this._porcentajeUltimoReajuste = ultimoReajustePasivo.getPorcentaje();
-        this._xmlOutput += "<porcentajeUltimoReajuste>" + this._porcentajeUltimoReajuste + "<%/porcentajeUltimoReajuste>\n";
+        this._xmlOutput += "<porcentajeUltimoReajuste>" + this._porcentajeUltimoReajuste + "%</porcentajeUltimoReajuste>\n";
         
         this._montoFinalOtrosReajustes = ultimoReajustePasivo.getMontoReajustado();
         
@@ -1572,7 +1567,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         DBMannager.close(c, true);  
         
         this._xmlOutput = Archivo.formatearXml(this._xmlOutput);
-        
+        System.out.println("RESULTADOS:\n "+ this._xmlOutput);
         return this._xmlOutput;
     }
 
