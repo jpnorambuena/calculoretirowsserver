@@ -97,7 +97,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -107,7 +109,6 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
-    <None Include="Service References\WsCalculoRetiro\CalculoRetiroWSSOAP.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -116,6 +117,7 @@
     <WCFMetadataStorage Include="Service References\WsCalculoRetiro\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\WsCalculoRetiro\CalculoRetiroWSSOAP1.wsdl" />
     <None Include="Service References\WsCalculoRetiro\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>

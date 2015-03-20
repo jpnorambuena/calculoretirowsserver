@@ -1108,86 +1108,80 @@ $(function() {
 
 
 function calcularX(){
-    var param = { 
-            run: '16.023.917-4' || '',
-            institucion: 'FUERZA AÉREA' || '',
-            subInstitucion: 'FUERZA AÉREA' || '',
-            categoria: 'OFICIAL (FA)' || '',
-            escalafonCivil: '' || '',
-            grado: 'CORONEL DE AVIACIÓN' || '',
-            gradoJerarquico: 4 || '',
-            gradoEconomico: 1 || '',
-            esDeLinea: 'NO' || '',
-            fechaDeBaja: '2015-01-31' || '',
-            cantidadDeAcciones: 10 || '',
-            tipoDeAcciones: 'Con AEGE' || '',
-            porcentajeDeSobresueldo: '21%' || '',
-            porcentajeDeSegundoSobresueldo: '20%' || '',
-            porcentajeDeAsignacionSOFSOM: '25%' || '',
-            poseeAsigMinistroDeCorte: 'SI' || '',
-            sueldoIntegroMinistroDeCorte: 100000 || '',
-            planillaSuplementariaLey19699: 3 || '',
-            planillaSuplementariaDFL1_68: 3 || '',
-            aniosCPDNyConsc: 26 || '',
-            mesesCPDNyConsc: 24 || '',
-            diasCPDNyConsc: 33 || '',
-            aniosDesahucio: 19 || '',
-            mesesDesahucio: 15 || '',
-            diasDesahucio: 32 || '',
-            otrasInstituciones: '<?xml version="1.0" encoding="UTF-8"?>' +
-	            '<grilla>' +
-	            '   <columna id="_Institucion" titulo="Institución" orden="1" tipoDato="ALF">' +
-	            '		<valor orden="0" tipoDato="null">Asmar</valor>' +
-	            '		<valor orden="1" tipoDato="null">Carabineros</valor>' +
-	            '		<valor orden="2" tipoDato="null">DGAC</valor>' +
-	            '	</columna>' +
-	            '</grilla>' || '',
-            abonos: '<?xml version="1.0" encoding="UTF-8"?>' + 
-                '<grilla>' +
-	            '   <columna id="_Abono" titulo="Abono" orden="1" tipoDato="ALF">' +
-	            '	    <valor orden="0" tipoDato="null">Abono por hijos</valor>' +
-	            '		<valor orden="1" tipoDato="null">Abono por viudez</valor>' +
-	            '		<valor orden="2" tipoDato="null">Abono por lesiones</valor>' +
-	            '	</columna>' +
-	            '	<columna id="_Anios" titulo="Años" orden="2" tipoDato="NUM">' +
-	            '	    <valor orden="0" tipoDato="null">10</valor>' +
-	            '		<valor orden="1" tipoDato="null">4</valor>' +
-	            '		<valor orden="2" tipoDato="null">4</valor>' +
-	            '	</columna>' +
-	            '	<columna id="_Meses" titulo="Meses" orden="3" tipoDato="NUM">' +
-	            '	    <valor orden="0" tipoDato="null">2</valor>' +
-	            '		<valor orden="1" tipoDato="null">6</valor>' +
-	            '		<valor orden="2" tipoDato="null">1</valor>' +
-	            '	</columna>' +
-	            '	<columna id="_Días" titulo="Días" orden="4" tipoDato="NUM">' +
-	            '	    <valor orden="0" tipoDato="null">3</valor>' +
-	            '		<valor orden="1" tipoDato="null">15</valor>' +
-	            '		<valor orden="2" tipoDato="null">25</valor>' +
-	            '	</columna>' +
-	            '</grilla>' || '',
-            concurrencias: '<?xml version="1.0" encoding="UTF-8"?>' + 
-                '<grilla>' +
-	            '   <columna id="_Concurrencia" titulo="Concurrencia" orden="1" tipoDato="ALF">' +
-	            '	    <valor orden="0" tipoDato="null">Canaempu</valor>' +
-	            '		<valor orden="1" tipoDato="null">Dipreca</valor>' +
-	            '		<valor orden="2" tipoDato="null">Empart</valor>' +
-	            '	</columna>' +
-	            '	<columna id="_Anios" titulo="Años" orden="2" tipoDato="NUM">' +
-	            '	    <valor orden="0" tipoDato="null">10</valor>' +
-	            '		<valor orden="1" tipoDato="null">2</valor>' +
-	            '		<valor orden="2" tipoDato="null">5</valor>' +
-	            '	</columna> ' +
-	            '	<columna id="_Meses" titulo="Meses" orden="3" tipoDato="NUM">' +
-	            '	    <valor orden="0" tipoDato="null">2</valor>' +
-	            '       <valor orden="1" tipoDato="null">3</valor>' +
-	            '		<valor orden="2" tipoDato="null">6</valor>' +
-	            '	</columna>' +
-	            '	<columna id="_Días" titulo="Días" orden="4" tipoDato="NUM">' +
-	            '	    <valor orden="0" tipoDato="null">3</valor>' +
-	            '		<valor orden="1" tipoDato="null">4</valor>' +
-	            '		<valor orden="2" tipoDato="null">4</valor>' +
-	            '	</columna>' +
-	            '</grilla>' || ''};
+    var param = {
+        xml: '<calcular>'+
+	    '<run>16.023.917-4</run>'+
+		'<institucion>FUERZA AÉREA</institucion>'+
+		'<subInstitucion>FUERZA AÉREA</subInstitucion>'+
+		'<categoria>OFICIAL (FA)</categoria>'+
+		'<escalafonCivil></escalafonCivil>'+
+		'<grado>CORONEL DE AVIACIÓN</grado>'+
+		'<gradoJerarquico>4</gradoJerarquico>'+
+		'<gradoEconomico>1</gradoEconomico>'+
+		'<esDeLinea>NO</esDeLinea>'+
+		'<fechaDeBaja>2015-01-31</fechaDeBaja>'+
+		'<cantidadDeAcciones>10</cantidadDeAcciones>'+
+		'<tipoDeAcciones>Con AEGE</tipoDeAcciones>'+
+		'<porcentajeDeSobresueldo>21%</porcentajeDeSobresueldo>'+
+		'<porcentajeDeSegundoSobresueldo>20%</porcentajeDeSegundoSobresueldo>'+
+		'<porcentajeDeAsignacionSOFSOM>25%</porcentajeDeAsignacionSOFSOM>'+
+		'<poseeAsigMinistroDeCorte>SI</poseeAsigMinistroDeCorte>'+
+		'<sueldoIntegroMinistroDeCorte>100000</sueldoIntegroMinistroDeCorte>'+
+		'<planillaSuplementariaLey19699>3</planillaSuplementariaLey19699>'+
+		'<planillaSuplementariaDFL1_68>3</planillaSuplementariaDFL1_68>'+
+		'<aniosCPDNyConsc>26</aniosCPDNyConsc>'+
+		'<mesesCPDNyConsc>24</mesesCPDNyConsc>'+
+		'<diasCPDNyConsc>33</diasCPDNyConsc>'+
+		'<aniosDesahucio>19</aniosDesahucio>'+
+		'<mesesDesahucio>15</mesesDesahucio>'+
+		'<diasDesahucio>32</diasDesahucio>'+
+		'<otrasInstituciones>'+
+		'<institucion>Asmar</institucion>'+
+		'<institucion>Carabineros</institucion>'+
+		'<institucion>DGAC</institucion>'+
+		'</otrasInstituciones>'+
+		'<abonos>'+
+		'<abono>'+
+		'<tipo>Abono por hijos</tipo>'+
+		'<anios>10</anios>'+
+		'<meses>2</meses>'+
+		'<dias>3</dias>'+
+		'</abono>'+
+		'<abono>'+
+		'<tipo>Abono por viudez</tipo>'+
+		'<anios>4</anios>'+
+		'<meses>6</meses>'+
+		'<dias>15</dias>'+
+		'</abono>'+
+		'<abono>'+
+		'<tipo>Abono por lesiones</tipo>'+
+		'<anios>4</anios>'+
+		'<meses>1</meses>'+
+		'<dias>25</dias>'+
+		'</abono>'+
+		'</abonos>'+
+		'<concurrencias>'+
+		'<concurrencia>'+
+		'<tipo>Canaempu</tipo>'+
+		'<anios>10</anios>'+
+		'<meses>2</meses>'+
+		'<dias>3</dias>'+
+		'</concurrencia>'+
+		'<concurrencia>'+
+		'<tipo>Dipreca</tipo>'+
+		'<anios>2</anios>'+
+		'<meses>3</meses>'+
+		'<dias>4</dias>'+
+		'</concurrencia>'+
+		'<concurrencia>'+
+		'<tipo>Empart</tipo>'+
+		'<anios>5</anios>'+
+		'<meses>6</meses>'+
+		'<dias>4</dias>'+
+		'</concurrencia>'+
+		'</concurrencias>'+
+		'</calcular>'
+            };
 
 
 

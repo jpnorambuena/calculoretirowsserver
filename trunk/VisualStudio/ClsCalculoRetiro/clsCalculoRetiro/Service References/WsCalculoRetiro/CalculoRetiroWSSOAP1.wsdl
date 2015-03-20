@@ -2,7 +2,7 @@
 <wsdl:definitions xmlns:intf="http://calculo.webServices.calculoRetiroWS.ssffaa.cl" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://calculo.webServices.calculoRetiroWS.ssffaa.cl" targetNamespace="http://calculo.webServices.calculoRetiroWS.ssffaa.cl" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://calculo.webServices.calculoRetiroWS.ssffaa.cl">
-      <xsd:element name="calcular">
+      <xsd:element name="calcularPorParametros">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="run" type="xsd:string" />
@@ -36,7 +36,7 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="calcularResponse">
+      <xsd:element name="calcularPorParametrosResponse">
         <xsd:complexType>
           <xsd:sequence>
             <xsd:element name="grados" type="xsd:string" />
@@ -126,35 +126,68 @@
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
+      <xsd:element name="calcularPorXml">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="xmlInput" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="calcularPorXmlResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="xmlOutput" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="calcularRequest">
-    <wsdl:part name="parameters" element="impl:calcular" />
+  <wsdl:message name="calcularPorParametrosRequest">
+    <wsdl:part name="parameters" element="impl:calcularPorParametros" />
   </wsdl:message>
-  <wsdl:message name="calcularResponse">
-    <wsdl:part name="parameters" element="impl:calcularResponse" />
+  <wsdl:message name="calcularPorXmlRequest">
+    <wsdl:part name="parameters" element="impl:calcularPorXml" />
+  </wsdl:message>
+  <wsdl:message name="calcularPorXmlResponse">
+    <wsdl:part name="parameters" element="impl:calcularPorXmlResponse" />
+  </wsdl:message>
+  <wsdl:message name="calcularPorParametrosResponse">
+    <wsdl:part name="parameters" element="impl:calcularPorParametrosResponse" />
   </wsdl:message>
   <wsdl:portType name="CalculoRetiroWS">
-    <wsdl:operation name="calcular">
-      <wsdl:input name="calcularRequest" message="impl:calcularRequest" />
-      <wsdl:output name="calcularResponse" message="impl:calcularResponse" />
+    <wsdl:operation name="calcularPorParametros">
+      <wsdl:input name="calcularPorParametrosRequest" message="impl:calcularPorParametrosRequest" />
+      <wsdl:output name="calcularPorParametrosResponse" message="impl:calcularPorParametrosResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="calcularPorXml">
+      <wsdl:input name="calcularPorXmlRequest" message="impl:calcularPorXmlRequest" />
+      <wsdl:output name="calcularPorXmlResponse" message="impl:calcularPorXmlResponse" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="CalculoRetiroWSSOAPSoapBinding" type="impl:CalculoRetiroWS">
     <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="calcular">
-      <wsdlsoap:operation soapAction="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcular" />
-      <wsdl:input name="calcularRequest">
+    <wsdl:operation name="calcularPorParametros">
+      <wsdlsoap:operation soapAction="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcularPorParametros" />
+      <wsdl:input name="calcularPorParametrosRequest">
         <wsdlsoap:body use="literal" />
       </wsdl:input>
-      <wsdl:output name="calcularResponse">
+      <wsdl:output name="calcularPorParametrosResponse">
+        <wsdlsoap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="calcularPorXml">
+      <wsdlsoap:operation soapAction="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcularPorXml" />
+      <wsdl:input name="calcularPorXmlRequest">
+        <wsdlsoap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="calcularPorXmlResponse">
         <wsdlsoap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="CalculoRetiroWS">
     <wsdl:port name="CalculoRetiroWSSOAP" binding="impl:CalculoRetiroWSSOAPSoapBinding">
-      <wsdlsoap:address location="http://unibox.ssffaa.cl/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP" />
+      <wsdlsoap:address location="http://localhost:8080/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

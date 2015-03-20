@@ -87,46 +87,18 @@ Partial Class panel
 
     
     <WebMethod(EnableSession:=True)> _
-    Public Shared Function calcular( _
-        ByVal run As String, _
-        ByVal institucion As String, _
-        ByVal subInstitucion As String, _
-        ByVal categoria As String, _
-        ByVal escalafonCivil As String, _
-        ByVal grado As String, _
-        ByVal gradoJerarquico As Integer, _
-        ByVal gradoEconomico As Integer, _
-        ByVal esDeLinea As String, _
-        ByVal fechaDeBaja As String, _
-        ByVal cantidadDeAcciones As Integer, _
-        ByVal tipoDeAcciones As String, _
-        ByVal porcentajeDeSobresueldo As String, _
-        ByVal porcentajeDeSegundoSobresueldo As String, _
-        ByVal porcentajeDeAsignacionSOFSOM As String, _
-        ByVal poseeAsigMinistroDeCorte As String, _
-        ByVal sueldoIntegroMinistroDeCorte As Integer, _
-        ByVal planillaSuplementariaLey19699 As String, _
-        ByVal planillaSuplementariaDFL1_68 As String, _
-        ByVal aniosCPDNyConsc As Integer, _
-        ByVal mesesCPDNyConsc As Integer, _
-        ByVal diasCPDNyConsc As Integer, _
-        ByVal aniosDesahucio As Integer, _
-        ByVal mesesDesahucio As Integer, _
-        ByVal diasDesahucio As Integer, _
-        ByVal otrasInstituciones As String, _
-        ByVal abonos As String, _
-        ByVal concurrencias As String) As List(Of String)
+    Public Shared Function calcular(ByVal xml As String) As List(Of String)
 
         Dim mDatos As New List(Of String)
 
-        Dim str As String
+        Dim xmlResultados As String
         Dim clsCalculo As New clsCalculoRetiro.calculoRetiro()
 
 
         Try
-            str = clsCalculo.calcular(run, institucion, subInstitucion, categoria, escalafonCivil, grado, gradoJerarquico, gradoEconomico, esDeLinea, fechaDeBaja, cantidadDeAcciones, tipoDeAcciones, porcentajeDeSobresueldo, porcentajeDeSegundoSobresueldo, porcentajeDeAsignacionSOFSOM, poseeAsigMinistroDeCorte, sueldoIntegroMinistroDeCorte, planillaSuplementariaLey19699, planillaSuplementariaDFL1_68, aniosCPDNyConsc, mesesCPDNyConsc, diasCPDNyConsc, aniosDesahucio, mesesDesahucio, diasDesahucio, otrasInstituciones, abonos, concurrencias)
+            xmlResultados = clsCalculo.calcular(xml)
             mDatos.Add(0)
-            mDatos.Add(str)
+            mDatos.Add(xmlResultados)
 
         Catch ex As Exception
             mDatos.Add(-1)
@@ -136,4 +108,13 @@ Partial Class panel
         Return mDatos
     End Function
 
-End Class
+    Class func
+        Public nombresStr As String
+        Public apellidosStr As String
+        Public gradoStr As String
+        Public emailStr As String
+        Public unidadStr As String
+        Public subunidadStr As String
+        Public direccionStr As String
+        Public pisoStr As String
+    End Class

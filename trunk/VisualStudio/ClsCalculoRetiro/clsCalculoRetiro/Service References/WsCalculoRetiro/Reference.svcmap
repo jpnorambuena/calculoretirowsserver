@@ -18,10 +18,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://unibox.ssffaa.cl/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP?wsdl" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://localhost:8080/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="CalculoRetiroWSSOAP.wsdl" MetadataType="Wsdl" ID="0a8707d7-bd06-415c-b5ec-95231c5f9eac" SourceId="1" SourceUrl="http://unibox.ssffaa.cl/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP?wsdl" />
+    <MetadataFile FileName="CalculoRetiroWSSOAP1.wsdl" MetadataType="Wsdl" ID="5d214f98-52c1-4ac6-aab9-733fd86c1fd5" SourceId="1" SourceUrl="http://localhost:8080/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP?wsdl" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
