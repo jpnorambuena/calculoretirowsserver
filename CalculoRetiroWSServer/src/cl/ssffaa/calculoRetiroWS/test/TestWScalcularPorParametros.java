@@ -152,61 +152,55 @@ public class TestWScalcularPorParametros {
 		//xml
 		
 		String otrasInstituciones = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> "+
-									"<grilla> "+
-									"	<columna id=\"_Institucion\" titulo=\"Institución\" orden=\"1\" tipoDato=\"ALF\"> "+
-									"		<valor orden=\"0\" tipoDato=\"null\">Asmar</valor> "+
-									"		<valor orden=\"1\" tipoDato=\"null\">Carabineros</valor> "+ 
-									"		<valor orden=\"2\" tipoDato=\"null\">DGAC</valor> "+
-									"	</columna> "+
-									"</grilla>";
+									"<otrasInstituciones>"+
+									"	<institucion>Asmar</institucion>"+
+									"	<institucion>Carabineros</institucion>"+
+									"	<institucion>DGAC</institucion>"+
+									"</otrasInstituciones>";
 		
 		String abonos = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> "+
-									"<grilla>  "+
-									"	<columna id=\"_Abono\" titulo=\"Abono\" orden=\"1\" tipoDato=\"ALF\">  "+
-									"		<valor orden=\"0\" tipoDato=\"null\">Abono por hijos</valor>  "+
-									"		<valor orden=\"1\" tipoDato=\"null\">Abono por viudez</valor>  "+
-									"		<valor orden=\"2\" tipoDato=\"null\">Abono por lesiones</valor>  "+
-									"	</columna>  "+
-									"	<columna id=\"_Anios\" titulo=\"Años\" orden=\"2\" tipoDato=\"NUM\"> "+ 
-									"		<valor orden=\"0\" tipoDato=\"null\">10</valor>  "+
-									"		<valor orden=\"1\" tipoDato=\"null\">4</valor>  "+
-									"		<valor orden=\"2\" tipoDato=\"null\">4</valor>  "+
-									"	</columna>  "+
-									"	<columna id=\"_Meses\" titulo=\"Meses\" orden=\"3\" tipoDato=\"NUM\">  "+
-									"		<valor orden=\"0\" tipoDato=\"null\">2</valor>  "+
-									"		<valor orden=\"1\" tipoDato=\"null\">6</valor>  "+
-									"		<valor orden=\"2\" tipoDato=\"null\">1</valor>  "+
-									"	</columna>  "+
-									"	<columna id=\"_Días\" titulo=\"Días\" orden=\"4\" tipoDato=\"NUM\">  "+
-									"		<valor orden=\"0\" tipoDato=\"null\">3</valor>  "+
-									"		<valor orden=\"1\" tipoDato=\"null\">15</valor>  "+
-									"		<valor orden=\"2\" tipoDato=\"null\">25</valor>  "+
-									"	</columna> "+
-									"</grilla>"; 
+						"<abonos>"+
+						"	<abono>"+
+						"		<tipo>Abono por hijos</tipo>"+
+						"		<anios>10</anios>"+
+						"		<meses>2</meses>"+
+						"		<dias>3</dias>"+
+						"	</abono>"+
+						"	<abono>"+
+						"		<tipo>Abono por viudez</tipo>"+
+						"		<anios>4</anios>"+
+						"		<meses>6</meses>"+
+						"		<dias>15</dias>"+
+						"	</abono>"+
+						"	<abono>"+
+						"		<tipo>Abono por lesiones</tipo>"+
+						"		<anios>4</anios>"+
+						"		<meses>1</meses>"+
+						"		<dias>25</dias>"+
+						"	</abono>"+
+						"</abonos>";
 				
 		String concurrencias = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>  "+
-								"<grilla>  "+
-								"	<columna id=\"_Concurrencia\" titulo=\"Concurrencia\" orden=\"1\" tipoDato=\"ALF\">  "+
-								"		<valor orden=\"0\" tipoDato=\"null\">Canaempu</valor>  "+
-								"		<valor orden=\"1\" tipoDato=\"null\">Dipreca</valor>  "+
-								"		<valor orden=\"2\" tipoDato=\"null\">Empart</valor>  "+
-								"	</columna>  "+
-								"	<columna id=\"_Anios\" titulo=\"Años\" orden=\"2\" tipoDato=\"NUM\">  "+
-								"		<valor orden=\"0\" tipoDato=\"null\">10</valor>  "+
-								"		<valor orden=\"1\" tipoDato=\"null\">2</valor>  "+
-								"		<valor orden=\"2\" tipoDato=\"null\">5</valor>  "+
-								"	</columna>  "+
-								"	<columna id=\"_Meses\" titulo=\"Meses\" orden=\"3\" tipoDato=\"NUM\">  "+
-								"		<valor orden=\"0\" tipoDato=\"null\">2</valor>  "+
-								"		<valor orden=\"1\" tipoDato=\"null\">3</valor>  "+
-								"		<valor orden=\"2\" tipoDato=\"null\">6</valor>  "+
-								"	</columna>  "+
-								"	<columna id=\"_Días\" titulo=\"Días\" orden=\"4\" tipoDato=\"NUM\">  "+
-								"		<valor orden=\"0\" tipoDato=\"null\">3</valor>  "+
-								"		<valor orden=\"1\" tipoDato=\"null\">4</valor>  "+
-								"		<valor orden=\"2\" tipoDato=\"null\">4</valor>  "+
-								"	</columna> "+
-								"</grilla> ";
+							"<concurrencias>"+
+							"	<concurrencia>"+
+							"		<tipo>Canaempu</tipo>"+
+							"		<anios>10</anios>"+
+							"		<meses>2</meses>"+
+							"		<dias>3</dias>"+
+							"	</concurrencia>"+
+							"	<concurrencia>"+
+							"		<tipo>Dipreca</tipo>"+
+							"		<anios>2</anios>"+
+							"		<meses>3</meses>"+
+							"		<dias>4</dias>"+
+							"	</concurrencia>"+
+							"	<concurrencia>"+
+							"		<tipo>Empart</tipo>"+
+							"		<anios>5</anios>"+
+							"		<meses>6</meses>"+
+							"		<dias>4</dias>"+
+							"	</concurrencia>"+
+							"</concurrencias>";
 		
 		
 		

@@ -77,8 +77,8 @@ public class Archivo {
         try {
             final InputSource src = new InputSource(new StringReader(xml));
             final Node document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src).getDocumentElement();
-            final Boolean keepDeclaration = Boolean.valueOf(xml.startsWith("<?xml"));
-            
+            //final Boolean keepDeclaration = Boolean.valueOf(xml.startsWith("<?xml"));
+            final Boolean keepDeclaration = Boolean.TRUE;
             final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
             final DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
             final LSSerializer writer = impl.createLSSerializer();
