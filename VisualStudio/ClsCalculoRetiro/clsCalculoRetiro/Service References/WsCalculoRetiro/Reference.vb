@@ -19,24 +19,28 @@ Namespace WsCalculoRetiro
     Public Interface CalculoRetiroWS
         
         'CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento run del espacio de nombres  no está marcado para aceptar valores nil.
-        <System.ServiceModel.OperationContractAttribute(Action:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcular", ReplyAction:="*")>  _
-        Function calcular(ByVal request As WsCalculoRetiro.calcularRequest) As WsCalculoRetiro.calcularResponse
+        <System.ServiceModel.OperationContractAttribute(Action:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcularPorParametros", ReplyAction:="*")>  _
+        Function calcularPorParametros(ByVal request As WsCalculoRetiro.calcularPorParametrosRequest) As WsCalculoRetiro.calcularPorParametrosResponse
+        
+        'CODEGEN: Se está generando un contrato de mensaje, ya que el nombre de elemento xmlInput del espacio de nombres  no está marcado para aceptar valores nil.
+        <System.ServiceModel.OperationContractAttribute(Action:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl/calcularPorXml", ReplyAction:="*")>  _
+        Function calcularPorXml(ByVal request As WsCalculoRetiro.calcularPorXmlRequest) As WsCalculoRetiro.calcularPorXmlResponse
     End Interface
     
     <System.Diagnostics.DebuggerStepThroughAttribute(),  _
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
      System.ServiceModel.MessageContractAttribute(IsWrapped:=false)>  _
-    Partial Public Class calcularRequest
+    Partial Public Class calcularPorParametrosRequest
         
-        <System.ServiceModel.MessageBodyMemberAttribute(Name:="calcular", [Namespace]:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl", Order:=0)>  _
-        Public Body As WsCalculoRetiro.calcularRequestBody
+        <System.ServiceModel.MessageBodyMemberAttribute(Name:="calcularPorParametros", [Namespace]:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl", Order:=0)>  _
+        Public Body As WsCalculoRetiro.calcularPorParametrosRequestBody
         
         Public Sub New()
             MyBase.New
         End Sub
         
-        Public Sub New(ByVal Body As WsCalculoRetiro.calcularRequestBody)
+        Public Sub New(ByVal Body As WsCalculoRetiro.calcularPorParametrosRequestBody)
             MyBase.New
             Me.Body = Body
         End Sub
@@ -46,7 +50,7 @@ Namespace WsCalculoRetiro
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
      System.Runtime.Serialization.DataContractAttribute([Namespace]:="")>  _
-    Partial Public Class calcularRequestBody
+    Partial Public Class calcularPorParametrosRequestBody
         
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false, Order:=0)>  _
         Public run As String
@@ -201,16 +205,16 @@ Namespace WsCalculoRetiro
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
      System.ServiceModel.MessageContractAttribute(IsWrapped:=false)>  _
-    Partial Public Class calcularResponse
+    Partial Public Class calcularPorParametrosResponse
         
-        <System.ServiceModel.MessageBodyMemberAttribute(Name:="calcularResponse", [Namespace]:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl", Order:=0)>  _
-        Public Body As WsCalculoRetiro.calcularResponseBody
+        <System.ServiceModel.MessageBodyMemberAttribute(Name:="calcularPorParametrosResponse", [Namespace]:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl", Order:=0)>  _
+        Public Body As WsCalculoRetiro.calcularPorParametrosResponseBody
         
         Public Sub New()
             MyBase.New
         End Sub
         
-        Public Sub New(ByVal Body As WsCalculoRetiro.calcularResponseBody)
+        Public Sub New(ByVal Body As WsCalculoRetiro.calcularPorParametrosResponseBody)
             MyBase.New
             Me.Body = Body
         End Sub
@@ -220,7 +224,7 @@ Namespace WsCalculoRetiro
      System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
      System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
      System.Runtime.Serialization.DataContractAttribute([Namespace]:="")>  _
-    Partial Public Class calcularResponseBody
+    Partial Public Class calcularPorParametrosResponseBody
         
         <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false, Order:=0)>  _
         Public grados As String
@@ -651,6 +655,82 @@ Namespace WsCalculoRetiro
         End Sub
     End Class
     
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
+     System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
+     System.ServiceModel.MessageContractAttribute(IsWrapped:=false)>  _
+    Partial Public Class calcularPorXmlRequest
+        
+        <System.ServiceModel.MessageBodyMemberAttribute(Name:="calcularPorXml", [Namespace]:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl", Order:=0)>  _
+        Public Body As WsCalculoRetiro.calcularPorXmlRequestBody
+        
+        Public Sub New()
+            MyBase.New
+        End Sub
+        
+        Public Sub New(ByVal Body As WsCalculoRetiro.calcularPorXmlRequestBody)
+            MyBase.New
+            Me.Body = Body
+        End Sub
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
+     System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
+     System.Runtime.Serialization.DataContractAttribute([Namespace]:="")>  _
+    Partial Public Class calcularPorXmlRequestBody
+        
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false, Order:=0)>  _
+        Public xmlInput As String
+        
+        Public Sub New()
+            MyBase.New
+        End Sub
+        
+        Public Sub New(ByVal xmlInput As String)
+            MyBase.New
+            Me.xmlInput = xmlInput
+        End Sub
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
+     System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
+     System.ServiceModel.MessageContractAttribute(IsWrapped:=false)>  _
+    Partial Public Class calcularPorXmlResponse
+        
+        <System.ServiceModel.MessageBodyMemberAttribute(Name:="calcularPorXmlResponse", [Namespace]:="http://calculo.webServices.calculoRetiroWS.ssffaa.cl", Order:=0)>  _
+        Public Body As WsCalculoRetiro.calcularPorXmlResponseBody
+        
+        Public Sub New()
+            MyBase.New
+        End Sub
+        
+        Public Sub New(ByVal Body As WsCalculoRetiro.calcularPorXmlResponseBody)
+            MyBase.New
+            Me.Body = Body
+        End Sub
+    End Class
+    
+    <System.Diagnostics.DebuggerStepThroughAttribute(),  _
+     System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0"),  _
+     System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced),  _
+     System.Runtime.Serialization.DataContractAttribute([Namespace]:="")>  _
+    Partial Public Class calcularPorXmlResponseBody
+        
+        <System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue:=false, Order:=0)>  _
+        Public xmlOutput As String
+        
+        Public Sub New()
+            MyBase.New
+        End Sub
+        
+        Public Sub New(ByVal xmlOutput As String)
+            MyBase.New
+            Me.xmlOutput = xmlOutput
+        End Sub
+    End Class
+    
     <System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")>  _
     Public Interface CalculoRetiroWSChannel
         Inherits WsCalculoRetiro.CalculoRetiroWS, System.ServiceModel.IClientChannel
@@ -683,11 +763,11 @@ Namespace WsCalculoRetiro
         End Sub
         
         <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Function WsCalculoRetiro_CalculoRetiroWS_calcular(ByVal request As WsCalculoRetiro.calcularRequest) As WsCalculoRetiro.calcularResponse Implements WsCalculoRetiro.CalculoRetiroWS.calcular
-            Return MyBase.Channel.calcular(request)
+        Function WsCalculoRetiro_CalculoRetiroWS_calcularPorParametros(ByVal request As WsCalculoRetiro.calcularPorParametrosRequest) As WsCalculoRetiro.calcularPorParametrosResponse Implements WsCalculoRetiro.CalculoRetiroWS.calcularPorParametros
+            Return MyBase.Channel.calcularPorParametros(request)
         End Function
         
-        Public Function calcular( _
+        Public Function calcularPorParametros( _
                     ByVal run As String,  _
                     ByVal institucion As String,  _
                     ByVal subInstitucion As String,  _
@@ -799,8 +879,8 @@ Namespace WsCalculoRetiro
                     <System.Runtime.InteropServices.OutAttribute()> ByRef proporcionServiciosTotales As Double,  _
                     <System.Runtime.InteropServices.OutAttribute()> ByRef detalleConcurrencias As String,  _
                     <System.Runtime.InteropServices.OutAttribute()> ByRef totalConcurrencias As Integer) As String
-            Dim inValue As WsCalculoRetiro.calcularRequest = New WsCalculoRetiro.calcularRequest()
-            inValue.Body = New WsCalculoRetiro.calcularRequestBody()
+            Dim inValue As WsCalculoRetiro.calcularPorParametrosRequest = New WsCalculoRetiro.calcularPorParametrosRequest()
+            inValue.Body = New WsCalculoRetiro.calcularPorParametrosRequestBody()
             inValue.Body.run = run
             inValue.Body.institucion = institucion
             inValue.Body.subInstitucion = subInstitucion
@@ -829,7 +909,7 @@ Namespace WsCalculoRetiro
             inValue.Body.otrasInstituciones = otrasInstituciones
             inValue.Body.abonos = abonos
             inValue.Body.concurrencias = concurrencias
-            Dim retVal As WsCalculoRetiro.calcularResponse = CType(Me,WsCalculoRetiro.CalculoRetiroWS).calcular(inValue)
+            Dim retVal As WsCalculoRetiro.calcularPorParametrosResponse = CType(Me,WsCalculoRetiro.CalculoRetiroWS).calcularPorParametros(inValue)
             sueldoEnActividad = retVal.Body.sueldoEnActividad
             sueldo1981 = retVal.Body.sueldo1981
             cantidadTrienios = retVal.Body.cantidadTrienios
@@ -914,6 +994,19 @@ Namespace WsCalculoRetiro
             detalleConcurrencias = retVal.Body.detalleConcurrencias
             totalConcurrencias = retVal.Body.totalConcurrencias
             Return retVal.Body.grados
+        End Function
+        
+        <System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)>  _
+        Function WsCalculoRetiro_CalculoRetiroWS_calcularPorXml(ByVal request As WsCalculoRetiro.calcularPorXmlRequest) As WsCalculoRetiro.calcularPorXmlResponse Implements WsCalculoRetiro.CalculoRetiroWS.calcularPorXml
+            Return MyBase.Channel.calcularPorXml(request)
+        End Function
+        
+        Public Function calcularPorXml(ByVal xmlInput As String) As String
+            Dim inValue As WsCalculoRetiro.calcularPorXmlRequest = New WsCalculoRetiro.calcularPorXmlRequest()
+            inValue.Body = New WsCalculoRetiro.calcularPorXmlRequestBody()
+            inValue.Body.xmlInput = xmlInput
+            Dim retVal As WsCalculoRetiro.calcularPorXmlResponse = CType(Me,WsCalculoRetiro.CalculoRetiroWS).calcularPorXml(inValue)
+            Return retVal.Body.xmlOutput
         End Function
     End Class
 End Namespace
