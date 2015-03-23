@@ -299,7 +299,22 @@ public class FacadeDetalleServicio {
 			Document doc = db.newDocument();
 
 			Element detalleDeServicios = doc.createElement("detalleDeServicios");
-								
+			Element servicios = doc.createElement("servicios");
+			Element totales = doc.createElement("totales");
+			
+			Element totalAnios = doc.createElement("anios");
+			Element totalMeses = doc.createElement("meses");
+			Element totalDias = doc.createElement("dias");
+			Element totalEnDias = doc.createElement("enDias");
+			Element totalProporcion = doc.createElement("proporcion");
+			
+			totales.appendChild(totalAnios);
+			totales.appendChild(totalMeses);
+			totales.appendChild(totalDias);
+			totales.appendChild(totalEnDias);
+			totales.appendChild(totalProporcion);
+			
+			
 			List<ServicioTO> listaDeServicios = this.obtenerListaDeServicios(instituciones, detalleAbonos, detalleConcurrencia, aniosCPDNyConsc, mesesCPDNyConsc, diasCPDNyConsc);
 						
 			if(listaDeServicios != null){
@@ -343,9 +358,19 @@ public class FacadeDetalleServicio {
 							proporcion.setTextContent("");
 						servicio.appendChild(proporcion);
 						
-		    			detalleDeServicios.appendChild(servicio);
+		    			servicios.appendChild(servicio);
+		    			
+		    			if(i == listaDeServicios.size()-1){
+		    				totalAnios.setTextContent(servicioTO.getAnios()+"");
+		    				totalMeses.setTextContent(servicioTO.getMeses()+"");
+		    				totalDias.setTextContent(servicioTO.getDias()+"");
+		    				totalEnDias.setTextContent(servicioTO.getEnDias()+"");
+		    				totalProporcion.setTextContent(servicioTO.getPorcentaje()+"");
+		    			}
 		    		}
 		    	}
+				detalleDeServicios.appendChild(servicios);
+				detalleDeServicios.appendChild(totales);
 				doc.appendChild(detalleDeServicios);
 				xml = Archivo.convertirDocumentToString(doc);
 			}

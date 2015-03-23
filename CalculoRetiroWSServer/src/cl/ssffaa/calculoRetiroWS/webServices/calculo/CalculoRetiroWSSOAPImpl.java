@@ -1117,7 +1117,7 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
                 
         
         //S020
-        this._xmlOutput += "<porcentajeSobresueldo>" + this._porcentajeSobresueldo + "%</porcentajeSobresueldo>n";
+        this._xmlOutput += "<porcentajeSobresueldo>" + this._porcentajeSobresueldo + "%</porcentajeSobresueldo>";
         
         this._sobresueldoLey18263 = (int) Math.round((this._sueldoBaseLey18263 * this._porcentajeSobresueldo)/100.0);
         this._sobresueldoLey18694 = (int) Math.round((this._sueldoBaseLey18694 * this._porcentajeSobresueldo)/100.0);
@@ -1542,25 +1542,27 @@ public class CalculoRetiroWSSOAPImpl implements cl.ssffaa.calculoRetiroWS.webSer
         
         this._xmlOutput += this._detalleDeServicios + "\n";
         
-        
+        /*
         this._xmlOutput += "<aniosServiciosTotales>" + this._detalleDeServiciosTO.getTotalAnios() + "</aniosServiciosTotales>\n";
         this._xmlOutput += "<mesesServiciosTotales>" + this._detalleDeServiciosTO.getTotalMeses() + "</mesesServiciosTotales>\n";
         this._xmlOutput += "<diasServiciosTotales>" + this._detalleDeServiciosTO.getTotalDias() + "</diasServiciosTotales>\n";
         this._xmlOutput += "<enDiasServiciosTotales>" + this._detalleDeServiciosTO.getTotalEnDias() + "</enDiasServiciosTotales>\n";
         this._xmlOutput += "<proporcionServiciosTotales>" + this._detalleDeServiciosTO.getTotalPorcentaje() + "</proporcionServiciosTotales>\n";
         
+        */
         
-        
-        this._distribucionConcurrencia = facadeConcurrencia.obtenerDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
+       // this._distribucionConcurrencia = facadeConcurrencia.obtenerDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
                
         this._detalleDeConcurrencias = facadeConcurrencia.obtenerXmlDistribucionConcurrencia(this._detalleDeServiciosTO.getServicios(), this._distribucionCapredena, this._detalleConcurrencia.getConcurrencias().size());
         this._detalleDeConcurrencias = this._detalleDeConcurrencias.replaceAll("\\<\\?xml(.+?)\\?\\>", "").trim();
         
+        this._xmlOutput += this._detalleDeConcurrencias;
+        /*
         this._xmlOutput += "<concurrencias>\n";
         this._xmlOutput += this._detalleDeConcurrencias + "\n";
         this._xmlOutput += "<totalConcurrencias>" + this._distribucionConcurrencia.getTotal() + "</totalConcurrencias>\n";
         this._xmlOutput += "</concurrencias>\n";
-        
+        */
         
         
         this._xmlOutput += "</resultados>";
