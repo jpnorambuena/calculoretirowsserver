@@ -292,7 +292,11 @@ public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias)
 	        DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.newDocument();
 
-			Element detalleConcurrencias = doc.createElement("detalleConcurrencias");
+			Element detalleDeConcurrencias = doc.createElement("detalleDeConcurrencias");
+			Element concurrencias = doc.createElement("concurrencias");
+			Element totalConcurrencias = doc.createElement("total");
+			
+			
 			
 			int total = 0;
 			
@@ -327,11 +331,15 @@ public DetalleConcurrenciaTO obtenerDetalleDeConcurrencias(String concurrencias)
 							
 							total += montoConcurrencia;
 								
-			    			detalleConcurrencias.appendChild(concurrencia);
+							concurrencias.appendChild(concurrencia);
 			    		}
 			    	}
 				}
-				doc.appendChild(detalleConcurrencias);
+				totalConcurrencias.setTextContent(total+"");
+				
+				detalleDeConcurrencias.appendChild(concurrencias);
+				detalleDeConcurrencias.appendChild(totalConcurrencias);
+				doc.appendChild(detalleDeConcurrencias);
 				xml = Archivo.convertirDocumentToString(doc);
 			}
 			
