@@ -109,6 +109,7 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Service References\WsCalculoRetiro\CalculoRetiroWSSOAP.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -117,7 +118,6 @@
     <WCFMetadataStorage Include="Service References\WsCalculoRetiro\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\WsCalculoRetiro\CalculoRetiroWSSOAP1.wsdl" />
     <None Include="Service References\WsCalculoRetiro\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>

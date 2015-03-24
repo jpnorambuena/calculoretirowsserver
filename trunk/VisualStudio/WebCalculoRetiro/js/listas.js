@@ -28,7 +28,7 @@ listaSimple['Concurrencias'] = 'Caja de OO.MM.|Caja de EE.MM.|Caja Nac. de la Ma
 var listaValorLabel = Object();
 listaValorLabel['Escalafon civil'] = 'Adm.&ADMINISTRATIVO|Aux.&AUXILIAR|Direc.&DIRECTIVO|Prof.&PROFESIONAL|Tec.&TÉCNICO';
 listaValorLabel['Sobresueldos'] = '0&0%|17&17%|18&18%|19&19%|20&20%|21&21%|22&22%|23&23%|24&24%|25&25%|26&26%|27&27%|28&28%|29&29%|30&30%|35&35%|65&65%';
-listaValorLabel['Segundo sobresueldo'] = '0&0%|17&17%|18&18%|19&19%|20&20%|21&21%|22&22%|23&23%|24&24%|25&25%|26&26%|27&27%|28&28%|29&29%|30&30%|35&35%|65&65%';
+listaValorLabel['Segundo sobresueldo'] = '0&0%|17&17%|18&18%|19&19%|20&20%|21&21%|22&22%|23&23%|24&24%|25&25%|26&26%|27&27%|28&28%|29&29%|30&30%|35&35%';
 listaValorLabel['Asignacion SOFSOM'] = '35%&SUBOFICIAL MAYOR|30%&SUBOFICIAL +30 AÑOS|25%&SUBOFICIAL -30 AÑOS';
 
 
