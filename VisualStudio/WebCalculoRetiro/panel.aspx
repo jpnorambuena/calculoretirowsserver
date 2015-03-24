@@ -14,6 +14,7 @@
     <script type="text/javascript" src="js/rut.js"></script> 
     <script type="text/javascript" src="js/listas.js"></script> 
     <script type="text/javascript" src="js/jquery.ui.combobox.js"></script>
+    <script type="text/javascript" src="js/jquery.tabletojson.js"></script>
 
     <script type="text/javascript">
         $(function () {
@@ -354,9 +355,9 @@
                                         <label for="Subinstitucion" class="etiqueta">Subinstitución</label>
                                         <select name="sltSubinstitucion" id="sltSubinstitucion"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
-                                            <option value="EJÉRCITO">EJÉRCITO</option>
-                                            <option value="FUERZA AÉREA">FUERZA AÉREA</option>
-                                            <option value="ARMADA">ARMADA</option>
+                                            <script type="text/javascript">
+                                                setInstituciones();
+                                            </script>
                                         </select>
                                     </div>
                                 </div>
@@ -581,6 +582,8 @@
                             </table>
                             <button id="btnNuevoAbono">Agregar</button>
                         </div>
+
+                        <button id="btnSgteAbonos">Siguiente</button>
                     </div>  
                     <div id="tabs-concurrencias">
                         <p>Ingrese las concurrencias correspondientes.</p>
@@ -1010,7 +1013,10 @@
                                                     <label class="peso">$</label>
                                                     <input type="text" name="totalRemuneracionAvos" id="tiTotalRemuneracionAvos" value="" class="numerico ui-widget-content ui-corner-all"/>    
                                                 </td>
-                                                <td colspan="2">xxxx.xxx% AVOS</td>
+                                                <td colspan="2">
+                                                    <input type="text" name="porcAvos2" id="tiPorcAvos2" value="" class="text ui-widget-content ui-corner-all"/>
+                                                    AVOS
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
