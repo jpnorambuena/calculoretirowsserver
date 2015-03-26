@@ -97,8 +97,12 @@ Partial Class panel
 
         Dim sb As New StringBuilder()
         Dim xmlDoc As XmlDocument
-        Dim xmlNode As XmlNode
-        Dim xmlNodeList As XmlNodeList
+        Dim xmlConcurrencias As XmlNodeList
+        Dim xmlServicios As XmlNodeList
+   
+        'Generar el xml a partir del JSON de entrada
+
+
 
         jsonResultados = ""
         Try
@@ -108,6 +112,7 @@ Partial Class panel
                 xmlDoc = New XmlDocument()
                 xmlDoc.LoadXml(xmlResultados)
 
+                'Generar el JSON a partir del xml de resultados
 
                 sb.Append("{""grados"":""" & xmlDoc.SelectSingleNode("/resultados/grados").InnerText & """,")
                 sb.Append("""sueldo1981"":""" & xmlDoc.SelectSingleNode("/resultados/sueldo1981").InnerText & """,")
@@ -184,22 +189,78 @@ Partial Class panel
                 sb.Append("""desahucioApagar"":""" & xmlDoc.SelectSingleNode("/resultados/desahucioApagar").InnerText & """,")
                 sb.Append("""mesesSgteTrienio"":""" & xmlDoc.SelectSingleNode("/resultados/mesesSgteTrienio").InnerText & """,")
                 sb.Append("""diasSgteTrienio"":""" & xmlDoc.SelectSingleNode("/resultados/diasSgteTrienio").InnerText & """,")
-                sb.Append("""siguienteTrienio"":""" & xmlDoc.SelectSingleNode("/resultados/siguienteTrienio").InnerText & """}")
+                sb.Append("""siguienteTrienio"":""" & xmlDoc.SelectSingleNode("/resultados/siguienteTrienio").InnerText & """,")
+
+
+                xmlConcurrencias = xmlDoc.SelectNodes("/resultados/detalleDeConcurrencias/concurrencias/concurrencia")
+                xmlServicios = xmlDoc.SelectNodes("/resultados/detalleDeServicios/servicios/servicio")
+
+
+                sb.Append("""detalleDeServicios"":{")
+                sb.Append("""servicios"":[")
+
+                Dim indice As Integer
+
+                indice = 0
+
+                For Each servicio As XmlNode In xmlServicios
+                    Dim detalle = servicio.ChildNodes.Item(0).InnerText
+                    Dim anios = servicio.ChildNodes.Item(1).InnerText
+                    Dim meses = servicio.ChildNodes.Item(2).InnerText
+                    Dim dias = servicio.ChildNodes.Item(3).InnerText
+                    Dim enDias = servicio.ChildNodes.Item(4).InnerText
+                    Dim proporcion = servicio.ChildNodes.Item(5).InnerText
+
+                    If indice = xmlServicios.Count - 1 Then
+                        sb.Append("{""detalle"":""" & detalle & """,""anios"":""" & anios & """,""meses"":""" & meses & """,""dias"":""" & dias & """,""enDias"":""" & enDias & """,""proporcion"":""" & proporcion & """}")
+                    Else
+                        sb.Append("{""detalle"":""" & detalle & """,""anios"":""" & anios & """,""meses"":""" & meses & """,""dias"":""" & dias & """,""enDias"":""" & enDias & """,""proporcion"":""" & proporcion & """},")
+                    End If
+
+                    indice = indice + 1
+                Next
+
+                sb.Append("],")
+                sb.Append("""totales"":{")
+
+                Dim totalServiciosAnios = xmlDoc.SelectSingleNode("/resultados/detalleDeServicios/totales/anios").InnerText
+                Dim totalServiciosMeses = xmlDoc.SelectSingleNode("/resultados/detalleDeServicios/totales/meses").InnerText
+                Dim totalServiciosDias = xmlDoc.SelectSingleNode("/resultados/detalleDeServicios/totales/dias").InnerText
+                Dim totalServiciosEnDias = xmlDoc.SelectSingleNode("/resultados/detalleDeServicios/totales/enDias").InnerText
+                Dim totalServiciosProporcion = xmlDoc.SelectSingleNode("/resultados/detalleDeServicios/totales/proporcion").InnerText
+
+                sb.Append("""anios"":""" & totalServiciosAnios & """,""meses"":""" & totalServiciosMeses & """,""dias"":""" & totalServiciosDias & """,""enDias"":""" & totalServiciosEnDias & """,""proporcion"":""" & totalServiciosProporcion & """")
+
+                sb.Append("}")
+                sb.Append("},")
+
+                sb.Append("""detalleDeConcurrencias"":{")
+                sb.Append("""concurrencias"":[")
+
+                indice = 0
+                For Each concurrencia As XmlNode In xmlConcurrencias
+                    Dim institucion = concurrencia.ChildNodes.Item(0).InnerText
+                    Dim monto = concurrencia.ChildNodes.Item(1).InnerText
+                    If indice = xmlConcurrencias.Count - 1 Then
+                        sb.Append("{""institucion"":""" & institucion & """,""monto"":""" & monto & """}")
+                    Else
+                        sb.Append("{""institucion"":""" & institucion & """,""monto"":""" & monto & """},")
+                    End If
+                    indice = indice + 1
+                Next
+
+                sb.Append("],")
+
+                sb.Append("""total"":""" & xmlDoc.SelectSingleNode("/resultados/detalleDeConcurrencias/total").InnerText & """")
+                
+
+                sb.Append("}}")
 
 
 
-
-                'sb.Append("""XXXXXXXXXX"":""" & xmlDoc.SelectSingleNode("/resultados/XXXXXXXXXX").InnerText & """,")
                 jsonResultados = sb.ToString
 
             End If
-
-            
-
-
-
-
-
 
             mDatos.Add(0)
             mDatos.Add(jsonResultados)

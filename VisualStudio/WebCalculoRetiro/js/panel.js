@@ -31,6 +31,7 @@ var dialogOtraInstitucion,
     otraInstitucionAllFields = $([]).add(otraInstitucion);
 
 var jsonAbonos, jsonConcurrencias, jsonInstituciones;
+var xmlAbonos, xmlConcurrencias, xmlInstituciones;
 
 $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 
@@ -338,11 +339,23 @@ $(document).ready(function () {
     });
 
 
-    $('#btnSgteAbonos').on("click", function (evento) {
+    $('#btnSgteInstituciones').on("click", function (evento) {
 
-        alert("hola");
+        jsonInstituciones = convertirTabla($('#tblOtrasInstituciones'), 1);
+        xmlInstituciones = otrasInstitucionesToXml();
     });
 
+    $('#btnSgteAbonos').on("click", function (evento) {
+
+        jsonAbonos = convertirTabla($('#tblAbonos'), 4);
+        xmlAbonos = abonosToXml();
+    });
+
+    $('#btnSgteConcurrencias').on("click", function (evento) {
+
+        jsonConcurrencias = convertirTabla($('#tblConcurrencias'), 4);
+        xmlConcurrencias = concurrenciasToXml();
+    });
 
     $('#btnCalcularPension').on("click", function (evento) {
 
@@ -372,89 +385,121 @@ $(document).ready(function () {
         var vMesesDesahucio = $('#tiMesesDesahucio').val();
         var vDiasDesahucio = $('#tiDiasDesahucio').val();
 
-
-
+        var vOtrasInstituciones = otrasInstitucionesToXml();
+        var vAbonos = abonosToXml();
+        var vConcurrencias = concurrenciasToXml();
+        /*
         var vOtrasInstituciones = '<otrasInstituciones>' +
-		                            '   <institucion>Asmar</institucion>' +
-		                            '   <institucion>Carabineros</institucion>' +
-		                            '   <institucion>DGAC</institucion>' +
-		                            '</otrasInstituciones>';
+        '   <institucion>Asmar</institucion>' +
+        '   <institucion>Carabineros</institucion>' +
+        '   <institucion>DGAC</institucion>' +
+        '</otrasInstituciones>';
 
         var vAbonos = '<abonos>' +
-		                '   <abono>' +
-		                '       <tipo>Abono por hijos</tipo>' +
-		                '       <anios>10</anios>' +
-		                '       <meses>2</meses>' +
-		                '       <dias>3</dias>' +
-		                '   </abono>' +
-		                '   <abono>' +
-		                '       <tipo>Abono por viudez</tipo>' +
-		                '       <anios>4</anios>' +
-		                '       <meses>6</meses>' +
-		                '       <dias>15</dias>' +
-		                '   </abono>' +
-		                '   <abono>' +
-		                '       <tipo>Abono por lesiones</tipo>' +
-		                '       <anios>4</anios>' +
-		                '       <meses>1</meses>' +
-		                '       <dias>25</dias>' +
-		                '   </abono>' +
-		                '</abonos>';
+        '   <abono>' +
+        '       <tipo>Abono por hijos</tipo>' +
+        '       <anios>10</anios>' +
+        '       <meses>2</meses>' +
+        '       <dias>3</dias>' +
+        '   </abono>' +
+        '   <abono>' +
+        '       <tipo>Abono por viudez</tipo>' +
+        '       <anios>4</anios>' +
+        '       <meses>6</meses>' +
+        '       <dias>15</dias>' +
+        '   </abono>' +
+        '   <abono>' +
+        '       <tipo>Abono por lesiones</tipo>' +
+        '       <anios>4</anios>' +
+        '       <meses>1</meses>' +
+        '       <dias>25</dias>' +
+        '   </abono>' +
+        '</abonos>';
 
         var vConcurrencias = '<concurrencias>' +
-		                        '   <concurrencia>' +
-		                        '       <tipo>Canaempu</tipo>' +
-		                        '       <anios>10</anios>' +
-		                        '       <meses>2</meses>' +
-		                        '       <dias>3</dias>' +
-		                        '   </concurrencia>' +
-		                        '   <concurrencia>' +
-		                        '       <tipo>Dipreca</tipo>' +
-		                        '       <anios>2</anios>' +
-		                        '       <meses>3</meses>' +
-		                        '       <dias>4</dias>' +
-		                        '   </concurrencia>' +
-		                        '   <concurrencia>' +
-		                        '       <tipo>Empart</tipo>' +
-		                        '       <anios>5</anios>' +
-		                        '       <meses>6</meses>' +
-		                        '       <dias>4</dias>' +
-		                        '   </concurrencia>' +
-		                        '</concurrencias>';
-
-
+        '   <concurrencia>' +
+        '       <tipo>Canaempu</tipo>' +
+        '       <anios>10</anios>' +
+        '       <meses>2</meses>' +
+        '       <dias>3</dias>' +
+        '   </concurrencia>' +
+        '   <concurrencia>' +
+        '       <tipo>Dipreca</tipo>' +
+        '       <anios>2</anios>' +
+        '       <meses>3</meses>' +
+        '       <dias>4</dias>' +
+        '   </concurrencia>' +
+        '   <concurrencia>' +
+        '       <tipo>Empart</tipo>' +
+        '       <anios>5</anios>' +
+        '       <meses>6</meses>' +
+        '       <dias>4</dias>' +
+        '   </concurrencia>' +
+        '</concurrencias>';
+        */
+        /*
         var entradas = { "run": vRun,
-            "institucion": vInstitucion,
-            "subInstitucion": vSubInstitucion,
-            "categoria": vCategoria,
-            "escalafonCivil": vEscalafonCivil,
-            "grado": vGrado,
-            "gradoJerarquico": vGradoJerarquico,
-            "gradoEconomico": vGradoEconomico,
-            "esDeLinea": vEsDeLinea,
-            "fechaDeBaja": vFechaBaja,
-            "cantidadDeAcciones": vCantidadDeAcciones.replace(".", ""),
-            "tipoDeAcciones": vTipoDeAcciones,
-            "porcentajeDeSobresueldo": vSobresueldo,
-            "porcentajeDeSegundoSobresueldo": vSegundoSobresueldo,
-            "porcentajeDeAsignacionSOFSOM": vAsignacionSOFSOM,
-            "poseeAsigMinistroDeCorte": vMinistroDeCorte,
-            "sueldoIntegroMinistroDeCorte": vSueldoIntegroMinCorte.replace(".", ""),
-            "planillaSuplementariaLey19699": vPlanillaSuplLey19699,
-            "planillaSuplementariaDFL1_68": vPlanillaSuplDFL1_68,
-            "aniosCPDNyConsc": vAniosCPDNyConsc.replace(".", ""),
-            "mesesCPDNyConsc": vMesesCPDNyConsc.replace(".", ""),
-            "diasCPDNyConsc": vDiasCPDNyConsc.replace(".", ""),
-            "aniosDesahucio": vAniosDesahucio.replace(".", ""),
-            "mesesDesahucio": vMesesDesahucio.replace(".", ""),
-            "diasDesahucio": vDiasDesahucio.replace(".", ""),
-            "otrasInstituciones": vOtrasInstituciones,
-            "abonos": vAbonos,
-            "concurrencias": vConcurrencias
+        "institucion": vInstitucion,
+        "subInstitucion": vSubInstitucion,
+        "categoria": vCategoria,
+        "escalafonCivil": vEscalafonCivil,
+        "grado": vGrado,
+        "gradoJerarquico": vGradoJerarquico,
+        "gradoEconomico": vGradoEconomico,
+        "esDeLinea": vEsDeLinea,
+        "fechaDeBaja": vFechaBaja,
+        "cantidadDeAcciones": vCantidadDeAcciones.replace(".", ""),
+        "tipoDeAcciones": vTipoDeAcciones,
+        "porcentajeDeSobresueldo": vSobresueldo,
+        "porcentajeDeSegundoSobresueldo": vSegundoSobresueldo,
+        "porcentajeDeAsignacionSOFSOM": vAsignacionSOFSOM,
+        "poseeAsigMinistroDeCorte": vMinistroDeCorte,
+        "sueldoIntegroMinistroDeCorte": vSueldoIntegroMinCorte.replace(".", ""),
+        "planillaSuplementariaLey19699": vPlanillaSuplLey19699,
+        "planillaSuplementariaDFL1_68": vPlanillaSuplDFL1_68,
+        "aniosCPDNyConsc": vAniosCPDNyConsc.replace(".", ""),
+        "mesesCPDNyConsc": vMesesCPDNyConsc.replace(".", ""),
+        "diasCPDNyConsc": vDiasCPDNyConsc.replace(".", ""),
+        "aniosDesahucio": vAniosDesahucio.replace(".", ""),
+        "mesesDesahucio": vMesesDesahucio.replace(".", ""),
+        "diasDesahucio": vDiasDesahucio.replace(".", ""),
+        "otrasInstituciones": vOtrasInstituciones,
+        "abonos": vAbonos,
+        "concurrencias": vConcurrencias
+        };
+        */
+
+        var entradas = { run: vRun,
+            institucion: vInstitucion,
+            subInstitucion: vSubInstitucion,
+            categoria: vCategoria,
+            escalafonCivil: vEscalafonCivil,
+            grado: vGrado,
+            gradoJerarquico: vGradoJerarquico,
+            gradoEconomico: vGradoEconomico,
+            esDeLinea: vEsDeLinea,
+            fechaDeBaja: vFechaBaja,
+            cantidadDeAcciones: vCantidadDeAcciones.replace(".", ""),
+            tipoDeAcciones: vTipoDeAcciones,
+            porcentajeDeSobresueldo: vSobresueldo,
+            porcentajeDeSegundoSobresueldo: vSegundoSobresueldo,
+            porcentajeDeAsignacionSOFSOM: vAsignacionSOFSOM,
+            poseeAsigMinistroDeCorte: vMinistroDeCorte,
+            sueldoIntegroMinistroDeCorte: vSueldoIntegroMinCorte.replace(".", ""),
+            planillaSuplementariaLey19699: vPlanillaSuplLey19699,
+            planillaSuplementariaDFL1_68: vPlanillaSuplDFL1_68,
+            aniosCPDNyConsc: vAniosCPDNyConsc.replace(".", ""),
+            mesesCPDNyConsc: vMesesCPDNyConsc.replace(".", ""),
+            diasCPDNyConsc: vDiasCPDNyConsc.replace(".", ""),
+            aniosDesahucio: vAniosDesahucio.replace(".", ""),
+            mesesDesahucio: vMesesDesahucio.replace(".", ""),
+            diasDesahucio: vDiasDesahucio.replace(".", ""),
+            otrasInstituciones: "",
+            abonos: "",
+            concurrencias: ""
         };
 
 
-        /*
         var param = '<calcular>' +
         '<run>' + vRun + '</run>' +
         '<institucion>' + vInstitucion + '</institucion>' +
@@ -481,19 +526,14 @@ $(document).ready(function () {
         '<aniosDesahucio>' + vAniosDesahucio + '</aniosDesahucio>' +
         '<mesesDesahucio>' + vMesesDesahucio + '</mesesDesahucio>' +
         '<diasDesahucio>' + vDiasDesahucio + '</diasDesahucio>' +
-        '<otrasInstituciones>' + vOtrasInstituciones + '</otrasInstituciones>' +
-        '<abonos>' + vAbonos + '</abonos>' +
-        '<concurrencias>' + vConcurrencias + '</concurrencias>' +
+        vOtrasInstituciones + vAbonos + vConcurrencias +
         '</calcular>';
-        */
 
 
-        //calcular(param);
 
-        var jsonTabla = convertirTabla()
+        calcular(param);
 
 
-        //tableToJson();
     });
 
 });
@@ -894,7 +934,7 @@ function removerFilaSimple(indice){
 
 function calcular(entradas){
     /*
-    var param2 = {
+    var paramXML = {
         xml: '<calcular>'+
 	    '<run>16.023.917-4</run>'+
 		'<institucion>FUERZA AÉREA</institucion>'+
@@ -968,12 +1008,14 @@ function calcular(entradas){
 		'</concurrencias>'+
 		'</calcular>'
             };
+
 */
     var param = {
         xml: entradas
     };
 
-    alert("ENTRADAS :\n" + entradas);
+
+    alert("ENTRADAS :\n" + JSON.stringify(entradas));
 
     //console.info('panel.js calcular --> param: '+JSON.stringify(param));
     $.ajax({
@@ -989,7 +1031,6 @@ function calcular(entradas){
             if (codigo == 0 && dataSet[1].toString() != '') {
 
                 var resultados = JSON.parse(dataSet[1].toString());
-
 
                 $('#tiGrados').val(resultados.grados);
                 $('#tiSueldo1981').val(resultados.sueldo1981);
@@ -1052,6 +1093,7 @@ function calcular(entradas){
                 $('#tiPorcUltimoReaj').val(resultados.porcentajeUltimoReajuste);
                 $('#tiMontoUltimoReaj').val(resultados.montoUltimoReajuste);
                 $('#tiPensioAotorgar').val(resultados.pensionAotorgar);
+                $('#tiPorcAvos1').val(resultados.porcentajeAVOS2);
                 $('#tiPorcAvos2').val(resultados.porcentajeAVOS2);
                 $('#tiTope').val(resultados.conTopeSinTope);
                 $('#tiDistribucionCapredena').val(resultados.distribucionCapredena);
@@ -1070,9 +1112,36 @@ function calcular(entradas){
 
 
 
+                //Procesar las tablas
 
+                var servicios = resultados.detalleDeServicios.servicios;
+                var totalServicios = resultados.detalleDeServicios.totales;
 
+                var $grillaServicios = $('#tblDetalleServicios tbody');
 
+                for (var indice in servicios) {
+                    var servicio = servicios[indice];
+                    $grillaServicios.append('<tr"><td style="text-align:left;">' + servicio["detalle"] + '</td>' +
+                                                 '<td>' + servicio["anios"] + '</td>' +
+                                                 '<td>' + servicio["meses"] + '</td>' +
+                                                 '<td>' + servicio["dias"] + '</td>' +
+                                                 '<td>' + servicio["enDias"] + '</td>' +
+                                                 '<td>' + servicio["proporcion"] + '</td>' +
+                                            '</tr>');
+                }
+
+                var concurrencias = resultados.detalleDeConcurrencias.concurrencias;
+                var totalConcurrencias = resultados.detalleDeConcurrencias.total;
+
+                var $grillaConcurrencias = $('#tblConcurrenciasSalida tbody');
+
+                for (var indice in concurrencias) {
+                    var concurrencia = concurrencias[indice];
+                    $grillaConcurrencias.append('<tr"><td>' + concurrencia["institucion"] + '</td>' +
+                                                 '<td><label class="peso">$</label>'+
+                                                 '<input type="text" value="'+ concurrencia["monto"] +'" class="numerico ui-widget-content ui-corner-all"/></td>' +
+                                                '</tr>');
+                }
 
 
 
@@ -1106,24 +1175,86 @@ function calcular(entradas){
 }
 
 
-function convertirTabla() {
+function convertirTabla(tabla, columnasIgnoradas) {
 
-/*
-    var table = $('#tblDetalleServicios').tableToJSON({
-        ignoreColumns: [3]
+    var jsonTabla = tabla.tableToJSON({
+        ignoreColumns: [columnasIgnoradas]
     });
 
-  */
+    return jsonTabla;
+}
 
+function abonosToXml() {
 
-    var table = $('#tblAbonos').tableToJSON({
-        ignoreColumns: [4]
+    var _abonosXml = '<abonos>';
+    
+    $('#tblAbonos tbody tr').each(function () {
+
+        var _tipo = $(this).find("td").eq(0).html();
+        var _anios = $(this).find("td").eq(1).html();
+        var _meses = $(this).find("td").eq(2).html();
+        var _dias = $(this).find("td").eq(3).html();
+
+        var _abono = '<abono><tipo>' + _tipo + '</tipo><anios>' + _anios + '</anios><meses>' + _meses + '</meses><dias>' + _dias + '</dias></abono>';
+        _abonosXml = _abonosXml + _abono;
     });
-   
-    console.log(table);
-    alert(JSON.stringify(table));
-    var test = '<table>' + $('#tblAbonos').html() + '</table>';
-    alert(JSON.stringify(test));
+    _abonosXml = _abonosXml + '</abonos>';
 
-    return "";
+    return _abonosXml;
+}
+
+function concurrenciasToXml() {
+
+    var _concurrenciasXml = '<concurrencias>';
+
+    $('#tblConcurrencias tbody tr').each(function () {
+
+        var _tipo = $(this).find("td").eq(0).html();
+        var _anios = $(this).find("td").eq(1).html();
+        var _meses = $(this).find("td").eq(2).html();
+        var _dias = $(this).find("td").eq(3).html();
+
+        var _concurrencia = '<concurrencia><tipo>' + _tipo + '</tipo><anios>' + _anios + '</anios><meses>' + _meses + '</meses><dias>' + _dias + '</dias></concurrencia>';
+        _concurrenciasXml = _concurrenciasXml + _concurrencia;
+    });
+    _concurrenciasXml = _concurrenciasXml + '</concurrencias>';
+
+    return _concurrenciasXml;
+}
+
+
+function tablaToXml(tabla, nombreRaiz, nombreHijos) {
+
+    var _strXml = '<' + nombreRaiz  + '>';
+
+    $('#tblConcurrencias tbody tr').each(function () {
+
+        var _tipo = $(this).find("td").eq(0).html();
+        var _anios = $(this).find("td").eq(1).html();
+        var _meses = $(this).find("td").eq(2).html();
+        var _dias = $(this).find("td").eq(3).html();
+
+        var _hijo = '<' + nombreHijos + '><tipo>' + _tipo + '</tipo><anios>' + _anios + '</anios><meses>' + _meses + '</meses><dias>' + _dias + '</dias></' + nombreHijos + '>';
+        _strXml = _strXml + _hijo;
+    });
+    _strXml = _strXml + '</' + nombreRaiz + '>';
+
+    return _strXml;
+}
+
+
+function otrasInstitucionesToXml() {
+
+    var _otrasInstitucionesXml = '<otrasInstituciones>';
+
+    $('#tblOtrasInstituciones tbody tr').each(function () {
+
+        var _inst = $(this).find("td").eq(0).html();
+
+        var _institucion = '<institucion>' + _inst + '</institucion>';
+        _otrasInstitucionesXml = _otrasInstitucionesXml + _institucion;
+    });
+    _otrasInstitucionesXml = _otrasInstitucionesXml + '</otrasInstituciones>';
+
+    return _otrasInstitucionesXml;
 }

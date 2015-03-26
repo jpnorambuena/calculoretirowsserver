@@ -327,3 +327,8 @@ a:hover {
     border-collapse: collapse;
     border: 1px solid black;
 }
+
+#tblConcurrenciasSalida tbody tr td
+{
+    width:50%;
+}
