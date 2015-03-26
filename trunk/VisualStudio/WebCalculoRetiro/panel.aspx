@@ -1,4 +1,4 @@
-﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="panel.aspx.vb" Inherits="panel" %>
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="panel.aspx.vb" Inherits="panel" Debug="true" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -563,6 +563,9 @@
                             </table>
                             <button id="btnNuevaInstitucion">Agregar</button>
                         </div>
+
+                        <button id="btnSgteInstituciones">Siguiente</button>
+
                     </div>  
                     <div id="tabs-abonos">
                         <p>Ingrese los abonos de tiempo correspondientes.</p>
@@ -603,6 +606,9 @@
                             </table>
                             <button id="btnNuevaConcurrencia">Agregar</button>
                         </div>
+
+                        <button id="btnSgteConcurrencias">Siguiente</button>
+
                     </div> 
                     <div id="tabs-resultados">
                         <p>Los resultados son los siguientes.</p>
@@ -622,14 +628,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td style="text-align:left;">Institucion de ejemplo</td>
-                                                <td>28</td>
-                                                <td>1</td>
-                                                <td>3</td>
-                                                <td>16.906</td>
-                                                <td>72,34990%</td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -925,7 +923,10 @@
                                                     <label class="peso">$</label>
                                                     <input type="text" name="totalDesahucioAvos18694" id="tiTotalDesahucioAvos" value="" class="numerico ui-widget-content ui-corner-all"/>    
                                                 </td>
-                                                <td colspan="2">xxxx% AVOS</td>
+                                                <td>
+                                                    <input type="text" name="porcAvos1" id="tiPorcAvos1" value="" class="text ui-widget-content ui-corner-all"/>
+                                                </td>
+                                                <td>AVOS</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -1013,10 +1014,10 @@
                                                     <label class="peso">$</label>
                                                     <input type="text" name="totalRemuneracionAvos" id="tiTotalRemuneracionAvos" value="" class="numerico ui-widget-content ui-corner-all"/>    
                                                 </td>
-                                                <td colspan="2">
+                                                <td>
                                                     <input type="text" name="porcAvos2" id="tiPorcAvos2" value="" class="text ui-widget-content ui-corner-all"/>
-                                                    AVOS
                                                 </td>
+                                                <td>AVOS</td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -1080,13 +1081,6 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td style="width:50%;">CONCURRENCIA</td>
-                                                <td style="width:50%;">
-                                                    <label class="peso">$</label>
-                                                    <input type="text" name="distribucionCapredena" id="Text1" value="" class="numerico ui-widget-content ui-corner-all"/>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </div>
