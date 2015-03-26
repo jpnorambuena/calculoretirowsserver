@@ -332,3 +332,7 @@ a:hover {
 {
     width:50%;
 }
+
+input[type=text]:disabled {
+    background: #e6e6e6;
+}

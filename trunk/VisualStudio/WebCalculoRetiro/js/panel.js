@@ -82,18 +82,19 @@ $(document).ready(function () {
     });
 
 
-    $("#celdaCantidadDeAcciones").hide();
-    $("#celdaTipoDeAcciones").hide();
+    $("#tiCantidadAcciones").attr("disabled", true);
+
+    $('input[name=tipoAcciones]:radio').attr("disabled", true);
+
     $("#celdaGradoJerarquico").hide();
     $("#celdaEscalafonCivil").hide();
-    $("#celdaGrado").hide();
-    $("#celdaEsDeLinea").hide();
-    $("#celdaSueldoMinistroDeCorte").hide();
+
+    $('input[name=esDeLinea]:radio').attr("disabled", true);
+    $("#tiSueldoMinistroDeCorte").attr("disabled", true);
 
     $('input[name=poseeAcciones]:radio').on("change", function () {
         actualizarAcciones(this);
     });
-
 
     $('#celdaCategoria > .ui-combobox > .ui-combobox-input').on("focusout", function () {
         mostrarGrado(this);
@@ -639,13 +640,16 @@ function updateTips(p, t) {
 
 function actualizarAcciones(radioButton) {
     if (radioButton.value == 'SI') {
-        $("#celdaCantidadDeAcciones").show();
-        $("#celdaTipoDeAcciones").show();
+        $("#tiCantidadAcciones").attr("disabled", false);
+        $("#tiCantidadAcciones").val('');
+        $('input[name=tipoAcciones]:radio').attr("disabled", false);
+        $('input[name=tipoAcciones]:radio').attr("checked", false);
     }
     else if (radioButton.value == 'NO') {
-        $("#celdaCantidadDeAcciones").hide();
-        $("#celdaTipoDeAcciones").hide();
+        $("#tiCantidadAcciones").attr("disabled", true);
         $("#tiCantidadAcciones").val('0');
+        $('input[name=tipoAcciones]:radio').attr("disabled", true);
+        $('input[name=tipoAcciones]:radio').attr("checked", false);
     }
 };
 
@@ -665,19 +669,21 @@ function mostrarGrado(combobox) {
 
 function mostrarEsDeLinea(combobox) {
     if(combobox.value.toUpperCase().indexOf("GENERAL") >= 0){
-        $("#celdaEsDeLinea").show();
+        $('input[name=esDeLinea]:radio').attr("disabled", false);
+        $('input[name=esDeLinea]:radio').attr("checked", false);
     }
     else {
-        $("#celdaEsDeLinea").hide();
+        $('input[name=esDeLinea]:radio').attr("disabled", true);
+        $('input[name=esDeLinea]:radio').attr("checked", false);
     }
 };
 
 function mostrarSueldoMinistroDeCorte(radioButton) {
     if (radioButton.value == 'SI') {
-        $("#celdaSueldoMinistroDeCorte").show();
+        $("#tiSueldoMinistroDeCorte").attr("disabled", false);
     }
     else if (radioButton.value == 'NO') {
-        $("#celdaSueldoMinistroDeCorte").hide();
+        $("#tiSueldoMinistroDeCorte").attr("disabled", true);
         $("#tiSueldoMinistroDeCorte").val('0');
     }
 };
