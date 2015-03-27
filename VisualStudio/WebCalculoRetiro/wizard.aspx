@@ -5,7 +5,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>c&aacute;lculoRetiro - Sistema de c&aacute;lculo de pensiones de retiro del personal de las FF.AA.</title>
+    
+    <link href="css/smart_wizard.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/jquery-2.0.0.min.js"></script>
     <link href="css/panel.css" rel="stylesheet" type="text/css" />
+    
     <link href="ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery_1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.js"></script> 
@@ -15,17 +19,285 @@
     <script type="text/javascript" src="js/listas.js"></script> 
     <script type="text/javascript" src="js/jquery.ui.combobox.js"></script>
     <script type="text/javascript" src="js/jquery.tabletojson.js"></script>
-    
+    <script type="text/javascript" src="js/jquery.smartWizard.js"></script>
+
     <script type="text/javascript">
-        $(function () {
+        $(document).ready(function () {
+            // Smart Wizard 	
+            $('#wizard').smartWizard();
+
+            function onFinishCallback() {
+                $('#wizard').smartWizard('showMessage', 'Finish Clicked');
+                //alert('Finish Clicked');
+            }
+        });
+</script>
+   
+
+   <style>
+      
+
+        body { font-size: 62.5%; }
+    
+        fieldset 
+        {
+            padding:0; 
+            border:0; 
+            margin-top:25px; 
+        }
+        h1 
+        {
+            font-size: 1.2em; 
+            margin: .6em 0; 
+        }
+    
+    
+        #frmPrincipal
+        {
+            font-size: 10px;
+            /*width:95%;
+            padding-left:10px;*/
+        }
         
-            
-        });  //fin function
-    </script>
+        .contenedor-tabla{
+            display: table;
+            width: 100%;
+        }
+        
+        .contenedor-fila{
+            display: table-row;
+            width:100%;
+            vertical-align:middle;
+        }
+        .contenedor-columna{
+            display: table-cell;
+            width:25% !important;
+            border: 2px solid;
+            vertical-align:middle;
+            padding:0px 5px 5px 10px;
+        }
+               
+        .etiqueta
+        {
+            float:left; 
+            width:40%;
+        }
+        
+        .numerico
+        {
+            float:left; 
+            width:55%; 
+            text-align:right;
+        }
+                
+        .text
+        {
+            float:left; 
+            width:55%; 
+        }
+        
+        table .numerico
+        {
+            float:left; 
+            width:80%; 
+            text-align:right;
+        }
+        
+        table .numericoCorto
+        {
+            float:left; 
+            width:20px; 
+            text-align:right;
+        }
+                
+        table .text
+        {
+            float:left; 
+            width:80%; 
+        }
+        
+        table .text-medio
+        {
+            float:left; 
+            width:40%; 
+        }
+        
+        .run
+        {
+            float:left; 
+            width:55%; 
+            text-align:right;
+        }
+        
+        .opcionRadio
+        {
+            float:left;
+        }
+        
+        radio
+        {
+            float:left; 
+            padding-left: 10px;
+        }
+        
+       .datepicker
+       {
+           width:80px; 
+       }
+        
+        
+       .contenedor-tabla-tiempos, .contenedor-tabla-simple
+        { 
+            border: 1px solid #dddddd; 
+             
+          /*  margin: 20px 0;*/ 
+        }
+        .contenedor-tabla-tiempos table 
+        { 
+            margin: 1em 0; 
+            border-collapse: collapse; 
+            width: 580px;
+        }
+        .contenedor-tabla-tiempos table td, .contenedor-tabla-tiempos table th 
+        { 
+            border: 1px solid #eee; 
+            padding: .6em 10px; 
+            text-align: left; 
+        }
+        
+        
+        .contenedor-tabla-simple table 
+        { 
+            margin: 1em 0; 
+            border-collapse: collapse; 
+            width: 470px;
+        }
+        .contenedor-tabla-simple table td, .contenedor-tabla-simple table th 
+        { 
+            border: 1px solid #eee; 
+            padding: .6em 10px; 
+            text-align: left; 
+        }
+        
+        .ui-dialog .ui-state-error 
+        { 
+            padding: .3em; 
+        }
+        .validateTips { 
+            border: 1px solid transparent; 
+            padding: 0.3em; 
+        }
+        
+        /*
+        .contenedor-fila-form{
+            display: inline-block;
+            border: 2px solid;
+            vertical-align:middle;
+            padding:0px 5px 5px 10px;
+            width:95%;
+        }
+        
+        .contenedor-fila-form .etiqueta
+        {
+            float:left; 
+            width:30%;
+        }
+        
+        .contenedor-fila-form .numerico
+        {
+            float:left; 
+            width:65%; 
+            text-align:right;
+        }
+        
+        .contenedor-fila-form .ui-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+            width: calc(65% - 30px);
+            float:right;
+        }
+        .contenedor-fila-form .ui-combobox-input {
+            margin: 0;
+            padding: 5px 10px;
+            width: calc(65% - 30px);
+            float:right;
+        }
+        */
+        
+        
+        #dialog-abono .etiqueta
+        {
+            float:left; 
+            width:30%;
+        }
+        
+        #dialog-abono .numerico
+        {
+            float:left; 
+            width:65%; 
+            text-align:right;
+        }
+        
+        #dialog-abono .ui-combobox
+        {
+            width: 65%;
+        }
+        
+        #dialog-abono .ui-combobox-input {
+            width:calc(100% - 26px);
+        }
+
+        #dialog-abono .ui-button
+        {
+            float:right;
+            right: -2px;
+        }
+        
+        
+        /*
+        #dialog-abono input.text { margin-bottom:12px; width:73%; padding: .4em; float: rigth; }
+        #dialog-abono label { width:22%;  }
+        */
+       
+        
+        .ui-dialog .ui-state-error { padding: .3em; }
+        .validateTips { border: 1px solid transparent; padding: 0.3em; }
+        
+        
+        
+
+    
+        /*
+
+     
+    #dialog label  
+    {
+        float:left; 
+        width:100px; 
+    }
+    
+    */
+
+   /* #dialog label, 
+    #dialog input { display:block; }
+    
+    
+    
+    input.text { margin-bottom:12px; width:73%; padding: .4em; float: rigth; }
    
-  
    
-  
+
+    .ui-autocomplete-loading { 
+	    background: 
+	    white url(images/loader.gif) right center no-repeat; 
+
+    */
+
+    
+    
+    }
+  </style>    
+
 </head>
 <body>
 
@@ -61,28 +333,58 @@
         
             <div id="principal" class="ui-widget-content">
                 
-                <div id="tabs">
+                <div id="wizard" class="swMain">
                     <ul>
-                        <li><a href="#tabs-info-general">Información general</a></li>
-                        <li><a href="#tabs-otras-instituciones">Otras instituciones</a></li>
-                        <li><a href="#tabs-abonos">Abonos</a></li>
-                        <li><a href="#tabs-concurrencias">Concurrencias</a></li>
-                        <li><a href="#tabs-resultados">Resultados</a></li>
+                        <li><a href="#tabs-info-general">
+                            <label class="stepNumber">1</label>
+                            <span class="stepDesc">
+                               Step 1<br />
+                               <small>Step 1 Información general</small>
+                            </span></a>
+                         </li>
+
+                        <li><a href="#tabs-otras-instituciones">
+                            <label class="stepNumber">2</label>
+                            <span class="stepDesc">
+                               Step 2<br />
+                               <small>Step 2 Otras instituciones</small>
+                            </span>
+                        </a></li>
+                        <li><a href="#tabs-abonos">
+                            <label class="stepNumber">3</label>
+                            <span class="stepDesc">
+                               Step 3<br />
+                               <small>Step 3 Abonos</small>
+                            </span>
+                        </a></li>
+                        <li><a href="#tabs-concurrencias">
+                            <label class="stepNumber">4</label>
+                            <span class="stepDesc">
+                               Step 4<br />
+                               <small>Step 4 Concurrencias</small>
+                            </span>
+                        </a></li>
+                        <li><a href="#tabs-resultados">
+                            <label class="stepNumber">2</label>
+                            <span class="stepDesc">
+                               Step 5<br />
+                               <small>Step 5 Resultados</small>
+                            </span>
+                        </a></li>
                     </ul>
                     <div id="tabs-info-general">
+                        <h2 class="StepTitle">Step 1 Información general</h2>
                         <p>Ingrese la información solicitada.</p>
                         <form id="frmPrincipal" >
-                           
-
                             <div class="contenedor-tabla">
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="Run" class="etiqueta">Run</label>
                                         <input type="text" name="tiRun" id="tiRun" value="" class="run ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="Institucion" class="etiqueta">Institución</label>
                                         <select name="sltInstitucion" id="sltInstitucion" class="combobox ui-widget-content ui-corner-all" onchange="setCategorias(this,sltCategoria,sltGrado)">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
@@ -91,7 +393,7 @@
                                             </script>
                                         </select>
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <label for="Subinstitucion" class="etiqueta">Subinstitución</label>
                                         <select name="sltSubinstitucion" id="sltSubinstitucion"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
@@ -101,14 +403,14 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="fila">
-                                    <div id="celdaCategoria" class="celda">
+                                <div class="contenedor-fila">
+                                    <div id="celdaCategoria" class="contenedor-columna">
                                         <label for="Categoria" class="etiqueta">Categoría</label>
                                         <select name="sltCategoria" id="sltCategoria"  class="combobox ui-widget-content ui-corner-all" onchange="setGrado(this,sltGrado)">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                         </select>
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <div id="celdaGrado" >
                                             <label for="Grado" class="etiqueta">Grado</label>
                                             <select name="sltGrado" id="sltGrado"  class="combobox ui-widget-content ui-corner-all">
@@ -126,7 +428,7 @@
                                         </div>
                             
                                     </div>
-                                    <div id="celdaEsDeLinea" class="celda">
+                                    <div id="celdaEsDeLinea" class="contenedor-columna">
                                         <label for="EsDeLinea" class="etiqueta">Es de línea</label>
                                         <input type="radio" name="esDeLinea" value="SI"/>
                                         <label for="EsDeLineaSI">Si</label>
@@ -134,8 +436,8 @@
                                         <label for="EsDeLineaNO">No</label>
                                     </div>
                                 </div>
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="GradoEconomico" class="etiqueta">Grado económico</label>
                                         <select id="sltGradoEconomico"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
@@ -144,7 +446,7 @@
                                             </script>
                                         </select>
                                     </div>
-                                    <div id="celdaEscalafonCivil" class="celda">
+                                    <div id="celdaEscalafonCivil" class="contenedor-columna">
                                         <label for="EscalafonCivil" class="etiqueta">Escalafón civil</label>
                                         <select id="sltEscalafonCivil"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
@@ -155,37 +457,37 @@
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="FechaBaja" class="etiqueta">Fecha de baja</label>
                                         <input type="text" id="dtFechaBaja" class="datepicker ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div id="celdaPoseeAcciones" class="celda">
+                                <div class="contenedor-fila">
+                                    <div id="celdaPoseeAcciones" class="contenedor-columna">
                                         <label for="PoseeAcciones" class="etiqueta">Posee acciones</label>
                                         <input type="radio" id="radioPoseeAccionesSi" name="poseeAcciones" value="SI"/>
-                                        <label for="PoseeAccionesSI" class="etiquetaOpcionRadio">Si</label>
+                                        <label for="PoseeAccionesSI">Si</label>
                                         <input type="radio" id="radioPoseeAccionesNo" name="poseeAcciones" value="NO"/>
-                                        <label for="PoseeAccionesNO" class="etiquetaOpcionRadio">No</label>
+                                        <label for="PoseeAccionesNO">No</label>
 
                                     </div>
-                                    <div id="celdaCantidadDeAcciones" class="celda">
+                                    <div id="celdaCantidadDeAcciones" class="contenedor-columna">
                                         <label for="CantidadAcciones" class="etiqueta">Cantidad</label>
                                         <input type="text" name="cantidadAcciones" id="tiCantidadAcciones" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
-                                    <div id="celdaTipoDeAcciones" class="celda">
+                                    <div id="celdaTipoDeAcciones" class="contenedor-columna">
                                         <label for="TipoAcciones" class="etiqueta">Tipo</label>
                                         <input type="radio" name="tipoAcciones" value="Con AEGE"/>
-                                        <label for="TipoAccionesConAege" class="etiquetaOpcionRadio">Con AEGE</label>
+                                        <label for="TipoAccionesConAege">Con AEGE</label>
                                         <input type="radio" name="tipoAcciones" value="Sin AEGE"/>
-                                        <label for="TipoAccionesSinAege" class="etiquetaOpcionRadio">Sin AEGE</label>
+                                        <label for="TipoAccionesSinAege">Sin AEGE</label>
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="Sobresueldo" class="etiqueta">Sobresueldo</label>
                                         <select id="sltSobresueldo"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
@@ -195,7 +497,7 @@
                                         </select>
 
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <label for="SegundoSobresueldo" class="etiqueta">Segundo sobresueldo</label>
                                         <select id="sltSegundoSobresueldo"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
@@ -206,9 +508,9 @@
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="AsignacionSOFSOM" class="etiqueta">Asig. SOF/SOM</label>
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
+                                        <label for="AsignacionSOFSOM" class="etiqueta">Asognación SOF/SOM</label>
                                         <select id="sltAsignacionSOFSOM"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -218,8 +520,8 @@
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div id="celdaMinistroDeCorte" class="celda">
+                                <div class="contenedor-fila">
+                                    <div id="celdaMinistroDeCorte" class="contenedor-columna">
                                         <label for="EsMinistroDeCorte" class="etiqueta">Posee asig. Min. Corte</label>
                                         <input type="radio" id="radioEsMinistroDeCorteSi" name="esMinistroDeCorte" value="SI"/>
                                         <label for="EsMinistroDeCorteSI">Si</label>
@@ -227,15 +529,15 @@
                                         <label for="EsMinistroDeCorteNO">No</label>
 
                                     </div>
-                                    <div id="celdaSueldoMinistroDeCorte" class="celda">
+                                    <div id="celdaSueldoMinistroDeCorte" class="contenedor-columna">
                                         <label for="CantidadAcciones" class="etiqueta">Sueldo íntegro</label>
                                         <input type="text" name="sueldoMinistroDeCorte" id="tiSueldoMinistroDeCorte" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="PlanillaSupl19699" class="etiqueta">Pla. Supl. Ley 19.699</label>
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
+                                        <label for="PlanillaSupl19699" class="etiqueta">Planilla Supl. Ley 19.699</label>
                                         <select id="sltPlanSuplLey19699"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -244,8 +546,8 @@
                                         </select>
 
                                     </div>
-                                    <div class="celda">
-                                        <label for="PlanillaSuplDFL1" class="etiqueta">Pla. Supl. DFL 1/68</label>
+                                    <div class="contenedor-columna">
+                                        <label for="PlanillaSuplDFL1" class="etiqueta">Planilla Supl. DFL 1/68</label>
                                         <select id="sltPlanSuplDFL1"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -256,31 +558,31 @@
                                 </div>
 
 
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="AniosCapredena" class="etiqueta">Años CAPREDENA</label>
                                         <input type="text" name="aniosCapredena" id="tiAniosCapredena" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <label for="MesesCapredena" class="etiqueta">Meses CAPREDENA</label>
                                         <input type="text" name="mesesCapredena" id="tiMesesCapredena" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <label for="DiasCapredena" class="etiqueta">Días CAPREDENA</label>
                                         <input type="text" name="diasCapredena" id="tiDiasCapredena" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
 
-                                <div class="fila">
-                                    <div class="celda">
+                                <div class="contenedor-fila">
+                                    <div class="contenedor-columna">
                                         <label for="AniosCapredena" class="etiqueta">Años desahucio</label>
                                         <input type="text" name="aniosDesahucio" id="tiAniosDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <label for="MesesCapredena" class="etiqueta">Meses desahucio</label>
                                         <input type="text" name="mesesDesahucio" id="tiMesesDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
-                                    <div class="celda">
+                                    <div class="contenedor-columna">
                                         <label for="DiasCapredena" class="etiqueta">Días desahucio</label>
                                         <input type="text" name="diasDesahucio" id="tiDiasDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
@@ -289,6 +591,7 @@
                         </form>
                     </div>
                     <div id="tabs-otras-instituciones">
+                        <h2 class="StepTitle">Step 2 Otras instituciones</h2>
                         <p>Ingrese otras instituciones en las que prestó servicios.</p>
                         <div class="contenedor-tabla-simple ui-widget">
                             <table id="tblOtrasInstituciones" class="ui-widget ui-widget-content">
@@ -308,6 +611,7 @@
 
                     </div>  
                     <div id="tabs-abonos">
+                        <h2 class="StepTitle">Step 3 Abonos</h2>
                         <p>Ingrese los abonos de tiempo correspondientes.</p>
                         <div class="contenedor-tabla-tiempos ui-widget">
                             <table id="tblAbonos" class="ui-widget ui-widget-content">
@@ -329,6 +633,7 @@
                         <button id="btnSgteAbonos">Siguiente</button>
                     </div>  
                     <div id="tabs-concurrencias">
+                        <h2 class="StepTitle">Step 4 Concurrencias</h2>
                         <p>Ingrese las concurrencias correspondientes.</p>
                         <div class="contenedor-tabla-tiempos ui-widget">
                             <table id="tblConcurrencias" class="ui-widget ui-widget-content">
@@ -351,10 +656,11 @@
 
                     </div> 
                     <div id="tabs-resultados">
+                        <h2 class="StepTitle">Step 5 Resultados</h2>
                         <p>Los resultados son los siguientes.</p>
 
                         <div class="contenedor-tabla">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-servicios ui-widget">
                                     <table id="tblDetalleServicios">
                                         <thead>
@@ -374,7 +680,7 @@
                             </div>
                         </div>
                         <div class="contenedor-tabla espacio-vertical">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-18263 ui-widget">
                                     <table id="tblLey18263">
                                         <thead class="borde-solido">
@@ -779,7 +1085,7 @@
                         </div>
 
                         <div class="contenedor-tabla espacio-vertical">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-distribucion">
                                     <table id="tblDistribucion">
                                         <thead class="borde-solido">
@@ -830,7 +1136,7 @@
 
 
                         <div class="contenedor-tabla-desahucio espacio-vertical">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-desahucio">
                                     <table id="tblDesahucio">
                                         <thead>
@@ -861,7 +1167,7 @@
                         
                         
                         <div class="contenedor-tabla-acciones espacio-vertical">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-acciones">
                                     <table id="tblAcciones">
                                         <thead>
@@ -891,7 +1197,7 @@
                         </div>
 
                         <div class="contenedor-tabla-acciones espacio-vertical">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-acciones">
                                     <table id="Table1">
                                         <thead>
@@ -913,7 +1219,7 @@
 
 
                         <div class="contenedor-tabla-acciones espacio-vertical">
-                            <div class="fila">
+                            <div class="contenedor-fila">
                                 <div class="contenedor-tabla-acciones">
                                     <table id="Table2">
                                         <tbody>
