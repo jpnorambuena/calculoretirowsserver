@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head id="Head1" runat="server">
     <title>c&aacute;lculoRetiro - Sistema de c&aacute;lculo de pensiones de retiro del personal de las FF.AA.</title>
-    <link href="css/panel.css" rel="stylesheet" type="text/css" />
+    <link href="css/panel2.css" rel="stylesheet" type="text/css" />
     <link href="ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery_1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.js"></script> 
@@ -18,8 +18,8 @@
     
     <script type="text/javascript">
         $(function () {
-        
-            
+
+
         });  //fin function
     </script>
    
@@ -73,76 +73,93 @@
                         <p>Ingrese la información solicitada.</p>
                         <form id="frmPrincipal" >
                            
+                            <div class="newFila">
+                                <label for="Run">Run</label>
+                                <input type="text" name="tiRun" id="tiRun" value="" class="run ui-widget-content ui-corner-all"/>
+                            </div>
+                            <div class="newFila">
+                                <label for="Institucion">Institución</label>
+                                <select name="sltInstitucion" id="sltInstitucion" class="combobox ui-widget-content ui-corner-all" onchange="setCategorias(this,sltCategoria,sltGrado)">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        setInstituciones();
+                                    </script>
+                                </select>
+                                <label for="Subinstitucion">Subinstitución</label>
+                                <select name="sltSubinstitucion" id="sltSubinstitucion"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        setInstituciones();
+                                    </script>
+                                </select>
+                            </div>
+                            <div class="newFila">
+                                <label for="Categoria">Categoría</label>
+                                <select name="sltCategoria" id="sltCategoria"  class="combobox ui-widget-content ui-corner-all" onchange="setGrado(this,sltGrado)">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                </select>
+                                <label for="Grado">Grado</label>
+                                <select name="sltGrado" id="sltGrado"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                </select>
+                                <label for="EsDeLinea">Es de línea</label>
+                                <input type="radio" name="esDeLinea" value="SI"/>
+                                <label for="EsDeLineaSI" class="opcionRadio">Si</label>
+                                <input type="radio" name="esDeLinea" value="NO" checked/>
+                                <label for="EsDeLineaNO" class="opcionRadio">No</label>
+                            </div>
+                            <div class="newFila">
+                                <label for="GradoEconomico">Grado económico</label>
+                                <select id="sltGradoEconomico"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        cargarLista("Grados economicos");
+                                    </script>
+                                </select>
+                                <label for="GradoJerarquico">Grado jerárquico</label>
+                                <select id="sltGradoJerarquico"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        cargarLista("Grados jerarquicos");
+                                    </script>
+                                </select>
+                            </div>
 
-                            <div class="contenedor-tabla">
+
+
+
+
+
+
+
+
+
                                 <div class="fila">
+                                    
                                     <div class="celda">
-                                        <label for="Run" class="etiqueta">Run</label>
-                                        <input type="text" name="tiRun" id="tiRun" value="" class="run ui-widget-content ui-corner-all"/>
-                                    </div>
-                                </div>
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="Institucion" class="etiqueta">Institución</label>
-                                        <select name="sltInstitucion" id="sltInstitucion" class="combobox ui-widget-content ui-corner-all" onchange="setCategorias(this,sltCategoria,sltGrado)">
-                                            <option value="-1" selected="selected">[SELECCIONE]</option>
-                                            <script type="text/javascript">
-                                                setInstituciones();
-                                            </script>
-                                        </select>
-                                    </div>
-                                    <div class="celda">
-                                        <label for="Subinstitucion" class="etiqueta">Subinstitución</label>
-                                        <select name="sltSubinstitucion" id="sltSubinstitucion"  class="combobox ui-widget-content ui-corner-all">
-                                            <option value="-1" selected="selected">[SELECCIONE]</option>
-                                            <script type="text/javascript">
-                                                setInstituciones();
-                                            </script>
-                                        </select>
+                                        
                                     </div>
                                 </div>
                                 <div class="fila">
                                     <div id="celdaCategoria" class="celda">
-                                        <label for="Categoria" class="etiqueta">Categoría</label>
-                                        <select name="sltCategoria" id="sltCategoria"  class="combobox ui-widget-content ui-corner-all" onchange="setGrado(this,sltGrado)">
-                                            <option value="-1" selected="selected">[SELECCIONE]</option>
-                                        </select>
+                                        
                                     </div>
                                     <div class="celda">
                                         <div id="celdaGrado" >
-                                            <label for="Grado" class="etiqueta">Grado</label>
-                                            <select name="sltGrado" id="sltGrado"  class="combobox ui-widget-content ui-corner-all">
-                                                <option value="-1" selected="selected">[SELECCIONE]</option>
-                                            </select>
+                                            
                                         </div> 
                                         <div id="celdaGradoJerarquico" >
-                                            <label for="GradoJerarquico" class="etiqueta">Grado jerárquico</label>
-                                            <select id="sltGradoJerarquico"  class="combobox ui-widget-content ui-corner-all">
-                                                <option value="-1" selected="selected">[SELECCIONE]</option>
-                                                <script type="text/javascript">
-                                                    cargarLista("Grados jerarquicos");
-                                                </script>
-                                            </select>
+                                            
                                         </div>
                             
                                     </div>
                                     <div id="celdaEsDeLinea" class="celda">
-                                        <label for="EsDeLinea" class="etiqueta">Es de línea</label>
-                                        <input type="radio" name="esDeLinea" value="SI"/>
-                                        <label for="EsDeLineaSI">Si</label>
-                                        <input type="radio" name="esDeLinea" value="NO" checked/>
-                                        <label for="EsDeLineaNO">No</label>
+                                        
                                     </div>
                                 </div>
                                 <div class="fila">
                                     <div class="celda">
-                                        <label for="GradoEconomico" class="etiqueta">Grado económico</label>
-                                        <select id="sltGradoEconomico"  class="combobox ui-widget-content ui-corner-all">
-                                            <option value="-1" selected="selected">[SELECCIONE]</option>
-                                            <script type="text/javascript">
-                                                cargarLista("Grados economicos");
-                                            </script>
-                                        </select>
+                                        
                                     </div>
                                     <div id="celdaEscalafonCivil" class="celda">
                                         <label for="EscalafonCivil" class="etiqueta">Escalafón civil</label>
@@ -285,7 +302,6 @@
                                         <input type="text" name="diasDesahucio" id="tiDiasDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
-                            </div>
                         </form>
                     </div>
                     <div id="tabs-otras-instituciones">
