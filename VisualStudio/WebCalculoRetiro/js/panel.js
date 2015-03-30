@@ -38,7 +38,7 @@ $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 // inicio del document ready
 $(document).ready(function () {
 
-
+   
 
     //agrega icono al boton
     $("#bttSalir").button({
@@ -86,8 +86,8 @@ $(document).ready(function () {
 
     $('input[name=tipoAcciones]:radio').attr("disabled", true);
 
-    $("#celdaGradoJerarquico").hide();
-    $("#celdaEscalafonCivil").hide();
+    deshabilitarCombobox('celdaGradoJerarquico', 'sltGradoJerarquico');
+    deshabilitarCombobox('celdaEscalafonCivil', 'sltEscalafonCivil');
 
     $('input[name=esDeLinea]:radio').attr("disabled", true);
     $("#tiSueldoMinistroDeCorte").attr("disabled", true);
@@ -95,7 +95,7 @@ $(document).ready(function () {
     $('input[name=poseeAcciones]:radio').on("change", function () {
         actualizarAcciones(this);
     });
-
+    
     $('#celdaCategoria > .ui-combobox > .ui-combobox-input').on("focusout", function () {
         mostrarGrado(this);
     });
@@ -108,7 +108,6 @@ $(document).ready(function () {
         mostrarSueldoMinistroDeCorte(this);
     });
 
-
     $(".numerico").keydown(function (e) {
         restringirNumerico(e);
     });
@@ -119,8 +118,7 @@ $(document).ready(function () {
         var valor = e.target.value;
         darFormatoDeMiles(elemento, valor);
     });
-
-
+    
     $('#tiRun').Rut({
         on_error: function () {
             limpiarRun($('#tiRun'));
@@ -145,9 +143,16 @@ $(document).ready(function () {
         dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
         dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
         weekHeader: "Se",
-        dateFormat: "dd/mm/yy"
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        maxDate: 0
     });
 
+
+
+    $('#dtFechaBaja').on("focusout", function () {
+        mostrarGrado(this);
+    });
 
     dialogAbono = $("#dialog-abono").dialog({
         autoOpen: false,
@@ -656,16 +661,40 @@ function actualizarAcciones(radioButton) {
 function mostrarGrado(combobox) {
 
     if (combobox.value.toUpperCase().indexOf("EMPLEADO CIVIL") >= 0) {
-        $("#celdaGradoJerarquico").show();
-        $("#celdaEscalafonCivil").show();
-        $("#celdaGrado").hide();
+        //$("#celdaGradoJerarquico").show();
+        habilitarCombobox('celdaGradoJerarquico');
+
+
+        //$("#celdaEscalafonCivil").show();
+        habilitarCombobox('celdaEscalafonCivil');
+
+        //$("#celdaGrado").hide();
+        deshabilitarCombobox('celdaGrado', 'sltGrado');
     }
     else {
-        $("#celdaGrado").show();
-        $("#celdaEscalafonCivil").hide();
-        $("#celdaGradoJerarquico").hide();
+        //$("#celdaGrado").show();
+        habilitarCombobox('celdaGrado');
+        
+        //$("#celdaEscalafonCivil").hide();
+        deshabilitarCombobox('celdaEscalafonCivil', 'sltEscalafonCivil');
+
+        //$("#celdaGradoJerarquico").hide();
+        deshabilitarCombobox('celdaGradoJerarquico', 'sltGradoJerarquico');
     }
 };
+
+
+function habilitarCombobox(nombreCelda) {
+    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-input').attr("disabled", false);
+    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-button').attr("disabled", false);
+}
+
+function deshabilitarCombobox(nombreCelda, nombreCombo) {
+    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-input').attr("disabled", true);
+    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-button').attr("disabled", true);
+    $('#' + nombreCombo).combobox('value', '-1');
+}
+
 
 function mostrarEsDeLinea(combobox) {
     if(combobox.value.toUpperCase().indexOf("GENERAL") >= 0){
@@ -781,7 +810,7 @@ function agregarFila(tipoDeFila) {
         }
         
         $( "#tbl"+tipoDeFila+"s tbody" ).append( "<tr>" +
-            "<td>" + $("#sltTipo"+tipoDeFila+" option:selected").html() + "</td>" +
+            "<td style=\"text-align:left;\">" + $("#sltTipo"+tipoDeFila+" option:selected").html() + "</td>" +
             "<td align=\"right\">" + $("#tiAnios"+tipoDeFila).val() + "</td>" +
             "<td align=\"right\">" + $("#tiMeses"+tipoDeFila).val() + "</td>" +
             "<td align=\"right\">" + $("#tiDias"+tipoDeFila).val() + "</td>" +

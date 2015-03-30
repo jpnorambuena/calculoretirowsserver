@@ -74,95 +74,90 @@
                         <form id="frmPrincipal" >
                            
                             <div class="newFila">
-                                <label for="Run">Run</label>
-                                <input type="text" name="tiRun" id="tiRun" value="" class="run ui-widget-content ui-corner-all"/>
-                            </div>
-                            <div class="newFila">
-                                <label for="Institucion">Institución</label>
-                                <select name="sltInstitucion" id="sltInstitucion" class="combobox ui-widget-content ui-corner-all" onchange="setCategorias(this,sltCategoria,sltGrado)">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                    <script type="text/javascript">
-                                        setInstituciones();
-                                    </script>
-                                </select>
-                                <label for="Subinstitucion">Subinstitución</label>
-                                <select name="sltSubinstitucion" id="sltSubinstitucion"  class="combobox ui-widget-content ui-corner-all">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                    <script type="text/javascript">
-                                        setInstituciones();
-                                    </script>
-                                </select>
-                            </div>
-                            <div class="newFila">
-                                <label for="Categoria">Categoría</label>
-                                <select name="sltCategoria" id="sltCategoria"  class="combobox ui-widget-content ui-corner-all" onchange="setGrado(this,sltGrado)">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                </select>
-                                <label for="Grado">Grado</label>
-                                <select name="sltGrado" id="sltGrado"  class="combobox ui-widget-content ui-corner-all">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                </select>
-                                <label for="EsDeLinea">Es de línea</label>
-                                <input type="radio" name="esDeLinea" value="SI"/>
-                                <label for="EsDeLineaSI" class="opcionRadio">Si</label>
-                                <input type="radio" name="esDeLinea" value="NO" checked/>
-                                <label for="EsDeLineaNO" class="opcionRadio">No</label>
-                            </div>
-                            <div class="newFila">
-                                <label for="GradoEconomico">Grado económico</label>
-                                <select id="sltGradoEconomico"  class="combobox ui-widget-content ui-corner-all">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                    <script type="text/javascript">
-                                        cargarLista("Grados economicos");
-                                    </script>
-                                </select>
-                                <label for="GradoJerarquico">Grado jerárquico</label>
-                                <select id="sltGradoJerarquico"  class="combobox ui-widget-content ui-corner-all">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                    <script type="text/javascript">
-                                        cargarLista("Grados jerarquicos");
-                                    </script>
-                                </select>
-                            </div>
-
-
-
-
-
-
-
-
-
-
-                                <div class="fila">
-                                    
-                                    <div class="celda">
-                                        
+                                <div class="newCelda">
+                                    <label for="Run">Run :</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="tiRun" id="tiRun" value="" class="run ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
-                                <div class="fila">
-                                    <div id="celdaCategoria" class="celda">
-                                        
-                                    </div>
-                                    <div class="celda">
-                                        <div id="celdaGrado" >
-                                            
-                                        </div> 
-                                        <div id="celdaGradoJerarquico" >
-                                            
-                                        </div>
-                            
-                                    </div>
-                                    <div id="celdaEsDeLinea" class="celda">
-                                        
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="Institucion">Institución :</label>
+                                    <div class="celdaValor">
+                                        <select name="sltInstitucion" id="sltInstitucion" class="combobox ui-widget-content ui-corner-all" onchange="setCategorias(this,sltCategoria,sltGrado)">
+                                            <option value="-1" selected="selected">[SELECCIONE]</option>
+                                            <script type="text/javascript">
+                                                setInstituciones();
+                                            </script>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="fila">
-                                    <div class="celda">
-                                        
+                                <div class="newCelda">
+                                    <label for="Subinstitucion">Subinstitución :</label>
+                                    <div class="celdaValor">
+                                        <select name="sltSubinstitucion" id="sltSubinstitucion"  class="combobox ui-widget-content ui-corner-all">
+                                            <option value="-1" selected="selected">[SELECCIONE]</option>
+                                            <script type="text/javascript">
+                                                setInstituciones();
+                                            </script>
+                                        </select>
                                     </div>
-                                    <div id="celdaEscalafonCivil" class="celda">
-                                        <label for="EscalafonCivil" class="etiqueta">Escalafón civil</label>
+                                </div>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="Categoria">Categoría :</label>
+                                    <div id="celdaCategoria" class="celdaValor">
+                                        <select name="sltCategoria" id="sltCategoria"  class="combobox ui-widget-content ui-corner-all" onchange="setGrado(this,sltGrado)">
+                                            <option value="-1" selected="selected">[SELECCIONE]</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="Grado">Grado :</label>
+                                    <div id="celdaGrado" class="celdaValor">
+                                        <select name="sltGrado" id="sltGrado"  class="combobox ui-widget-content ui-corner-all">
+                                            <option value="-1" selected="selected">[SELECCIONE]</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="EsDeLinea">Es de línea :</label>
+                                    <div class="celdaValor">
+                                        <input type="radio" name="esDeLinea" value="SI"/>
+                                        <label for="EsDeLineaSI" class="opcionRadioCorto">Si</label>
+                                        <input type="radio" name="esDeLinea" value="NO" checked/>
+                                        <label for="EsDeLineaNO" class="opcionRadioCorto">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="GradoEconomico">Grado económico :</label>
+                                    <div class="celdaValor">
+                                        <select id="sltGradoEconomico"  class="combobox ui-widget-content ui-corner-all">
+                                            <option value="-1" selected="selected">[SELECCIONE]</option>
+                                            <script type="text/javascript">
+                                                cargarLista("Grados economicos");
+                                            </script>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="GradoJerarquico">Grado jerárquico :</label>
+                                    <div id="celdaGradoJerarquico" class="celdaValor">
+                                        <select id="sltGradoJerarquico"  class="combobox ui-widget-content ui-corner-all">
+                                            <option value="-1" selected="selected">[SELECCIONE]</option>
+                                            <script type="text/javascript">
+                                                cargarLista("Grados jerarquicos");
+                                            </script>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="EscalafonCivil">Escalafón civil :</label>
+                                    <div id="celdaEscalafonCivil" class="celdaValor">
                                         <select id="sltEscalafonCivil"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -171,49 +166,56 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="FechaBaja" class="etiqueta">Fecha de baja</label>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="FechaBaja">Fecha de baja :</label>
+                                    <div class="celdaValor">
                                         <input type="text" id="dtFechaBaja" class="datepicker ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
-
-                                <div class="fila">
-                                    <div id="celdaPoseeAcciones" class="celda">
-                                        <label for="PoseeAcciones" class="etiqueta">Posee acciones</label>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="PoseeAcciones">Posee acciones :</label>
+                                    <div class="celdaValor">
                                         <input type="radio" id="radioPoseeAccionesSi" name="poseeAcciones" value="SI"/>
-                                        <label for="PoseeAccionesSI" class="etiquetaOpcionRadio">Si</label>
+                                        <label for="PoseeAccionesSI" class="opcionRadioCorto">Si</label>
                                         <input type="radio" id="radioPoseeAccionesNo" name="poseeAcciones" value="NO"/>
-                                        <label for="PoseeAccionesNO" class="etiquetaOpcionRadio">No</label>
-
+                                        <label for="PoseeAccionesNO" class="opcionRadioCorto">No</label>
                                     </div>
-                                    <div id="celdaCantidadDeAcciones" class="celda">
-                                        <label for="CantidadAcciones" class="etiqueta">Cantidad</label>
-                                        <input type="text" name="cantidadAcciones" id="tiCantidadAcciones" value="" class="numerico ui-widget-content ui-corner-all"/>
+                               </div>
+                               <div class="newCelda">
+                                    <label for="CantidadAcciones">Cantidad :</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="cantidadAcciones" id="tiCantidadAcciones" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
-                                    <div id="celdaTipoDeAcciones" class="celda">
-                                        <label for="TipoAcciones" class="etiqueta">Tipo</label>
+                               </div>
+                               <div class="newCelda">
+                                    <label for="TipoAcciones">Tipo :</label>
+                                    <div class="celdaValor">
                                         <input type="radio" name="tipoAcciones" value="Con AEGE"/>
-                                        <label for="TipoAccionesConAege" class="etiquetaOpcionRadio">Con AEGE</label>
+                                        <label for="TipoAccionesConAege" class="opcionRadioMedio">Con AEGE</label>
                                         <input type="radio" name="tipoAcciones" value="Sin AEGE"/>
-                                        <label for="TipoAccionesSinAege" class="etiquetaOpcionRadio">Sin AEGE</label>
+                                        <label for="TipoAccionesSinAege" class="opcionRadioMedio">Sin AEGE</label>
                                     </div>
-                                </div>
-
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="Sobresueldo" class="etiqueta">Sobresueldo</label>
+                               </div>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="Sobresueldo">Sobresueldo</label>
+                                    <div class="celdaValor">
                                         <select id="sltSobresueldo"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
                                                 cargarListaValor("Sobresueldos");
                                             </script>
                                         </select>
-
                                     </div>
-                                    <div class="celda">
-                                        <label for="SegundoSobresueldo" class="etiqueta">Segundo sobresueldo</label>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="SegundoSobresueldo">Sgdo. sobresueldo</label>
+                                    <div class="celdaValor">
                                         <select id="sltSegundoSobresueldo"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -222,10 +224,9 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="AsignacionSOFSOM" class="etiqueta">Asig. SOF/SOM</label>
+                                <div class="newCelda">
+                                    <label for="AsignacionSOFSOM">Asig. SOF/SOM</label>
+                                    <div class="celdaValor">
                                         <select id="sltAsignacionSOFSOM"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -234,35 +235,39 @@
                                         </select>
                                     </div>
                                 </div>
-
-                                <div class="fila">
-                                    <div id="celdaMinistroDeCorte" class="celda">
-                                        <label for="EsMinistroDeCorte" class="etiqueta">Posee asig. Min. Corte</label>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="EsMinistroDeCorte">Asig. Min. Corte</label>
+                                    <div class="celdaValor">
                                         <input type="radio" id="radioEsMinistroDeCorteSi" name="esMinistroDeCorte" value="SI"/>
-                                        <label for="EsMinistroDeCorteSI">Si</label>
+                                        <label class="opcionRadioCorto" for="EsMinistroDeCorteSI">Si</label>
                                         <input type="radio" id="radioEsMinistroDeCorteNo" name="esMinistroDeCorte" value="NO"/>
-                                        <label for="EsMinistroDeCorteNO">No</label>
-
-                                    </div>
-                                    <div id="celdaSueldoMinistroDeCorte" class="celda">
-                                        <label for="CantidadAcciones" class="etiqueta">Sueldo íntegro</label>
-                                        <input type="text" name="sueldoMinistroDeCorte" id="tiSueldoMinistroDeCorte" value="" class="numerico ui-widget-content ui-corner-all"/>
+                                        <label class="opcionRadioCorto" for="EsMinistroDeCorteNO">No</label>
                                     </div>
                                 </div>
-
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="PlanillaSupl19699" class="etiqueta">Pla. Supl. Ley 19.699</label>
+                                <div class="newCelda">
+                                    <label for="CantidadAcciones">Sueldo íntegro</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="sueldoMinistroDeCorte" id="tiSueldoMinistroDeCorte" value="" class="numerico numericoMedio ui-widget-content ui-corner-all"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="PlanillaSupl19699">P. Supl. Ley 19.699</label>
+                                    <div class="celdaValor">
                                         <select id="sltPlanSuplLey19699"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
                                                 cargarLista("Planilla Supl 19699");
                                             </script>
                                         </select>
-
                                     </div>
-                                    <div class="celda">
-                                        <label for="PlanillaSuplDFL1" class="etiqueta">Pla. Supl. DFL 1/68</label>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="PlanillaSuplDFL1">P. Supl. DFL 1/68</label>
+                                    <div class="celdaValor">
                                         <select id="sltPlanSuplDFL1"  class="combobox ui-widget-content ui-corner-all">
                                             <option value="-1" selected="selected">[SELECCIONE]</option>
                                             <script type="text/javascript">
@@ -271,41 +276,52 @@
                                         </select>
                                     </div>
                                 </div>
+                            </div>
 
-
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="AniosCapredena" class="etiqueta">Años CAPREDENA</label>
-                                        <input type="text" name="aniosCapredena" id="tiAniosCapredena" value="" class="numerico ui-widget-content ui-corner-all"/>
-                                    </div>
-                                    <div class="celda">
-                                        <label for="MesesCapredena" class="etiqueta">Meses CAPREDENA</label>
-                                        <input type="text" name="mesesCapredena" id="tiMesesCapredena" value="" class="numerico ui-widget-content ui-corner-all"/>
-                                    </div>
-                                    <div class="celda">
-                                        <label for="DiasCapredena" class="etiqueta">Días CAPREDENA</label>
-                                        <input type="text" name="diasCapredena" id="tiDiasCapredena" value="" class="numerico ui-widget-content ui-corner-all"/>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="AniosCapredena">Años CAPREDENA</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="aniosCapredena" id="tiAniosCapredena" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
-
-                                <div class="fila">
-                                    <div class="celda">
-                                        <label for="AniosCapredena" class="etiqueta">Años desahucio</label>
-                                        <input type="text" name="aniosDesahucio" id="tiAniosDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
-                                    </div>
-                                    <div class="celda">
-                                        <label for="MesesCapredena" class="etiqueta">Meses desahucio</label>
-                                        <input type="text" name="mesesDesahucio" id="tiMesesDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
-                                    </div>
-                                    <div class="celda">
-                                        <label for="DiasCapredena" class="etiqueta">Días desahucio</label>
-                                        <input type="text" name="diasDesahucio" id="tiDiasDesahucio" value="" class="numerico ui-widget-content ui-corner-all"/>
+                                <div class="newCelda">
+                                    <label for="MesesCapredena">Meses CAPREDENA</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="mesesCapredena" id="tiMesesCapredena" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
+                                <div class="newCelda">
+                                    <label for="DiasCapredena">Días CAPREDENA</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="diasCapredena" id="tiDiasCapredena" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="newFila">
+                                <div class="newCelda">
+                                    <label for="AniosCapredena">Años desahucio</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="aniosDesahucio" id="tiAniosDesahucio" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                    </div>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="MesesCapredena">Meses desahucio</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="mesesDesahucio" id="tiMesesDesahucio" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                    </div>
+                                </div>
+                                <div class="newCelda">
+                                    <label for="DiasCapredena">Días desahucio</label>
+                                    <div class="celdaValor">
+                                        <input type="text" name="diasDesahucio" id="tiDiasDesahucio" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div id="tabs-otras-instituciones">
-                        <p>Ingrese otras instituciones en las que prestó servicios.</p>
+                        <p>Agregue otras instituciones en las que prestó servicios.</p>
                         <div class="contenedor-tabla-simple ui-widget">
                             <table id="tblOtrasInstituciones" class="ui-widget ui-widget-content">
                                 <thead>
@@ -324,7 +340,7 @@
 
                     </div>  
                     <div id="tabs-abonos">
-                        <p>Ingrese los abonos de tiempo correspondientes.</p>
+                        <p>Agregue los abonos de tiempo correspondientes.</p>
                         <div class="contenedor-tabla-tiempos ui-widget">
                             <table id="tblAbonos" class="ui-widget ui-widget-content">
                                 <thead>
@@ -345,7 +361,7 @@
                         <button id="btnSgteAbonos">Siguiente</button>
                     </div>  
                     <div id="tabs-concurrencias">
-                        <p>Ingrese las concurrencias correspondientes.</p>
+                        <p>Agregue las concurrencias correspondientes.</p>
                         <div class="contenedor-tabla-tiempos ui-widget">
                             <table id="tblConcurrencias" class="ui-widget ui-widget-content">
                                 <thead>
@@ -990,18 +1006,21 @@
             </div>
 
             <div id="dialog-otra-inst" title="Agregar nueva institución" class="ui-dialog-content ui-widget-content">
-                <p class="validateTips">Ingrese los datos solicitados.</p>
+                <p class="validateTips">Seleccione una institución.</p>
                 <form>
                     <fieldset>
-                            <label for="name" class="etiqueta">Institución</label>
-                            <select name="institucion" id="sltOtraInstitucion"  class="combobox ui-widget-content ui-corner-all">
-                                <option value="-1" selected="selected">[SELECCIONE]</option>
-                                <script type="text/javascript">
-                                    cargarListaValorCorrelativo("Instituciones");
-                                </script>
-                            </select>
-                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
-                       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+                        <div class="celdaDialogo">
+                            <label for="otraInstitucion">Institución :</label>
+                            <div class="valorDialogo">
+                                <select name="institucion" id="sltOtraInstitucion"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        cargarListaValorCorrelativo("Instituciones");
+                                    </script>
+                                </select>
+                            </div>
+                        </div>
+                       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"/>
                 </fieldset>
               </form>
             </div>
@@ -1011,24 +1030,35 @@
                 <p class="validateTips">Ingrese los datos solicitados.</p>
                 <form>
                     <fieldset>
-                            <label for="name" class="etiqueta">Tipo de abono</label>
-                            <select name="tipoAbono" id="sltTipoAbono"  class="combobox ui-widget-content ui-corner-all">
-                                <option value="-1" selected="selected">[SELECCIONE]</option>
-                                <script type="text/javascript">
-                                    cargarListaValorCorrelativo("Abonos");
-                                </script>
-                            </select>
-
-                            <label for="aniosAbono" class="etiqueta">Años</label>
-                            <input type="text" name="aniosAbono" id="tiAniosAbono" value="" class="numerico ui-widget-content ui-corner-all"/>
-                        
-                            <label for="mesesAbono" class="etiqueta">Meses</label>
-                            <input type="text" name="mesesAbono" id="tiMesesAbono" value="" class="numerico ui-widget-content ui-corner-all"/>
-                        
-                            <label for="diasAbono" class="etiqueta">Días</label>
-                            <input type="text" name="diasAbono" id="tiDiasAbono" value="" class="numerico ui-widget-content ui-corner-all"/>
-                     
-                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                        <div class="celdaDialogo">
+                            <label for="name">Tipo de abono :</label>
+                            <div class="valorDialogo">
+                                <select name="tipoAbono" id="sltTipoAbono"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        cargarListaValorCorrelativo("Abonos");
+                                    </script>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="celdaDialogo">
+                            <label for="aniosAbono">Años :</label>
+                            <div class="valorDialogo">
+                                <input type="text" name="aniosAbono" id="tiAniosAbono" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                            </div>
+                        </div>
+                        <div class="celdaDialogo">
+                            <label for="mesesAbono">Meses :</label>
+                            <div class="valorDialogo">
+                                <input type="text" name="mesesAbono" id="tiMesesAbono" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                            </div>
+                        </div>
+                        <div class="celdaDialogo">
+                            <label for="diasAbono">Días :</label>
+                            <div class="valorDialogo">
+                                <input type="text" name="diasAbono" id="tiDiasAbono" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                            </div>
+                        </div>
                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
                 </fieldset>
               </form>
@@ -1038,24 +1068,35 @@
                 <p class="validateTips">Ingrese los datos solicitados.</p>
                 <form>
                     <fieldset>
-                            <label for="name" class="etiqueta">Concurrencia</label>
-                            <select name="tipoAbono" id="sltTipoConcurrencia"  class="combobox ui-widget-content ui-corner-all">
-                                <option value="-1" selected="selected">[SELECCIONE]</option>
-                                <script type="text/javascript">
-                                    cargarListaValorCorrelativo("Concurrencias");
-                                </script>
-                            </select>
-
-                            <label for="aniosConcurrencia" class="etiqueta">Años</label>
-                            <input type="text" name="aniosConcurrencia" id="tiAniosConcurrencia" value="" class="numerico ui-widget-content ui-corner-all"/>
-                        
-                            <label for="mesesConcurrencia" class="etiqueta">Meses</label>
-                            <input type="text" name="mesesConcurrencia" id="tiMesesConcurrencia" value="" class="numerico ui-widget-content ui-corner-all"/>
-                        
-                            <label for="diasConcurrencia" class="etiqueta">Días</label>
-                            <input type="text" name="diasConcurrencia" id="tiDiasConcurrencia" value="" class="numerico ui-widget-content ui-corner-all"/>
-                     
-                        <!-- Allow form submission with keyboard without duplicating the dialog button -->
+                        <div class="celdaDialogo">
+                            <label for="name">Concurrencia :</label>
+                            <div class="valorDialogo">
+                                <select name="tipoAbono" id="sltTipoConcurrencia"  class="combobox ui-widget-content ui-corner-all">
+                                    <option value="-1" selected="selected">[SELECCIONE]</option>
+                                    <script type="text/javascript">
+                                        cargarListaValorCorrelativo("Concurrencias");
+                                    </script>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="celdaDialogo">
+                            <label for="aniosConcurrencia">Años :</label>
+                            <div class="valorDialogo">
+                                <input type="text" name="aniosConcurrencia" id="tiAniosConcurrencia" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                            </div>
+                        </div>
+                        <div class="celdaDialogo">
+                                <label for="mesesConcurrencia">Meses :</label>
+                            <div class="valorDialogo">
+                                <input type="text" name="mesesConcurrencia" id="tiMesesConcurrencia" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                            </div>
+                        </div>
+                        <div class="celdaDialogo">
+                            <label for="diasConcurrencia">Días :</label>
+                            <div class="valorDialogo">
+                                <input type="text" name="diasConcurrencia" id="tiDiasConcurrencia" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                            </div>
+                        </div>
                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
                 </fieldset>
               </form>
