@@ -10,9 +10,9 @@
     <script type="text/javascript" src="js/jquery_1.10.2.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.11.js"></script> 
     <script src="js/jquery.blockUI.js" type="text/javascript"></script>
+    <script type="text/javascript" src="js/listas.js"></script> 
     <script type="text/javascript" src="js/panel.js"></script> 
     <script type="text/javascript" src="js/rut.js"></script> 
-    <script type="text/javascript" src="js/listas.js"></script> 
     <script type="text/javascript" src="js/jquery.ui.combobox.js"></script>
     <script type="text/javascript" src="js/jquery.tabletojson.js"></script>
     
@@ -77,7 +77,7 @@
                                 <div class="newCelda">
                                     <label for="Run">Run :</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="tiRun" id="tiRun" value="" class="run ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="tiRun" id="tiRun" value="" maxlength="13" class="run ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                                 <div class="newCelda">
                                     <label for="FechaBaja">Fecha de baja :</label>
                                     <div class="celdaValor">
-                                        <input type="text" id="dtFechaBaja" class="datepicker ui-widget-content ui-corner-all"/>
+                                        <input type="text" id="dtFechaBaja" maxlength="10" class="datepicker ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                             </div>
@@ -188,7 +188,7 @@
                                <div class="newCelda">
                                     <label for="CantidadAcciones">Cantidad :</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="cantidadAcciones" id="tiCantidadAcciones" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="cantidadAcciones" id="tiCantidadAcciones" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                </div>
                                <div class="newCelda">
@@ -249,7 +249,7 @@
                                 <div class="newCelda">
                                     <label for="CantidadAcciones">Sueldo íntegro</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="sueldoMinistroDeCorte" id="tiSueldoMinistroDeCorte" value="" class="numerico numericoMedio ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="sueldoMinistroDeCorte" id="tiSueldoMinistroDeCorte" value="" maxlength="10" class="numerico numericoMedio ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                             </div>
@@ -282,19 +282,19 @@
                                 <div class="newCelda">
                                     <label for="AniosCapredena">Años CAPREDENA</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="aniosCapredena" id="tiAniosCapredena" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="aniosCapredena" id="tiAniosCapredena" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                                 <div class="newCelda">
                                     <label for="MesesCapredena">Meses CAPREDENA</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="mesesCapredena" id="tiMesesCapredena" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="mesesCapredena" id="tiMesesCapredena" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                                 <div class="newCelda">
                                     <label for="DiasCapredena">Días CAPREDENA</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="diasCapredena" id="tiDiasCapredena" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="diasCapredena" id="tiDiasCapredena" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                             </div>
@@ -302,19 +302,19 @@
                                 <div class="newCelda">
                                     <label for="AniosCapredena">Años desahucio</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="aniosDesahucio" id="tiAniosDesahucio" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="aniosDesahucio" id="tiAniosDesahucio" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                                 <div class="newCelda">
                                     <label for="MesesCapredena">Meses desahucio</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="mesesDesahucio" id="tiMesesDesahucio" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="mesesDesahucio" id="tiMesesDesahucio" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                                 <div class="newCelda">
                                     <label for="DiasCapredena">Días desahucio</label>
                                     <div class="celdaValor">
-                                        <input type="text" name="diasDesahucio" id="tiDiasDesahucio" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                        <input type="text" name="diasDesahucio" id="tiDiasDesahucio" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                                     </div>
                                 </div>
                             </div>
@@ -334,6 +334,7 @@
                                 </tbody>
                             </table>
                             <button id="btnNuevaInstitucion">Agregar</button>
+                            <button id="btnNuevaInstitucion2">btnNuevaInstitucion2</button>
                         </div>
 
                         <button id="btnSgteInstituciones">Siguiente</button>
@@ -1044,19 +1045,19 @@
                         <div class="celdaDialogo">
                             <label for="aniosAbono">Años :</label>
                             <div class="valorDialogo">
-                                <input type="text" name="aniosAbono" id="tiAniosAbono" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                <input type="text" name="aniosAbono" id="tiAniosAbono" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                             </div>
                         </div>
                         <div class="celdaDialogo">
                             <label for="mesesAbono">Meses :</label>
                             <div class="valorDialogo">
-                                <input type="text" name="mesesAbono" id="tiMesesAbono" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                <input type="text" name="mesesAbono" id="tiMesesAbono" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                             </div>
                         </div>
                         <div class="celdaDialogo">
                             <label for="diasAbono">Días :</label>
                             <div class="valorDialogo">
-                                <input type="text" name="diasAbono" id="tiDiasAbono" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                <input type="text" name="diasAbono" id="tiDiasAbono" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                             </div>
                         </div>
                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
@@ -1082,19 +1083,19 @@
                         <div class="celdaDialogo">
                             <label for="aniosConcurrencia">Años :</label>
                             <div class="valorDialogo">
-                                <input type="text" name="aniosConcurrencia" id="tiAniosConcurrencia" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                <input type="text" name="aniosConcurrencia" id="tiAniosConcurrencia" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                             </div>
                         </div>
                         <div class="celdaDialogo">
                                 <label for="mesesConcurrencia">Meses :</label>
                             <div class="valorDialogo">
-                                <input type="text" name="mesesConcurrencia" id="tiMesesConcurrencia" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                <input type="text" name="mesesConcurrencia" id="tiMesesConcurrencia" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                             </div>
                         </div>
                         <div class="celdaDialogo">
                             <label for="diasConcurrencia">Días :</label>
                             <div class="valorDialogo">
-                                <input type="text" name="diasConcurrencia" id="tiDiasConcurrencia" value="" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+                                <input type="text" name="diasConcurrencia" id="tiDiasConcurrencia" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
                             </div>
                         </div>
                        <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
