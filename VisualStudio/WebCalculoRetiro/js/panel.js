@@ -1,6 +1,8 @@
 ﻿// Archivo JScript
 
-var numFilaAeliminar = -1; 
+var numFilaAeliminar = -1;
+
+var fechaRegex = /^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
 var icons = {
     header: "ui-icon-circle-arrow-e",
@@ -38,7 +40,7 @@ $(document).ajaxStart($.blockUI).ajaxStop($.unblockUI);
 // inicio del document ready
 $(document).ready(function () {
 
-   
+
 
     //agrega icono al boton
     $("#bttSalir").button({
@@ -95,7 +97,7 @@ $(document).ready(function () {
     $('input[name=poseeAcciones]:radio').on("change", function () {
         actualizarAcciones(this);
     });
-    
+
     $('#celdaCategoria > .ui-combobox > .ui-combobox-input').on("focusout", function () {
         mostrarGrado(this);
     });
@@ -112,13 +114,17 @@ $(document).ready(function () {
         restringirNumerico(e);
     });
 
+    $(".run").keydown(function (e) {
+        restringirRun(e);
+    });
+
     $(".numerico").on("keyup", function (e) {
         var elemento = $('input[name=' + this.name + ']:input');
 
         var valor = e.target.value;
         darFormatoDeMiles(elemento, valor);
     });
-    
+
     $('#tiRun').Rut({
         on_error: function () {
             limpiarRun($('#tiRun'));
@@ -148,7 +154,10 @@ $(document).ready(function () {
         maxDate: 0
     });
 
-
+    $('.datepicker').on("focusout", function () {
+        var elemento = $('#' + this.id);
+        var valido = checkRegexpUnitario(elemento, fechaRegex, "no es una fecha válida");
+    });
 
     $('#dtFechaBaja').on("focusout", function () {
         mostrarGrado(this);
@@ -336,6 +345,9 @@ $(document).ready(function () {
         numFilaAeliminar = -1;
     });
 
+    $('#btnNuevaInstitucion2').on("click", function (evento) {
+        agregarFilaSimple2();
+    });
 
     $("#btnNuevaInstitucion").button({
         text: true,
@@ -602,6 +614,24 @@ function checkRegexp(o, regexp, n, p) {
     }
 }
 
+function checkRegexpUnitario(elemento, regexp, mensaje) {
+    if (!(regexp.test(elemento.val())) && elemento.val() != "") {
+        elemento.tooltip({
+            tooltipClass: "ui-state-highlight"
+        });
+        elemento
+            .attr("title", elemento.val() + " " + mensaje)
+            .val("")
+            .tooltip("open");
+        delay(function () {
+            elemento.tooltip("close").attr("title", "");
+        }, 2500);
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function checkLength(o, n, min, max, p) {
     if (o.val().length > max || o.val().length < min) {
         o.addClass("ui-state-error");
@@ -661,38 +691,27 @@ function actualizarAcciones(radioButton) {
 function mostrarGrado(combobox) {
 
     if (combobox.value.toUpperCase().indexOf("EMPLEADO CIVIL") >= 0) {
-        //$("#celdaGradoJerarquico").show();
         habilitarCombobox('celdaGradoJerarquico');
-
-
-        //$("#celdaEscalafonCivil").show();
         habilitarCombobox('celdaEscalafonCivil');
-
-        //$("#celdaGrado").hide();
         deshabilitarCombobox('celdaGrado', 'sltGrado');
     }
     else {
-        //$("#celdaGrado").show();
         habilitarCombobox('celdaGrado');
-        
-        //$("#celdaEscalafonCivil").hide();
         deshabilitarCombobox('celdaEscalafonCivil', 'sltEscalafonCivil');
-
-        //$("#celdaGradoJerarquico").hide();
         deshabilitarCombobox('celdaGradoJerarquico', 'sltGradoJerarquico');
     }
 };
 
 
-function habilitarCombobox(nombreCelda) {
-    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-input').attr("disabled", false);
-    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-button').attr("disabled", false);
+function habilitarCombobox(idCelda) {
+    $('#' + idCelda + ' .ui-combobox .ui-combobox-input').attr("disabled", false);
+    $('#' + idCelda + ' .ui-combobox .ui-combobox-button').attr("disabled", false);
 }
 
-function deshabilitarCombobox(nombreCelda, nombreCombo) {
-    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-input').attr("disabled", true);
-    $('#' + nombreCelda + ' .ui-combobox .ui-combobox-button').attr("disabled", true);
-    $('#' + nombreCombo).combobox('value', '-1');
+function deshabilitarCombobox(idCelda, idCombo) {
+    $('#' + idCelda + ' .ui-combobox .ui-combobox-input').attr("disabled", true);
+    $('#' + idCelda + ' .ui-combobox .ui-combobox-button').attr("disabled", true);
+    $('#' + idCombo).combobox('value', '-1');
 }
 
 
@@ -729,6 +748,22 @@ function restringirNumerico(e) {
     }
     // Ensure that it is a number and stop the keypress
     if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+        e.preventDefault();
+    }
+};
+
+function restringirRun(e) {
+    // Allow: backspace, delete, tab, escape, enter and .
+    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 190]) !== -1 ||
+    // Allow: Ctrl+A
+        (e.keyCode == 65 && e.ctrlKey == true) ||
+    // Allow: home, end, left, right, down, up
+        (e.keyCode >= 35 && e.keyCode <= 40)) {
+        // let it happen, don't do anything
+        return;
+    }
+    // Ensure that it is a number and stop the keypress    keyCode = 75 -> K
+    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 75 || e.keyCode > 75) && (e.keyCode < 96 || e.keyCode > 105)) {
         e.preventDefault();
     }
 };
@@ -888,7 +923,28 @@ function removerFila(indice, tipoDeFila){
     $('#tiDias'+tipoDeFila).val(dias);
     $('#sltTipo'+tipoDeFila).focus();
  }
-    
+
+
+ function agregarFilaSimple2() {
+
+     var opciones = obtenerTextoListaValorCorrelativo("Instituciones");
+
+     $("#tblOtrasInstituciones tbody").append("<tr>" +
+            "<td>" +
+                "<select name=\"institucion\" class=\"combobox ui-widget-content ui-corner-all\">" +
+                "<option value=\"-1\" selected=\"selected\">[SELECCIONE]</option>" +
+                opciones +
+                "</select>" +
+            "</td>" +
+            "<td>" +
+            "<button class=\"btnEditarFila\">Editar</button>" +
+            "<button class=\"btnRemoverFila\">Remover</button>" +
+            "</td>" +
+            "</tr>");
+
+     $(".combobox").combobox();
+}
+
 
 function agregarFilaSimple() {
     var valid = true;
@@ -962,7 +1018,7 @@ function removerFilaSimple(indice){
     
     $tips.text('Todos los datos son obligatorios.');
 
-    $('#sltOtraInstitucion').combobox('value', tipo);
+    $('#sltOtraInstitucion').combobox('value', institucion);
     $('#sltOtraInstitucion').focus();
  }
    

@@ -187,8 +187,11 @@
                             $el.tooltip("open");
 
                             // remove invalid value, as it didn't match anything
-                            $el.val('');
+                            //$el.val('');
 
+                            // reemplazo el valor de ingresado por el item -1
+                            this.value('-1');
+                            
                             // Internally, term must change before another search is performed
                             // if the same search is performed again, the menu won't be shown
                             // because the value didn't actually change via a keyboard event
@@ -209,7 +212,7 @@
 
                 //Generar evento change en el select
                 this.element.trigger("change");
-                
+
                 this._trigger("change", event, {
                     item: changedOption
                 });
