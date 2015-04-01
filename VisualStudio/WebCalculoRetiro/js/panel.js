@@ -1,6 +1,6 @@
 ﻿// Archivo JScript
 
-var numFilaAeliminar = -1;
+var $filaAeditar = null;
 
 var fechaRegex = /^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
@@ -215,7 +215,7 @@ $(document).ready(function () {
             .dialog("open");
         $tips.text('Todos los datos son obligatorios.');
         $('#sltTipoAbono').focus();
-        numFilaAeliminar = -1;
+        agregandoFila = false;
     });
 
 
@@ -278,7 +278,7 @@ $(document).ready(function () {
             .dialog("open");
         $tips.text('Todos los datos son obligatorios.');
         $('#sltTipoConcurrencia').focus();
-        numFilaAeliminar = -1;
+        agregandoFila = false;
     });
 
 
@@ -301,7 +301,7 @@ $(document).ready(function () {
                 name: "btnAgregar",
                 click: function () {
                     $("#sltOtraInstitucion").removeClass("ui-state-error");
-                    agregarFilaSimple("Institucion");
+                    agregarFilaOtraInstitucion();
                 }
             },
             {
@@ -342,11 +342,7 @@ $(document).ready(function () {
             .dialog("open");
         $tips.text('Todos los datos son obligatorios.');
         $('#sltOtraInstitucion').focus();
-        numFilaAeliminar = -1;
-    });
-
-    $('#btnNuevaInstitucion2').on("click", function (evento) {
-        agregarFilaSimple2();
+        agregandoFila = false;
     });
 
     $("#btnNuevaInstitucion").button({
@@ -357,6 +353,9 @@ $(document).ready(function () {
     });
 
 
+
+    /******************************************************************************************************/
+    /******************************************************************************************************/
     $('#btnSgteInstituciones').on("click", function (evento) {
 
         jsonInstituciones = convertirTabla($('#tblOtrasInstituciones'), 1);
@@ -374,6 +373,99 @@ $(document).ready(function () {
         jsonConcurrencias = convertirTabla($('#tblConcurrencias'), 4);
         xmlConcurrencias = concurrenciasToXml();
     });
+
+    /******************************************************************************************************/
+    /******************************************************************************************************/
+
+
+
+
+
+
+
+
+
+    $(".btnEditarFila").button({
+        text: false,
+        icons: {
+            primary: "ui-icon-pencil"
+        }
+    });
+
+    $(".btnRemoverFila").button({
+        text: false,
+        icons: {
+            primary: "ui-icon-closethick"
+        }
+    });
+    
+
+
+
+
+
+
+
+    $('#tblOtrasInstituciones').on('click', 'tbody tr td .btnEditarFila', function () {
+        var indice = $(".btnEditarFila").index(this);
+
+        $filaAeditar = $($('#tblOtrasInstituciones tbody tr')[indice]);
+  
+        modificarFilaOtraInstitucion();
+    });
+
+    $('#tblOtrasInstituciones').on('click', 'tbody tr td .btnRemoverFila', function () {
+        var indice = $(".btnRemoverFila").index(this);
+
+        $($('#tblOtrasInstituciones tbody tr')[indice]).remove();
+    });
+
+
+
+    $('#tblOtrasInstituciones').on('click', 'tbody tr td .btnEditarFila', function () {
+        var indice = $(".btnEditarFila").index(this);
+
+        var tipo = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[0].innerHTML;
+        var anios = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[1].innerHTML;
+        var meses = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[2].innerHTML;
+        var dias = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[3].innerHTML;
+        agregandoFila = indice;
+        modificarFila(tipoDeFila, tipo, anios, meses, dias);
+    });
+
+    $('.btnRemoverFila').on("click", function () {
+        var indice = $(".btnRemoverFila").index(this);
+        removerFila(indice, tipoDeFila);
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $('#btnCalcularPension').on("click", function (evento) {
 
@@ -840,8 +932,8 @@ function agregarFila(tipoDeFila) {
       
     if ( valid ) {
         
-        if(numFilaAeliminar >= 0){
-            removerFila(numFilaAeliminar);
+        if(agregandoFila >= 0){
+            removerFila(agregandoFila);
         }
         
         $( "#tbl"+tipoDeFila+"s tbody" ).append( "<tr>" +
@@ -861,7 +953,7 @@ function agregarFila(tipoDeFila) {
 }
 
 function actualizarBotones(tipoDeFila){
-
+/*
     $(".btnEditarFila").button({
         text: false,
         icons: {
@@ -876,7 +968,7 @@ function actualizarBotones(tipoDeFila){
         var anios = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[1].innerHTML;
         var meses = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[2].innerHTML;
         var dias = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[3].innerHTML;
-        numFilaAeliminar = indice;
+        agregandoFila = indice;
         modificarFila(tipoDeFila, tipo, anios, meses, dias);
     });  
 
@@ -891,6 +983,7 @@ function actualizarBotones(tipoDeFila){
         var indice = $(".btnRemoverFila").index(this);
         removerFila(indice, tipoDeFila);
     });
+*/
 }
  
 function removerFila(indice, tipoDeFila){
@@ -925,28 +1018,7 @@ function removerFila(indice, tipoDeFila){
  }
 
 
- function agregarFilaSimple2() {
-
-     var opciones = obtenerTextoListaValorCorrelativo("Instituciones");
-
-     $("#tblOtrasInstituciones tbody").append("<tr>" +
-            "<td>" +
-                "<select name=\"institucion\" class=\"combobox ui-widget-content ui-corner-all\">" +
-                "<option value=\"-1\" selected=\"selected\">[SELECCIONE]</option>" +
-                opciones +
-                "</select>" +
-            "</td>" +
-            "<td>" +
-            "<button class=\"btnEditarFila\">Editar</button>" +
-            "<button class=\"btnRemoverFila\">Remover</button>" +
-            "</td>" +
-            "</tr>");
-
-     $(".combobox").combobox();
-}
-
-
-function agregarFilaSimple() {
+ function agregarFilaOtraInstitucion() {
     var valid = true;
     
     otraInstitucionAllFields.removeClass( "ui-state-error" );
@@ -954,60 +1026,44 @@ function agregarFilaSimple() {
     valid = valid && checkCombo( $("#sltOtraInstitucion"), "Institución", dialogOtraInstitucion);
       
     if ( valid ) {
-        
-        if(numFilaAeliminar >= 0){
-            removerFila(numFilaAeliminar);
+        var nuevaInstitucion = $("#sltOtraInstitucion option:selected").html();
+
+        var nuevaFila = "<tr>" +
+            "<td>" + nuevaInstitucion + "</td>" +
+            "<td>" +
+            "<button class=\"btnEditarFila\">Editar</button>" +
+            "<button class=\"btnRemoverFila\">Remover</button>" +
+            "</td>" +
+            "</tr>";
+
+        if ($filaAeditar == null) {
+            $('#tblOtrasInstituciones tbody').append(nuevaFila);
+            $('#tblOtrasInstituciones tbody').find('tr:last')
+                .find('.btnEditarFila').button({
+                    text: false,
+                    icons: {
+                        primary: "ui-icon-pencil"
+                    }
+                });
+            $('#tblOtrasInstituciones tbody').find('tr:last')
+                .find('.btnRemoverFila').button({
+                    text: false,
+                    icons: {
+                        primary: "ui-icon-closethick"
+                    }
+                });
+        }
+        else {
+            $filaAeditar.children('td')[0].innerHTML = nuevaInstitucion;
         }
         
-        $( "#tblOtrasInstituciones tbody" ).append( "<tr>" +
-            "<td>" + $("#sltOtraInstitucion option:selected").html() + "</td>" +
-            "<td>"+
-            "<button class=\"btnEditarFila\">Editar</button>"+
-            "<button class=\"btnRemoverFila\">Remover</button>"+
-            "</td>" +
-            "</tr>" );
+        
         dialogOtraInstitucion.dialog( "close" );
-        actualizarBotonesFilaSimple();
     }
     return valid;
 }
 
-function actualizarBotonesFilaSimple(){
-
-    $(".btnEditarFila").button({
-        text: false,
-        icons: {
-            primary: "ui-icon-pencil"
-        }
-    });
-    
-    $('.btnEditarFila').on("click", function () {
-        var indice = $(".btnEditarFila").index(this);
-        
-        var institucion = $($('#tblOtrasInstituciones tbody tr')[indice]).children('td')[0].innerHTML;
-        numFilaAeliminar = indice;
-        modificarFilaSimple(institucion);
-    });  
-
-    $(".btnRemoverFila").button({
-        text: false,
-        icons: {
-            primary: "ui-icon-closethick"
-        }
-    });
-    
-    $('.btnRemoverFila').on("click", function () {
-        var indice = $(".btnRemoverFila").index(this);
-        removerFilaSimple(indice);
-    });
-}
- 
-function removerFilaSimple(indice){
-   
-    $($('#tblOtrasInstituciones tbody tr')[indice]).remove();
-}
-
- function modificarFilaSimple(institucion){
+ function modificarFilaOtraInstitucion(){
 
     var $tips;
 
@@ -1018,8 +1074,10 @@ function removerFilaSimple(indice){
     
     $tips.text('Todos los datos son obligatorios.');
 
-    $('#sltOtraInstitucion').combobox('value', institucion);
-    $('#sltOtraInstitucion').focus();
+    var $select = $('#dialog-otra-inst').find('#sltOtraInstitucion');
+    var institucion = $filaAeditar.children('td')[0].innerHTML;
+
+    $select.combobox('textValue', institucion);
  }
    
 

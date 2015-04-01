@@ -334,7 +334,6 @@
                                 </tbody>
                             </table>
                             <button id="btnNuevaInstitucion">Agregar</button>
-                            <button id="btnNuevaInstitucion2">btnNuevaInstitucion2</button>
                         </div>
 
                         <button id="btnSgteInstituciones">Siguiente</button>

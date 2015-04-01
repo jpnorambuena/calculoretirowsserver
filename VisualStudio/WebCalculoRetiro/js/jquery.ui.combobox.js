@@ -31,6 +31,13 @@
 *
 */
 
+/*
+*
+* MEJORADO por Juan Pablo Norambuena
+* Mejora: permite seleccionar un valor a partir del texto del option
+* 01/04/2015
+*/
+
 (function ($, undefined) {
 
     $.widget("ui.combobox", {
@@ -266,6 +273,33 @@
             select.prop('selectedIndex', -1);
             select.children('option').each(function () {
                 if (this.value == newVal) {
+                    this.selected = valid = true;
+                    return false;
+                }
+            });
+
+            if (valid) {
+                this.uiInput.val(select.children(':selected').text());
+            } else {
+                this.uiInput.val("");
+                this.element.prop('selectedIndex', -1);
+            }
+
+        },
+        //Seteo de la opcion seleccionada a partir del texto de la opcion
+        textValue: function (newVal) {
+            var select = this.element,
+             valid = false,
+             selected;
+
+            if (!arguments.length) {
+                selected = select.children(":selected");
+                return selected.length > 0 ? selected.text() : null;
+            }
+
+            select.prop('selectedIndex', -1);
+            select.children('option').each(function () {
+                if (this.text == newVal) {
                     this.selected = valid = true;
                     return false;
                 }

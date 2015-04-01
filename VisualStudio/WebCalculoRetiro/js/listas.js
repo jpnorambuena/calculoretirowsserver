@@ -20,7 +20,7 @@ listaSimple['Grados jerarquicos'] = '1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|1
 listaSimple['Grados economicos'] = '1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20';
 listaSimple['Planilla Supl 19699'] = '1|2|3|4|5|6|7|8|9|10|11|12|13|14';
 listaSimple['Planilla Supl DFL1'] = '1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20';
-listaSimple['Instituciones'] = 'Armada|Asmar|Carabineros|Central Nacional de Inteligencia|Chile Deportes|D.G.TT.MM. Y MM.|DGAC|Digeder|Dipreca|Dirección General de Movilización Nacional|Ejército|Enaer|Estado Mayor Conyunto|FACH|Famae|Gendarmeria|Hospital Fach|Investigaciones|Subsecrataría de Defensa|Subsecretaría para las Fuerzas Armadas';
+listaSimple['Instituciones'] = 'Armada|Asmar|Carabineros|Central Nacional de Inteligencia|Chile Deportes|D.G.TT.MM. Y MM.|DGAC|Digeder|Dipreca|Dirección General de Movilización Nacional|Ejército|Enaer|Estado Mayor Conjunto|FACH|Famae|Gendarmeria|Hospital Fach|Investigaciones|Subsecrataría de Defensa|Subsecretaría para las Fuerzas Armadas';
 listaSimple['Abonos'] = 'Abono por hijos|Abono por Viudez|Abono por Lesiones|Abono Rama Aire|Abono por Radiación|Abono Zona Antartica o Aislamiento|Administradora de Fondos de Pensiones|Caja de OO.MM.|Caja de EE.MM.|Caja Nac. de la Marina Merc.|Caja de Prev. de la Hipica Nac.|Canaempu|Capremer|Carabineros de Chile|Dipreca|Empart|Ferrocarriles del Estado|Gendarmeria de Chile|Investigaciones de Chile|Servicio de Seguro Social|Triomar|Otros';
 listaSimple['Concurrencias'] = 'Caja de OO.MM.|Caja de EE.MM.|Caja Nac. de la Marina Merc.|Caja de Prev. de la Hipica Nac.|Canaempu|Capremer|Carabineros de Chile|Dipreca|Empart|Ferrocarriles del Estado|Gendarmeria de Chile|Investigaciones de Chile|Servicio de Seguro Social|Triomar|Otros';
 
