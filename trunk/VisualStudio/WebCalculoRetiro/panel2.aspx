@@ -335,9 +335,6 @@
                             </table>
                             <button id="btnNuevaInstitucion">Agregar</button>
                         </div>
-
-                        <button id="btnSgteInstituciones">Siguiente</button>
-
                     </div>  
                     <div id="tabs-abonos">
                         <p>Agregue los abonos de tiempo correspondientes.</p>
@@ -357,8 +354,6 @@
                             </table>
                             <button id="btnNuevoAbono">Agregar</button>
                         </div>
-
-                        <button id="btnSgteAbonos">Siguiente</button>
                     </div>  
                     <div id="tabs-concurrencias">
                         <p>Agregue las concurrencias correspondientes.</p>
@@ -378,9 +373,6 @@
                             </table>
                             <button id="btnNuevaConcurrencia">Agregar</button>
                         </div>
-
-                        <button id="btnSgteConcurrencias">Siguiente</button>
-
                     </div> 
                     <div id="tabs-resultados">
                         <p>Los resultados son los siguientes.</p>
@@ -1025,83 +1017,43 @@
               </form>
             </div>
 
-
-            <div id="dialog-abono" title="Agregar nuevo abono" class="ui-dialog-content ui-widget-content">
-                <p class="validateTips">Ingrese los datos solicitados.</p>
-                <form>
-                    <fieldset>
-                        <div class="celdaDialogo">
-                            <label for="name">Tipo de abono :</label>
-                            <div class="valorDialogo">
-                                <select name="tipoAbono" id="sltTipoAbono"  class="combobox ui-widget-content ui-corner-all">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                    <script type="text/javascript">
-                                        cargarListaValorCorrelativo("Abonos");
-                                    </script>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="celdaDialogo">
-                            <label for="aniosAbono">Años :</label>
-                            <div class="valorDialogo">
-                                <input type="text" name="aniosAbono" id="tiAniosAbono" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
-                            </div>
-                        </div>
-                        <div class="celdaDialogo">
-                            <label for="mesesAbono">Meses :</label>
-                            <div class="valorDialogo">
-                                <input type="text" name="mesesAbono" id="tiMesesAbono" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
-                            </div>
-                        </div>
-                        <div class="celdaDialogo">
-                            <label for="diasAbono">Días :</label>
-                            <div class="valorDialogo">
-                                <input type="text" name="diasAbono" id="tiDiasAbono" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
-                            </div>
-                        </div>
-                       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                </fieldset>
-              </form>
-            </div>
-
-            <div id="dialog-concurrencia" title="Agregar nueva concurrencia" class="ui-dialog-content ui-widget-content">
-                <p class="validateTips">Ingrese los datos solicitados.</p>
-                <form>
-                    <fieldset>
-                        <div class="celdaDialogo">
-                            <label for="name">Concurrencia :</label>
-                            <div class="valorDialogo">
-                                <select name="tipoAbono" id="sltTipoConcurrencia"  class="combobox ui-widget-content ui-corner-all">
-                                    <option value="-1" selected="selected">[SELECCIONE]</option>
-                                    <script type="text/javascript">
-                                        cargarListaValorCorrelativo("Concurrencias");
-                                    </script>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="celdaDialogo">
-                            <label for="aniosConcurrencia">Años :</label>
-                            <div class="valorDialogo">
-                                <input type="text" name="aniosConcurrencia" id="tiAniosConcurrencia" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
-                            </div>
-                        </div>
-                        <div class="celdaDialogo">
-                                <label for="mesesConcurrencia">Meses :</label>
-                            <div class="valorDialogo">
-                                <input type="text" name="mesesConcurrencia" id="tiMesesConcurrencia" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
-                            </div>
-                        </div>
-                        <div class="celdaDialogo">
-                            <label for="diasConcurrencia">Días :</label>
-                            <div class="valorDialogo">
-                                <input type="text" name="diasConcurrencia" id="tiDiasConcurrencia" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
-                            </div>
-                        </div>
-                       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
-                </fieldset>
-              </form>
+            <div id="dialog-tiempo" title="Agregar nuevo tiempo" class="ui-dialog-content ui-widget-content">
+	            <p class="validateTips">Ingrese los datos solicitados.</p>
+	            <form>
+		            <fieldset>
+			            <div class="celdaDialogo">
+				            <label for="tipoDeTiempo" id="lblTipoDeTiempo">Tiempo :</label>
+				            <div class="valorDialogo">
+					            <select name="tipoDeTiempo" id="sltTipoDeTiempo"  class="combobox ui-widget-content ui-corner-all">
+						            <option value="-1" selected="selected">[SELECCIONE]</option>
+						            <script type="text/javascript">
+						                cargarListaValorCorrelativo("Concurrencias");
+						            </script>
+					            </select>
+				            </div>
+			            </div>
+			            <div class="celdaDialogo">
+				            <label for="tiempoAnios">Años :</label>
+				            <div class="valorDialogo">
+					            <input type="text" name="tiempoAnios" id="tiTiempoAnios" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+				            </div>
+			            </div>
+			            <div class="celdaDialogo">
+					            <label for="tiempoMeses">Meses :</label>
+				            <div class="valorDialogo">
+					            <input type="text" name="tiempoMeses" id="tiTiempoMeses" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+				            </div>
+			            </div>
+			            <div class="celdaDialogo">
+				            <label for="tiempoDias">Días :</label>
+				            <div class="valorDialogo">
+					            <input type="text" name="tiempoDias" id="tiTiempoDias" value="" maxlength="2" class="numerico numericoCorto ui-widget-content ui-corner-all"/>
+				            </div>
+			            </div>
+		               <input type="submit" tabindex="-1" style="position:absolute; top:-1000px"/>
+	                </fieldset>
+                </form>
             </div>
         </div>
-
 </body>
 </html>
