@@ -1,6 +1,7 @@
 ﻿// Archivo JScript
 
 var $filaAeditar = null;
+var $tipoDeFila = '';
 
 var fechaRegex = /^(?:(?:31(\/)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
 
@@ -8,6 +9,16 @@ var icons = {
     header: "ui-icon-circle-arrow-e",
     headerSelected: "ui-icon-circle-arrow-s"
 };
+
+var dialogTiempo,
+    tipoTiempo = $("#sltTipoDeTiempo"),
+    tiempoAnios = $("#tiTiempoAnios"),
+    tiempoMeses = $("#tiTiempoMeses"),
+    tiempoDias = $("#tiTiempoDias"),
+    tiempoAllFields = $([]).add(tipoTiempo)
+                            .add(tiempoAnios)
+                            .add(tiempoMeses)
+                            .add(tiempoDias);
 
 var dialogAbono,
     tipoAbono = $("#sltTipoAbono"),
@@ -73,10 +84,6 @@ $(document).ready(function () {
         $.unblockUI();
         return false;
     });
-
-    /*----------------------------------------------------------------*/
-    /*----------------------------NUEVO-------------------------------*/
-    /*----------------------------------------------------------------*/
 
     $(".combobox").combobox();
     $("#tabs").tabs({
@@ -163,7 +170,7 @@ $(document).ready(function () {
         mostrarGrado(this);
     });
 
-    dialogAbono = $("#dialog-abono").dialog({
+    dialogTiempo = $("#dialog-tiempo").dialog({
         autoOpen: false,
         height: 300,
         width: 500,
@@ -173,18 +180,18 @@ $(document).ready(function () {
                 text: "Agregar",
                 name: "btnAgregar",
                 click: function () {
-                    $("#sltTipoAbono,#tiAniosAbono,#tiMesesAbono,#tiDiasAbono").removeClass("ui-state-error");
-                    agregarFila("Abono");
+                    $("#sltTipoDeTiempo,#tiTiempoAnios,#tiTiempoMeses,#tiTiempoDias").removeClass("ui-state-error");
+                    agregarFilaDeTiempos();
                 }
             },
             {
                 text: "Cerrar",
                 name: "btnCerrar",
-                click: function () { dialogAbono.dialog("close"); }
+                click: function () { dialogTiempo.dialog("close"); }
             }
         ],
         open: function () {
-            var dialog = dialogAbono.parent();
+            var dialog = dialogTiempo.parent();
             dialog
                 .find("button[name='btnAgregar']")
                 .button({ icons: { primary: "ui-icon-disk"} });
@@ -194,28 +201,32 @@ $(document).ready(function () {
         },
 
         close: function () {
-            dialogAbono
+            dialogTiempo
                 .find('.validateTips')
                 .text('Ingrese datos:');
-            formAbono[0].reset();
-            $("#sltTipoAbono,#tiAniosAbono,#tiMesesAbono,#tiDiasAbono").removeClass("ui-state-error");
+            formTiempo[0].reset();
+            $("#sltTipoDeTiempo,#tiTiempoAnios,#tiTiempoMeses,#tiTiempoDias").removeClass("ui-state-error");
             /* if(vData.estado.toString()=="0"){dialogFunc.dialog( "open" );}*/
         }
     });
 
-    formAbono = dialogAbono.find("form").on("submit", function (event) {
+    formTiempo = dialogTiempo.find("form").on("submit", function (event) {
         event.preventDefault();
     });
-
+  
     $('#btnNuevoAbono').on("click", function (evento) {
 
-        var $tips = $('#dialog-abono .validateTips');
-        dialogAbono
+        var $tips = $('#dialog-tiempo .validateTips');
+        dialogTiempo
             .dialog({ title: 'Nuevo abono' })
             .dialog("open");
-        $tips.text('Todos los datos son obligatorios.');
-        $('#sltTipoAbono').focus();
-        agregandoFila = false;
+
+        $('#lblTipoDeTiempo').text('Abono :');
+
+        $tips.text('Ingrese los datos solicitados.');
+        $('#sltTipoDeTiempo').focus();
+        $tipoDeFila = 'Abono';
+        $filaAeditar = null;
     });
 
 
@@ -225,62 +236,21 @@ $(document).ready(function () {
             primary: "ui-icon-plusthick"
         }
     });
-
-    dialogConcurrencia = $("#dialog-concurrencia").dialog({
-        autoOpen: false,
-        height: 300,
-        width: 500,
-        modal: true,
-        buttons: [
-            {
-                text: "Agregar",
-                name: "btnAgregar",
-                click: function () {
-                    $("#sltTipoConcurrencia,#tiAniosConcurrencia,#tiMesesConcurrencia,#tiDiasConcurrencia").removeClass("ui-state-error");
-                    agregarFila("Concurrencia");
-                }
-            },
-            {
-                text: "Cerrar",
-                name: "btnCerrar",
-                click: function () { dialogConcurrencia.dialog("close"); }
-            }
-        ],
-        open: function () {
-            var dialog = dialogConcurrencia.parent();
-            dialog
-                .find("button[name='btnAgregar']")
-                .button({ icons: { primary: "ui-icon-disk"} });
-            dialog
-                .find("button[name='btnCerrar']")
-                .button({ icons: { primary: "ui-icon-close"} });
-        },
-
-        close: function () {
-            dialogConcurrencia
-                .find('.validateTips')
-                .text('Ingrese datos:');
-            formConcurrencia[0].reset();
-            $("#sltTipoConcurrencia,#tiAniosConcurrencia,#tiMesesConcurrencia,#tiDiasConcurrencia").removeClass("ui-state-error");
-            /* if(vData.estado.toString()=="0"){dialogFunc.dialog( "open" );}*/
-        }
-    });
-
-    formConcurrencia = dialogConcurrencia.find("form").on("submit", function (event) {
-        event.preventDefault();
-    });
-
+   
     $('#btnNuevaConcurrencia').on("click", function (evento) {
 
-        var $tips = $('#dialog-concurrencia .validateTips');
-        dialogConcurrencia
+        var $tips = $('#dialog-tiempo .validateTips');
+        dialogTiempo
             .dialog({ title: 'Nueva concurrencia' })
             .dialog("open");
-        $tips.text('Todos los datos son obligatorios.');
-        $('#sltTipoConcurrencia').focus();
-        agregandoFila = false;
-    });
 
+        $('#lblTipoDeTiempo').text('Concurrencia :');
+
+        $tips.text('Ingrese los datos solicitados');
+        $('#sltTipoDeTiempo').focus();
+        $tipoDeFila = 'Concurrencia';
+        $filaAeditar = null;
+    });
 
     $("#btnNuevaConcurrencia").button({
         text: true,
@@ -340,9 +310,10 @@ $(document).ready(function () {
         dialogOtraInstitucion
             .dialog({ title: 'Nueva institución' })
             .dialog("open");
-        $tips.text('Todos los datos son obligatorios.');
+        $tips.text('Ingrese los datos solicitados.');
         $('#sltOtraInstitucion').focus();
-        agregandoFila = false;
+        $tipoDeFila = 'OtraInstitucion';
+        $filaAeditar = null;
     });
 
     $("#btnNuevaInstitucion").button({
@@ -354,118 +325,28 @@ $(document).ready(function () {
 
 
 
-    /******************************************************************************************************/
-    /******************************************************************************************************/
-    $('#btnSgteInstituciones').on("click", function (evento) {
+    $('#tblOtrasInstituciones, #tblAbonos, #tblConcurrencias').on('click', 'tbody tr td .btnRemoverFila', function () {
+        var indice = $(".btnRemoverFila").index(this);
 
-        jsonInstituciones = convertirTabla($('#tblOtrasInstituciones'), 1);
-        xmlInstituciones = otrasInstitucionesToXml();
+        var fila = $(this).parent().parent();
+        fila.remove();
     });
-
-    $('#btnSgteAbonos').on("click", function (evento) {
-
-        jsonAbonos = convertirTabla($('#tblAbonos'), 4);
-        xmlAbonos = abonosToXml();
-    });
-
-    $('#btnSgteConcurrencias').on("click", function (evento) {
-
-        jsonConcurrencias = convertirTabla($('#tblConcurrencias'), 4);
-        xmlConcurrencias = concurrenciasToXml();
-    });
-
-    /******************************************************************************************************/
-    /******************************************************************************************************/
-
-
-
-
-
-
-
-
-
-    $(".btnEditarFila").button({
-        text: false,
-        icons: {
-            primary: "ui-icon-pencil"
-        }
-    });
-
-    $(".btnRemoverFila").button({
-        text: false,
-        icons: {
-            primary: "ui-icon-closethick"
-        }
-    });
-    
-
-
-
-
-
-
 
     $('#tblOtrasInstituciones').on('click', 'tbody tr td .btnEditarFila', function () {
         var indice = $(".btnEditarFila").index(this);
 
         $filaAeditar = $($('#tblOtrasInstituciones tbody tr')[indice]);
-  
+
         modificarFilaOtraInstitucion();
     });
 
-    $('#tblOtrasInstituciones').on('click', 'tbody tr td .btnRemoverFila', function () {
-        var indice = $(".btnRemoverFila").index(this);
-
-        $($('#tblOtrasInstituciones tbody tr')[indice]).remove();
-    });
-
-
-
-    $('#tblOtrasInstituciones').on('click', 'tbody tr td .btnEditarFila', function () {
+    $('#tblAbonos, #tblConcurrencias').on('click', 'tbody tr td .btnEditarFila', function () {
         var indice = $(".btnEditarFila").index(this);
 
-        var tipo = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[0].innerHTML;
-        var anios = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[1].innerHTML;
-        var meses = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[2].innerHTML;
-        var dias = $($('#tbl' + tipoDeFila + 's tbody tr')[indice]).children('td')[3].innerHTML;
-        agregandoFila = indice;
-        modificarFila(tipoDeFila, tipo, anios, meses, dias);
+        $filaAeditar = $(this).parent().parent();
+
+        modificarFilaDeTiempos();
     });
-
-    $('.btnRemoverFila').on("click", function () {
-        var indice = $(".btnRemoverFila").index(this);
-        removerFila(indice, tipoDeFila);
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     $('#btnCalcularPension').on("click", function (evento) {
 
@@ -498,86 +379,6 @@ $(document).ready(function () {
         var vOtrasInstituciones = otrasInstitucionesToXml();
         var vAbonos = abonosToXml();
         var vConcurrencias = concurrenciasToXml();
-        /*
-        var vOtrasInstituciones = '<otrasInstituciones>' +
-        '   <institucion>Asmar</institucion>' +
-        '   <institucion>Carabineros</institucion>' +
-        '   <institucion>DGAC</institucion>' +
-        '</otrasInstituciones>';
-
-        var vAbonos = '<abonos>' +
-        '   <abono>' +
-        '       <tipo>Abono por hijos</tipo>' +
-        '       <anios>10</anios>' +
-        '       <meses>2</meses>' +
-        '       <dias>3</dias>' +
-        '   </abono>' +
-        '   <abono>' +
-        '       <tipo>Abono por viudez</tipo>' +
-        '       <anios>4</anios>' +
-        '       <meses>6</meses>' +
-        '       <dias>15</dias>' +
-        '   </abono>' +
-        '   <abono>' +
-        '       <tipo>Abono por lesiones</tipo>' +
-        '       <anios>4</anios>' +
-        '       <meses>1</meses>' +
-        '       <dias>25</dias>' +
-        '   </abono>' +
-        '</abonos>';
-
-        var vConcurrencias = '<concurrencias>' +
-        '   <concurrencia>' +
-        '       <tipo>Canaempu</tipo>' +
-        '       <anios>10</anios>' +
-        '       <meses>2</meses>' +
-        '       <dias>3</dias>' +
-        '   </concurrencia>' +
-        '   <concurrencia>' +
-        '       <tipo>Dipreca</tipo>' +
-        '       <anios>2</anios>' +
-        '       <meses>3</meses>' +
-        '       <dias>4</dias>' +
-        '   </concurrencia>' +
-        '   <concurrencia>' +
-        '       <tipo>Empart</tipo>' +
-        '       <anios>5</anios>' +
-        '       <meses>6</meses>' +
-        '       <dias>4</dias>' +
-        '   </concurrencia>' +
-        '</concurrencias>';
-        */
-        /*
-        var entradas = { "run": vRun,
-        "institucion": vInstitucion,
-        "subInstitucion": vSubInstitucion,
-        "categoria": vCategoria,
-        "escalafonCivil": vEscalafonCivil,
-        "grado": vGrado,
-        "gradoJerarquico": vGradoJerarquico,
-        "gradoEconomico": vGradoEconomico,
-        "esDeLinea": vEsDeLinea,
-        "fechaDeBaja": vFechaBaja,
-        "cantidadDeAcciones": vCantidadDeAcciones.replace(".", ""),
-        "tipoDeAcciones": vTipoDeAcciones,
-        "porcentajeDeSobresueldo": vSobresueldo,
-        "porcentajeDeSegundoSobresueldo": vSegundoSobresueldo,
-        "porcentajeDeAsignacionSOFSOM": vAsignacionSOFSOM,
-        "poseeAsigMinistroDeCorte": vMinistroDeCorte,
-        "sueldoIntegroMinistroDeCorte": vSueldoIntegroMinCorte.replace(".", ""),
-        "planillaSuplementariaLey19699": vPlanillaSuplLey19699,
-        "planillaSuplementariaDFL1_68": vPlanillaSuplDFL1_68,
-        "aniosCPDNyConsc": vAniosCPDNyConsc.replace(".", ""),
-        "mesesCPDNyConsc": vMesesCPDNyConsc.replace(".", ""),
-        "diasCPDNyConsc": vDiasCPDNyConsc.replace(".", ""),
-        "aniosDesahucio": vAniosDesahucio.replace(".", ""),
-        "mesesDesahucio": vMesesDesahucio.replace(".", ""),
-        "diasDesahucio": vDiasDesahucio.replace(".", ""),
-        "otrasInstituciones": vOtrasInstituciones,
-        "abonos": vAbonos,
-        "concurrencias": vConcurrencias
-        };
-        */
 
         var entradas = { run: vRun,
             institucion: vInstitucion,
@@ -639,11 +440,7 @@ $(document).ready(function () {
         vOtrasInstituciones + vAbonos + vConcurrencias +
         '</calcular>';
 
-
-
         calcular(param);
-
-
     });
 
 });
@@ -691,10 +488,6 @@ function CerrarMiSession() {
 
     });  
 }
-
-/*----------------------------------------------------------------*/
-/*----------------------------NUEVO-------------------------------*/
-/*----------------------------------------------------------------*/
 
 function checkRegexp(o, regexp, n, p) {
     if (!(regexp.test(o.val())) && o.val() != "") {
@@ -910,114 +703,86 @@ function limpiarRun(run) {
     }, 2500);
 };
 
-function agregarFila(tipoDeFila) {
-    var valid = true;
-    var dialogo;
+function agregarFilaDeTiempos() {
+     var valid = true;
+    
+     tiempoAllFields.removeClass("ui-state-error");
+     
+     valid = valid && checkCombo($("#sltTipoDeTiempo"), "Tipo de abono", dialogTiempo);
+     valid = valid && checkLength($("#tiTiempoAnios"), "A\u00F1os", 1, 2, dialogTiempo);
+     valid = valid && checkLength($("#tiTiempoMeses"), "Meses", 1, 2, dialogTiempo);
+     valid = valid && checkLength($("#tiTiempoDias"), "D\u00EDas", 1, 2, dialogTiempo);
 
+     if (valid) {
 
-    if(tipoDeFila == "Abono"){
-        abonoAllFields.removeClass( "ui-state-error" );
-        dialogo = dialogAbono;
-    }
-    else if(tipoDeFila == "Concurrencia"){
-        concurrenciaAllFields.removeClass( "ui-state-error" );
-        dialogo = dialogConcurrencia;
-    }
-
- 
-    valid = valid && checkCombo( $("#sltTipo"+tipoDeFila), "Tipo de abono", dialogo);
-    valid = valid && checkLength( $("#tiAnios"+tipoDeFila), "A\u00F1os", 1, 2, dialogo);
-    valid = valid && checkLength( $("#tiMeses"+tipoDeFila), "Meses", 1, 2, dialogo);
-    valid = valid && checkLength( $("#tiDias"+tipoDeFila), "D\u00EDas", 1, 2, dialogo);
-      
-    if ( valid ) {
-        
-        if(agregandoFila >= 0){
-            removerFila(agregandoFila);
-        }
-        
-        $( "#tbl"+tipoDeFila+"s tbody" ).append( "<tr>" +
-            "<td style=\"text-align:left;\">" + $("#sltTipo"+tipoDeFila+" option:selected").html() + "</td>" +
-            "<td align=\"right\">" + $("#tiAnios"+tipoDeFila).val() + "</td>" +
-            "<td align=\"right\">" + $("#tiMeses"+tipoDeFila).val() + "</td>" +
-            "<td align=\"right\">" + $("#tiDias"+tipoDeFila).val() + "</td>" +
-            "<td>"+
-            "<button class=\"btnEditarFila\">Editar</button>"+
-            "<button class=\"btnRemoverFila\">Remover</button>"+
+         var nuevaFila = "<tr>" +
+            "<td style=\"text-align:left;\">" + $("#sltTipoDeTiempo option:selected").html() + "</td>" +
+            "<td align=\"right\">" + $("#tiTiempoAnios").val() + "</td>" +
+            "<td align=\"right\">" + $("#tiTiempoMeses").val() + "</td>" +
+            "<td align=\"right\">" + $("#tiTiempoDias").val() + "</td>" +
+            "<td>" +
+            "<button class=\"btnEditarFila\">Editar</button>" +
+            "<button class=\"btnRemoverFila\">Remover</button>" +
             "</td>" +
-            "</tr>" );
-        dialogo.dialog( "close" );
-        actualizarBotones(tipoDeFila);
-    }
-    return valid;
-}
+            "</tr>";
 
-function actualizarBotones(tipoDeFila){
-/*
-    $(".btnEditarFila").button({
-        text: false,
-        icons: {
-            primary: "ui-icon-pencil"
-        }
-    });
-    
-    $('.btnEditarFila').on("click", function () {
-        var indice = $(".btnEditarFila").index(this);
-        
-        var tipo = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[0].innerHTML;
-        var anios = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[1].innerHTML;
-        var meses = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[2].innerHTML;
-        var dias = $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).children('td')[3].innerHTML;
-        agregandoFila = indice;
-        modificarFila(tipoDeFila, tipo, anios, meses, dias);
-    });  
-
-    $(".btnRemoverFila").button({
-        text: false,
-        icons: {
-            primary: "ui-icon-closethick"
-        }
-    });
-    
-    $('.btnRemoverFila').on("click", function () {
-        var indice = $(".btnRemoverFila").index(this);
-        removerFila(indice, tipoDeFila);
-    });
-*/
-}
- 
-function removerFila(indice, tipoDeFila){
-   
-    $($('#tbl'+tipoDeFila+'s tbody tr')[indice]).remove();
-}
-
- function modificarFila(tipoDeFila, tipo, anios, meses, dias){
-
-    var $tips;
-
-    if(tipoDeFila == "Abono"){
-        var $tips = $('#dialog-abono .validateTips');
-        dialogAbono
-            .dialog({title:'Nuevo abono'})
-            .dialog("open");
-    }
-    else if(tipoDeFila == "Concurrencia"){
-        var $tips = $('#dialog-concurrencia .validateTips');
-        dialogAbono
-            .dialog({title:'Nueva concurrencia'})
-            .dialog("open");
-    }
-
-    $tips.text('Todos los datos son obligatorios.');
-
-    $('#sltTipo'+tipoDeFila).combobox('value', tipo);
-    $('#tiAnios'+tipoDeFila).val(anios);
-    $('#tiMeses'+tipoDeFila).val(meses);
-    $('#tiDias'+tipoDeFila).val(dias);
-    $('#sltTipo'+tipoDeFila).focus();
+         if ($filaAeditar == null) {
+             $('#tbl' + $tipoDeFila + 's tbody').append(nuevaFila);
+             $('#tbl' + $tipoDeFila + 's tbody').find('tr:last')
+                .find('.btnEditarFila').button({
+                    text: false,
+                    icons: {
+                        primary: "ui-icon-pencil"
+                    }
+                });
+                $('#tbl' + $tipoDeFila + 's tbody').find('tr:last')
+                .find('.btnRemoverFila').button({
+                    text: false,
+                    icons: {
+                        primary: "ui-icon-closethick"
+                    }
+                });
+         }
+         else {
+             $filaAeditar.children('td')[0].innerHTML = $("#sltTipoDeTiempo option:selected").html();
+             $filaAeditar.children('td')[1].innerHTML = $("#tiTiempoAnios").val();
+             $filaAeditar.children('td')[2].innerHTML = $("#tiTiempoMeses").val();
+             $filaAeditar.children('td')[3].innerHTML = $("#tiTiempoDias").val();
+         }
+         dialogTiempo.dialog("close");
+     }
+     return valid;
  }
 
 
+
+
+ function modificarFilaDeTiempos() {
+
+     var $tips;
+
+     var tipo = $filaAeditar.children('td')[0].innerHTML;
+     var anios = $filaAeditar.children('td')[1].innerHTML;
+     var meses = $filaAeditar.children('td')[2].innerHTML;
+     var dias = $filaAeditar.children('td')[3].innerHTML;
+
+     if ($tipoDeFila == "Abono") {
+         dialogTiempo
+            .dialog({ title: 'Editar abono' })
+            .dialog("open");
+     }
+     else if ($tipoDeFila == "Concurrencia") {
+         dialogTiempo
+            .dialog({ title: 'Editar concurrencia' })
+            .dialog("open");
+     }
+
+     $('#sltTipoDeTiempo').combobox('textValue', tipo);
+     $('#tiTiempoAnios').val(anios);
+     $('#tiTiempoMeses').val(meses);
+     $('#tiTiempoDias').val(dias);
+ }
+ 
  function agregarFilaOtraInstitucion() {
     var valid = true;
     
@@ -1057,22 +822,21 @@ function removerFila(indice, tipoDeFila){
             $filaAeditar.children('td')[0].innerHTML = nuevaInstitucion;
         }
         
-        
         dialogOtraInstitucion.dialog( "close" );
     }
     return valid;
 }
 
- function modificarFilaOtraInstitucion(){
+function modificarFilaOtraInstitucion(){
 
     var $tips;
 
     var $tips = $('#dialog-otra-inst .validateTips');
     dialogOtraInstitucion
-        .dialog({title:'Nueva institución'})
+        .dialog({title:'Editar institución'})
         .dialog("open");
     
-    $tips.text('Todos los datos son obligatorios.');
+    $tips.text('Ingrese los datos solicitados.');
 
     var $select = $('#dialog-otra-inst').find('#sltOtraInstitucion');
     var institucion = $filaAeditar.children('td')[0].innerHTML;
@@ -1082,90 +846,10 @@ function removerFila(indice, tipoDeFila){
    
 
 function calcular(entradas){
-    /*
-    var paramXML = {
-        xml: '<calcular>'+
-	    '<run>16.023.917-4</run>'+
-		'<institucion>FUERZA AÉREA</institucion>'+
-		'<subInstitucion>FUERZA AÉREA</subInstitucion>'+
-		'<categoria>OFICIAL (FA)</categoria>'+
-		'<escalafonCivil></escalafonCivil>'+
-		'<grado>CORONEL DE AVIACIÓN</grado>'+
-		'<gradoJerarquico>4</gradoJerarquico>'+
-		'<gradoEconomico>1</gradoEconomico>'+
-		'<esDeLinea>NO</esDeLinea>'+
-		'<fechaDeBaja>2015-01-31</fechaDeBaja>'+
-		'<cantidadDeAcciones>10</cantidadDeAcciones>'+
-		'<tipoDeAcciones>Con AEGE</tipoDeAcciones>'+
-		'<porcentajeDeSobresueldo>21%</porcentajeDeSobresueldo>'+
-		'<porcentajeDeSegundoSobresueldo>20%</porcentajeDeSegundoSobresueldo>'+
-		'<porcentajeDeAsignacionSOFSOM>25%</porcentajeDeAsignacionSOFSOM>'+
-		'<poseeAsigMinistroDeCorte>SI</poseeAsigMinistroDeCorte>'+
-		'<sueldoIntegroMinistroDeCorte>100000</sueldoIntegroMinistroDeCorte>'+
-		'<planillaSuplementariaLey19699>3</planillaSuplementariaLey19699>'+
-		'<planillaSuplementariaDFL1_68>3</planillaSuplementariaDFL1_68>'+
-		'<aniosCPDNyConsc>26</aniosCPDNyConsc>'+
-		'<mesesCPDNyConsc>24</mesesCPDNyConsc>'+
-		'<diasCPDNyConsc>33</diasCPDNyConsc>'+
-		'<aniosDesahucio>19</aniosDesahucio>'+
-		'<mesesDesahucio>15</mesesDesahucio>'+
-		'<diasDesahucio>32</diasDesahucio>'+
-		'<otrasInstituciones>'+
-		'<institucion>Asmar</institucion>'+
-		'<institucion>Carabineros</institucion>'+
-		'<institucion>DGAC</institucion>'+
-		'</otrasInstituciones>'+
-		'<abonos>'+
-		'<abono>'+
-		'<tipo>Abono por hijos</tipo>'+
-		'<anios>10</anios>'+
-		'<meses>2</meses>'+
-		'<dias>3</dias>'+
-		'</abono>'+
-		'<abono>'+
-		'<tipo>Abono por viudez</tipo>'+
-		'<anios>4</anios>'+
-		'<meses>6</meses>'+
-		'<dias>15</dias>'+
-		'</abono>'+
-		'<abono>'+
-		'<tipo>Abono por lesiones</tipo>'+
-		'<anios>4</anios>'+
-		'<meses>1</meses>'+
-		'<dias>25</dias>'+
-		'</abono>'+
-		'</abonos>'+
-		'<concurrencias>'+
-		'<concurrencia>'+
-		'<tipo>Canaempu</tipo>'+
-		'<anios>10</anios>'+
-		'<meses>2</meses>'+
-		'<dias>3</dias>'+
-		'</concurrencia>'+
-		'<concurrencia>'+
-		'<tipo>Dipreca</tipo>'+
-		'<anios>2</anios>'+
-		'<meses>3</meses>'+
-		'<dias>4</dias>'+
-		'</concurrencia>'+
-		'<concurrencia>'+
-		'<tipo>Empart</tipo>'+
-		'<anios>5</anios>'+
-		'<meses>6</meses>'+
-		'<dias>4</dias>'+
-		'</concurrencia>'+
-		'</concurrencias>'+
-		'</calcular>'
-            };
-
-*/
     var param = {
         xml: entradas
     };
-
-
-    alert("ENTRADAS :\n" + JSON.stringify(entradas));
-
+    
     //console.info('panel.js calcular --> param: '+JSON.stringify(param));
     $.ajax({
         type: "POST",
