@@ -192,7 +192,7 @@
   </wsdl:binding>
   <wsdl:service name="CalculoRetiroWS">
     <wsdl:port binding="tns:CalculoRetiroWSSOAP" name="CalculoRetiroWSSOAP">
-      <soap:address location="http://localhost:8080/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP"/>
+      <soap:address location="http://unibox.ssffaa.cl/CalculoRetiroWSServer/services/CalculoRetiroWSSOAP"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
